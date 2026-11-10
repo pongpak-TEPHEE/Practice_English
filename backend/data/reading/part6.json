@@ -1,0 +1,227 @@
+{
+  "guide": {
+    "part": 6,
+    "title": "Part 6 เติมข้อความ",
+    "summary": "ข้อความสั้น 4 ชิ้น ชิ้นละ 4 ช่องว่าง: คำ วลี คำเชื่อม และเลือกประโยคทั้งประโยค",
+    "analysis": {
+      "parts": "Reading Part 6: ข้อความ 4 ชิ้น ชิ้นละ 4 ข้อ รวม 16 ข้อ จาก 100 ข้อของ Reading",
+      "questions": "16 ข้อทุกครั้ง ในแต่ละข้อความมีข้อเลือกประโยคทั้งประโยค 1 ข้อ (รวม 4 ข้อ) ที่เหลือเป็นไวยากรณ์ คำศัพท์ และคำเชื่อม",
+      "points": "ประมาณ 80 คะแนน จาก 495 คะแนนของ Reading (คิดคร่าว ๆ ข้อละ 5 คะแนน) ข้อไวยากรณ์ใช้ความรู้เดียวกับ Part 5 ส่วนที่ต้องฝึกเพิ่มคือข้อเลือกประโยคและข้อที่ต้องดูเวลาจากทั้งข้อความ",
+      "covers": [
+        "วิธีอ่านทั้งข้อความแทนการอ่านเฉพาะประโยคที่มีช่องว่าง",
+        "ข้อ tense ที่ต้องดูเวลาจากประโยคอื่นในข้อความ",
+        "ข้อคำเชื่อมระหว่างประโยค (Therefore, In addition)",
+        "ข้อเลือกประโยคใส่ในข้อความ และตัวลวงที่พบบ่อย",
+        "ข้อความแบบที่ออกบ่อย: อีเมลภายในบริษัท ประกาศ จดหมายถึงลูกค้า และข่าวธุรกิจ"
+      ],
+      "notCovered": [
+        "ไวยากรณ์แต่ละเรื่องโดยละเอียด (อยู่ในบทเรียนไวยากรณ์)",
+        "ข้อสอบจริงของ ETS (ข้อความในชุดนี้เขียนขึ้นใหม่ตามรูปแบบข้อสอบ)"
+      ],
+      "note": "จำนวนข้อเป็นรูปแบบข้อสอบ TOEIC Listening & Reading ปัจจุบัน ส่วนคะแนนต่อข้อเป็นค่าประมาณ เพราะตารางแปลงคะแนนต่างกันในแต่ละชุด TOEIC ไม่หักคะแนนเมื่อตอบผิด จึงควรตอบทุกข้อ"
+    },
+    "strategy": [
+      "อ่านทั้งข้อความตั้งแต่ต้น ไม่อ่านเฉพาะประโยคที่มีช่องว่าง เพราะหลายข้อต้องใช้ข้อมูลจากประโยคก่อนหรือหลัง",
+      "ข้อที่ตัวเลือกเป็นคำเดียวกันคนละรูป ใช้วิธีเดียวกับ Part 5 (ดูตำแหน่ง) แต่เช็ก tense กับเวลาที่ข้อความบอกไว้ เช่น วันที่ของอีเมลหรือคำว่า next month",
+      "ข้อเลือกประโยค ให้อ่านประโยคก่อนและหลังช่องว่าง ประโยคที่ถูกต้องเชื่อมได้ทั้งสองฝั่ง",
+      "ตัดตัวเลือกที่ขัดกับข้อมูลในข้อความ ตัวเลือกที่อ้างถึงสิ่งที่ไม่มีในข้อความ (this, these, them ที่ไม่มีอะไรให้อ้าง) และตัวเลือกที่พูดเรื่องเดียวกันแต่ผิดตำแหน่ง",
+      "ใช้เวลาประมาณ 2 นาทีต่อข้อความ (ประมาณ 8 นาทีทั้ง Part) เพื่อเหลือเวลาให้ Part 7"
+    ],
+    "questionTypes": [
+      { "name": "ไวยากรณ์", "how": "ใช้กฎของ Part 5 เช่น ชนิดคำ รูปกริยา แต่ดูเวลาและประธานจากทั้งข้อความ" },
+      { "name": "คำศัพท์ตามบริบท", "how": "ตัวเลือกเป็นคำต่างกันที่ถูกไวยากรณ์ทุกตัว เลือกจากความหมายของประโยคก่อนและหลัง" },
+      { "name": "คำเชื่อม", "how": "ดูความสัมพันธ์กับประโยคก่อนหน้า: ผลลัพธ์ เพิ่มเติม ขัดแย้ง หรือยกตัวอย่าง" },
+      { "name": "เลือกประโยค", "how": "ประโยคที่ถูกต้องเชื่อมกับทั้งประโยคก่อนและหลัง และไม่ขัดกับข้อมูลส่วนอื่นของข้อความ" }
+    ]
+  },
+  "sets": [
+    {
+      "id": "p6-office-move",
+      "part": 6,
+      "title": "อีเมลแจ้งย้ายสำนักงาน",
+      "passages": [
+        {
+          "kind": "email",
+          "heading": "To: All Staff\nFrom: Karen Mills, Office Manager\nSubject: Office move",
+          "body": "As many of you know, our team will move to the fifth floor next month. The new space is larger and {{1}} better lighting. Movers will pack all files and equipment on Friday, May 9. {{2}}, please clear your desks of personal items by Thursday evening.\n\n{{3}} Boxes and labels are available in the supply room. Please write your name and new desk number on each box.\n\nWe expect to be fully {{4}} in the new office by Monday morning. Thank you for your cooperation."
+        }
+      ],
+      "questions": [
+        {
+          "type": "grammar",
+          "question": "ช่องที่ 1",
+          "options": ["offers", "offering", "to offer", "offered"],
+          "answer": "offers",
+          "why": "ตอบ offers เพราะช่องว่างเป็นกริยาตัวที่สองของประธาน The new space ที่เชื่อมด้วย and ขนานกับ is ซึ่งเป็น present simple ส่วน offering และ to offer ไม่ใช่กริยาหลัก และ offered เป็นอดีต ซึ่งไม่เข้ากับการบรรยายสำนักงานใหม่ในปัจจุบัน"
+        },
+        {
+          "type": "transition",
+          "question": "ช่องที่ 2",
+          "options": ["However", "Therefore", "Otherwise", "For instance"],
+          "answer": "Therefore",
+          "why": "ตอบ Therefore เพราะการเก็บของบนโต๊ะภายในวันพฤหัสเป็นผลจากการที่ทีมขนย้ายจะมาแพ็กของในวันศุกร์ ส่วน However บอกความขัดแย้ง Otherwise แปลว่ามิฉะนั้น และ For instance ใช้ยกตัวอย่าง"
+        },
+        {
+          "type": "sentence",
+          "question": "ช่องที่ 3",
+          "options": [
+            "We recommend packing your personal belongings yourself.",
+            "The fifth floor is currently closed to visitors.",
+            "Please return all boxes to the supply room by Friday.",
+            "The movers have already completed this task."
+          ],
+          "answer": "We recommend packing your personal belongings yourself.",
+          "why": "ตอบ We recommend packing your personal belongings yourself. เพราะเชื่อมกับย่อหน้าก่อนที่ให้เก็บของส่วนตัว และประโยคถัดไปที่บอกว่ามีกล่องกับป้ายให้ใช้แพ็กของ ส่วนเรื่องชั้นห้าปิดรับผู้มาติดต่อไม่เกี่ยวกับการแพ็กของ การให้คืนกล่องภายในวันศุกร์ขัดกับประโยคถัดไปที่ให้หยิบกล่องไปใช้ และการบอกว่าทีมขนย้ายทำเสร็จแล้วขัดกับข้อความที่บอกว่าจะมาในวันศุกร์"
+        },
+        {
+          "type": "vocabulary",
+          "question": "ช่องที่ 4",
+          "options": ["settled", "settle", "settling", "settlement"],
+          "answer": "settled",
+          "why": "ตอบ settled เพราะ be settled in แปลว่าเข้าที่เข้าทางในที่ใหม่ และหลัง be fully ต้องเป็นคุณศัพท์หรือ V3 ส่วน settle เป็นกริยาช่อง 1 settling ทำให้ความหมายผิด และ settlement เป็นคำนาม"
+        }
+      ]
+    },
+    {
+      "id": "p6-pool-closure",
+      "part": 6,
+      "title": "ประกาศปิดสระว่ายน้ำของฟิตเนส",
+      "passages": [
+        {
+          "kind": "notice",
+          "heading": "Notice to Members: Greenfield Fitness Center",
+          "body": "Beginning on June 3, the swimming pool will be closed for {{1}} repairs. The work is expected to take about three weeks. During this time, members may use the pool at our Riverside location {{2}} no additional cost. Simply show your membership card at the front desk.\n\n{{3}} Group fitness classes, the weight room, and the sauna will remain open as usual.\n\nWe apologize for any inconvenience and appreciate your {{4}}."
+        }
+      ],
+      "questions": [
+        {
+          "type": "grammar",
+          "question": "ช่องที่ 1",
+          "options": ["necessary", "necessity", "necessarily", "necessitate"],
+          "answer": "necessary",
+          "why": "ตอบ necessary เพราะช่องว่างอยู่หน้าคำนาม repairs จึงต้องเป็นคุณศัพท์ ส่วน necessity เป็นคำนาม necessarily เป็น adverb และ necessitate เป็นกริยา"
+        },
+        {
+          "type": "vocabulary",
+          "question": "ช่องที่ 2",
+          "options": ["at", "in", "on", "by"],
+          "answer": "at",
+          "why": "ตอบ at เพราะสำนวนคือ at no additional cost (โดยไม่มีค่าใช้จ่ายเพิ่ม) ราคาและค่าใช้จ่ายใช้คู่กับ at ส่วน in, on และ by ไม่ใช้กับ no additional cost"
+        },
+        {
+          "type": "sentence",
+          "question": "ช่องที่ 3",
+          "options": [
+            "Other areas of the center will not be affected.",
+            "The pool reopened last week after similar repairs.",
+            "Membership fees will increase next year.",
+            "The Riverside location will also close during this period."
+          ],
+          "answer": "Other areas of the center will not be affected.",
+          "why": "ตอบ Other areas of the center will not be affected. เพราะประโยคถัดไปยกตัวอย่างส่วนอื่นที่ยังเปิดตามปกติ (คลาส ห้องเวท ซาวน่า) ส่วนการบอกว่าสระเปิดอีกครั้งเมื่อสัปดาห์ก่อนขัดกับการปิดซ่อมที่จะเริ่ม 3 มิถุนายน ค่าสมาชิกปีหน้าไม่เกี่ยวกับประโยคถัดไป และสาขา Riverside ปิดด้วยขัดกับที่ให้สมาชิกไปใช้สระที่นั่น"
+        },
+        {
+          "type": "grammar",
+          "question": "ช่องที่ 4",
+          "options": ["patients", "patient", "patiently", "patience"],
+          "answer": "patience",
+          "why": "ตอบ patience เพราะหลัง your ต้องเป็นคำนาม และความหมายคือความอดทน ส่วน patients เป็นคำนามแต่แปลว่าผู้ป่วย patient เป็นคุณศัพท์ (หรือคำนามแปลว่าผู้ป่วย) และ patiently เป็น adverb"
+        }
+      ]
+    },
+    {
+      "id": "p6-order-delay",
+      "part": 6,
+      "title": "จดหมายแจ้งสินค้าล่าช้าถึงลูกค้า",
+      "passages": [
+        {
+          "kind": "letter",
+          "heading": "Dear Mr. Haddad,",
+          "body": "Thank you for your order of 200 office chairs. Unfortunately, the fabric you selected is temporarily out of stock. Our supplier {{1}} us that a new shipment will arrive on July 15. As a result, your chairs will be delivered about two weeks later than {{2}} scheduled.\n\n{{3}} If you would prefer a different fabric, we can ship your order within three days. A list of available fabrics is enclosed.\n\nPlease let us know which option you prefer by June 30. We apologize for the delay and {{4}} your understanding.\n\nSincerely,\nLena Park\nCustomer Service, Norland Office Furniture"
+        }
+      ],
+      "questions": [
+        {
+          "type": "grammar",
+          "question": "ช่องที่ 1",
+          "options": ["will inform", "has informed", "informing", "to inform"],
+          "answer": "has informed",
+          "why": "ตอบ has informed เพราะบริษัทรู้วันที่สินค้าจะมาถึงแล้ว (จึงบอกลูกค้าได้ว่าจะล่าช้า) แปลว่าผู้จำหน่ายแจ้งมาแล้ว ส่วน will inform จะแปลว่ายังไม่ได้แจ้ง ซึ่งขัดกับการรู้วันที่ และ informing กับ to inform ไม่ใช่กริยาหลัก"
+        },
+        {
+          "type": "grammar",
+          "question": "ช่องที่ 2",
+          "options": ["originally", "original", "origin", "originate"],
+          "answer": "originally",
+          "why": "ตอบ originally เพราะช่องว่างอยู่หน้า V3 scheduled จึงต้องเป็น adverb (than originally scheduled = กว่าที่กำหนดไว้แต่แรก) ส่วน original เป็นคุณศัพท์ origin เป็นคำนาม และ originate เป็นกริยา"
+        },
+        {
+          "type": "sentence",
+          "question": "ช่องที่ 3",
+          "options": [
+            "Your chairs have already been shipped.",
+            "However, we can offer you an alternative.",
+            "We no longer sell office chairs.",
+            "Our staff will assemble the chairs for you."
+          ],
+          "answer": "However, we can offer you an alternative.",
+          "why": "ตอบ However, we can offer you an alternative. เพราะเชื่อมจากข่าวร้ายในย่อหน้าแรก (ล่าช้า) ไปสู่ทางเลือกในประโยคถัดไป (เปลี่ยนผ้าแล้วส่งได้ใน 3 วัน) ส่วนการบอกว่าส่งเก้าอี้แล้วขัดกับการล่าช้า การเลิกขายเก้าอี้ขัดกับทั้งจดหมาย และการประกอบเก้าอี้ไม่เชื่อมกับประโยคถัดไปเรื่องเปลี่ยนผ้า"
+        },
+        {
+          "type": "grammar",
+          "question": "ช่องที่ 4",
+          "options": ["appreciation", "appreciate", "appreciating", "appreciative"],
+          "answer": "appreciate",
+          "why": "ตอบ appreciate เพราะ and เชื่อมกริยาสองตัวของประธาน We ให้ขนานกัน (We apologize ... and appreciate ...) ส่วน appreciation เป็นคำนาม appreciating ไม่ขนานกับ apologize และ appreciative เป็นคุณศัพท์"
+        }
+      ]
+    },
+    {
+      "id": "p6-coffee-expansion",
+      "part": 6,
+      "title": "ข่าวธุรกิจ: ร้านกาแฟเปิดสาขาใหม่",
+      "passages": [
+        {
+          "kind": "article",
+          "heading": "Harbor Coffee to Open Fifth Location",
+          "body": "PORTLAND (April 2) — Harbor Coffee announced yesterday that it will open its fifth café in the Westgate Shopping Center this fall. The company, which began as a small cart near the waterfront in 2015, has grown {{1}} over the past ten years.\n\nThe new café will be the company's largest so far. {{2}}, it will include a roasting area where customers can watch coffee beans being prepared.\n\n\"{{3}}\" said founder Mia Chen. \"Westgate is one of the busiest shopping areas in the city.\" Harbor Coffee plans to hire about 25 new employees for the location. Interested {{4}} can apply on the company's Web site."
+        }
+      ],
+      "questions": [
+        {
+          "type": "grammar",
+          "question": "ช่องที่ 1",
+          "options": ["steady", "steadily", "steadiness", "steadied"],
+          "answer": "steadily",
+          "why": "ตอบ steadily เพราะประโยค The company has grown over the past ten years ครบแล้ว ช่องว่างขยายกริยา grown จึงต้องเป็น adverb ส่วน steady เป็นคุณศัพท์ steadiness เป็นคำนาม และ steadied เป็นกริยา"
+        },
+        {
+          "type": "transition",
+          "question": "ช่องที่ 2",
+          "options": ["However", "Otherwise", "In addition", "Instead"],
+          "answer": "In addition",
+          "why": "ตอบ In addition เพราะพื้นที่คั่วกาแฟเป็นข้อมูลเพิ่มเติมไปทางเดียวกับการเป็นสาขาที่ใหญ่ที่สุด ส่วน However บอกความขัดแย้ง Otherwise แปลว่ามิฉะนั้น และ Instead แปลว่าแทนที่"
+        },
+        {
+          "type": "sentence",
+          "question": "ช่องที่ 3",
+          "options": [
+            "We are closing our waterfront café.",
+            "Our coffee prices will not change.",
+            "We chose this location carefully.",
+            "The roasting area was too small."
+          ],
+          "answer": "We chose this location carefully.",
+          "why": "ตอบ We chose this location carefully. เพราะประโยคถัดไปในคำพูดเดียวกันให้เหตุผลว่าทำไมเลือก Westgate (เป็นย่านช้อปปิ้งที่คนพลุกพล่าน) ส่วนการปิดร้านริมน้ำไม่มีข้อมูลในข่าว ราคากาแฟไม่เชื่อมกับเหตุผลเรื่องทำเล และพื้นที่คั่วเล็กเกินไปขัดกับข่าวที่บอกว่าเป็นสาขาใหญ่ที่สุด"
+        },
+        {
+          "type": "grammar",
+          "question": "ช่องที่ 4",
+          "options": ["applicants", "applications", "apply", "applicable"],
+          "answer": "applicants",
+          "why": "ตอบ applicants เพราะหลังคุณศัพท์ Interested ต้องเป็นคำนาม และผู้ที่สมัครงานได้ต้องเป็นคน ส่วน applications เป็นใบสมัครซึ่งสมัครเองไม่ได้ apply เป็นกริยา และ applicable เป็นคุณศัพท์"
+        }
+      ]
+    }
+  ]
+}

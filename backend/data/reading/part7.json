@@ -1,0 +1,297 @@
+{
+  "guide": {
+    "part": 7,
+    "title": "Part 7 อ่านจับใจความ",
+    "summary": "อีเมล ประกาศ โฆษณา บทความ แชท และชุดเอกสาร 2–3 ชิ้น ส่วนที่ใหญ่ที่สุดของ Reading",
+    "analysis": {
+      "parts": "Reading Part 7: เอกสารเดี่ยว 29 ข้อ (10 ชุด) เอกสารคู่ 10 ข้อ (2 ชุด) และเอกสารสามชิ้น 15 ข้อ (3 ชุด) รวม 54 ข้อ",
+      "questions": "54 ข้อจาก 100 ข้อของ Reading มากกว่า Part 5 และ 6 รวมกัน",
+      "points": "ประมาณ 270 คะแนน จาก 495 คะแนนของ Reading (คิดคร่าว ๆ ข้อละ 5 คะแนน) คนส่วนใหญ่เสียคะแนนส่วนนี้เพราะทำไม่ทันเวลา มากกว่าเพราะอ่านไม่เข้าใจ",
+      "covers": [
+        "ประเภทคำถามทั้งหมดของ Part 7 และวิธีหาคำตอบของแต่ละประเภท",
+        "คำตอบที่ถูกมักใช้คำต่างจากเนื้อหา (paraphrase) และตัวลวงที่ใช้คำซ้ำกับเนื้อหา",
+        "คำถาม NOT, คำถามอนุมาน, ความหมายคำตามบริบท, แทรกประโยค [1]–[4] และเจตนาผู้เขียนในแชท",
+        "ชุดเอกสารคู่และสามชิ้นที่ต้องใช้ข้อมูลข้ามเอกสาร",
+        "การคุมเวลาประมาณ 1 นาทีต่อข้อ"
+      ],
+      "notCovered": [
+        "ข้อสอบจริงของ ETS (เอกสารในชุดนี้เขียนขึ้นใหม่ตามรูปแบบข้อสอบ)",
+        "คำศัพท์ที่ใช้ในเอกสาร (ฝึกเพิ่มที่ตัวท่องศัพท์ระดับ TOEIC)"
+      ],
+      "note": "จำนวนข้อเป็นรูปแบบข้อสอบ TOEIC Listening & Reading ปัจจุบัน ส่วนคะแนนต่อข้อเป็นค่าประมาณ เพราะตารางแปลงคะแนนต่างกันในแต่ละชุด TOEIC ไม่หักคะแนนเมื่อตอบผิด จึงควรเดาข้อที่ทำไม่ทันแทนการปล่อยว่าง"
+    },
+    "strategy": [
+      "อ่านคำถามก่อนอ่านเนื้อหา (ยังไม่ต้องอ่านตัวเลือก) เพื่อรู้ว่าต้องหาข้อมูลอะไร",
+      "ดูประเภทเอกสาร หัวเรื่อง ผู้ส่ง ผู้รับ และวันที่ก่อน ข้อมูลส่วนนี้ตอบคำถามจุดประสงค์และคำถามว่าใครเป็นใครได้บ่อย",
+      "คำตอบที่ถูกมักใช้คำต่างจากเนื้อหาแต่ความหมายเดียวกัน (meeting, workshop → business event) ตัวเลือกที่ยกคำจากเนื้อหามาตรง ๆ ต้องตรวจให้ดี เพราะมักเป็นตัวลวง",
+      "คำถาม NOT: หาข้อมูลของตัวเลือกในเนื้อหาทีละตัว ตัวที่หาไม่เจอคือคำตอบ",
+      "ชุดเอกสาร 2–3 ชิ้น: อย่างน้อยหนึ่งข้อต้องใช้ข้อมูลจากสองเอกสารรวมกัน เช่น จำนวนในอีเมลกับราคาในตาราง",
+      "ใช้เวลาประมาณ 1 นาทีต่อข้อ ถ้าติดข้อไหนเกิน 2 นาที ให้เดาแล้วไปข้อต่อไป"
+    ],
+    "questionTypes": [
+      { "name": "ใจความหลัก / จุดประสงค์", "how": "ดูหัวเรื่องและย่อหน้าแรก คำตอบมักเป็นการสรุปด้วยคำที่กว้างกว่าในเนื้อหา" },
+      { "name": "รายละเอียด", "how": "หาคำสำคัญจากคำถาม (วันที่ ชื่อ ตัวเลข) ในเนื้อหา แล้วอ่านประโยครอบ ๆ" },
+      { "name": "ข้อใดไม่ได้กล่าวถึง (NOT)", "how": "ตรวจตัวเลือกกับเนื้อหาทีละตัว ตัวที่ไม่มีหรือขัดกับเนื้อหาคือคำตอบ" },
+      { "name": "อนุมาน", "how": "คำถามที่มี most likely, suggested, implied คำตอบไม่ได้เขียนตรง ๆ แต่ต้องมีหลักฐานในเนื้อหารองรับ ห้ามเดาเกินข้อมูล" },
+      { "name": "ความหมายคำ", "how": "แทนตัวเลือกลงในประโยคเดิม เลือกความหมายตามบริบท ไม่ใช่ความหมายที่คุ้นที่สุดของคำนั้น" },
+      { "name": "แทรกประโยค", "how": "หาคำในประโยคที่ให้มาที่อ้างถึงสิ่งก่อนหน้า (them, this, also) แล้วหาตำแหน่งที่มีสิ่งนั้นอยู่ข้างหน้า" },
+      { "name": "เจตนาผู้เขียนในแชท", "how": "อ่านข้อความก่อนและหลังประโยคที่ถาม ความหมายขึ้นกับบริบท ไม่ใช่ความหมายตรงตัว" },
+      { "name": "ใช้ข้อมูลหลายเอกสาร", "how": "หาข้อมูลส่วนหนึ่งในเอกสารแรก แล้วเอาไปจับคู่กับอีกเอกสาร เช่น ชื่อผู้บรรยายกับวันที่ในตาราง" }
+    ]
+  },
+  "sets": [
+    {
+      "id": "p7-conference-ad",
+      "part": 7,
+      "title": "โฆษณาศูนย์ประชุม (เอกสารเดี่ยว)",
+      "passages": [
+        {
+          "kind": "advertisement",
+          "heading": "Seaside Conference Center",
+          "body": "Planning a meeting, workshop, or company retreat? The Seaside Conference Center offers six meeting rooms that hold from 10 to 200 people. All rooms include a projector, wireless Internet, and a sound system at no extra charge. Our on-site catering team can provide breakfast, lunch, and refreshments for any event.\n\nBook before March 31 and receive 15 percent off the room rental fee for events held in April or May.\n\nTo check availability, call 555-0142 or visit www.seasidecc.com."
+        }
+      ],
+      "questions": [
+        {
+          "type": "purpose",
+          "question": "What is being advertised?",
+          "options": ["A catering company", "A location for business events", "A hotel offering vacation packages", "A company that rents projectors"],
+          "answer": "A location for business events",
+          "why": "ตอบ A location for business events เพราะโฆษณาพูดถึงห้องประชุมสำหรับ meeting, workshop และ company retreat ซึ่งสรุปได้ว่าเป็นสถานที่จัดงานธุรกิจ ส่วนบริการอาหารและโปรเจกเตอร์เป็นแค่สิ่งที่มีให้ในศูนย์ ไม่ใช่สิ่งที่โฆษณาขาย และไม่ได้พูดถึงแพ็กเกจท่องเที่ยว"
+        },
+        {
+          "type": "detail",
+          "question": "How can customers receive a discount?",
+          "options": ["By holding an event in March", "By booking a room for more than 200 people", "By reserving a room before the end of March", "By ordering lunch from the catering team"],
+          "answer": "By reserving a room before the end of March",
+          "why": "ตอบ By reserving a room before the end of March เพราะโฆษณาเขียนว่า Book before March 31 (จองก่อนสิ้นเดือนมีนาคม คือคำเดียวกันแต่เขียนต่างกัน) ส่วนตัวเลือกที่มีคำว่า March เป็นตัวลวง เพราะส่วนลดใช้กับงานเดือนเมษายนและพฤษภาคม ห้องรับได้สูงสุด 200 คน และการสั่งอาหารไม่เกี่ยวกับส่วนลด"
+        }
+      ]
+    },
+    {
+      "id": "p7-delivery-chat",
+      "part": 7,
+      "title": "แชทเรื่องเปลี่ยนวันส่งสินค้า (เอกสารเดี่ยว)",
+      "passages": [
+        {
+          "kind": "text-chain",
+          "heading": "Daniel Ruiz and Sophie Tan",
+          "body": "Daniel Ruiz (9:12 A.M.): Hi Sophie, are you still at the warehouse?\nSophie Tan (9:13 A.M.): Yes, I'm checking the shipment that arrived this morning.\nDaniel Ruiz (9:14 A.M.): Great. The client just called. They need all 40 printers delivered by Thursday instead of next Monday.\nSophie Tan (9:16 A.M.): That's tight. We only received 25 today.\nDaniel Ruiz (9:17 A.M.): Can we send those first and the rest later?\nSophie Tan (9:18 A.M.): That should work. I'll ask the driver to load them this afternoon.\nDaniel Ruiz (9:19 A.M.): Thanks. I'll let the client know."
+        }
+      ],
+      "questions": [
+        {
+          "type": "purpose",
+          "question": "Why did Mr. Ruiz contact Ms. Tan?",
+          "options": ["To ask her to order more printers", "To report a change in a delivery date", "To complain about a damaged shipment", "To schedule a meeting with a client"],
+          "answer": "To report a change in a delivery date",
+          "why": "ตอบ To report a change in a delivery date เพราะคุณรุยซ์แจ้งว่าลูกค้าต้องการให้ส่งภายในวันพฤหัสแทนวันจันทร์หน้า ส่วนเขาไม่ได้ขอให้สั่งเครื่องเพิ่ม ไม่มีการพูดถึงสินค้าเสียหาย และไม่มีการนัดประชุม"
+        },
+        {
+          "type": "intent",
+          "question": "At 9:16 A.M., what does Ms. Tan most likely mean when she writes, \"That's tight\"?",
+          "options": ["She thinks the printers are packed too closely.", "She believes the client's budget is too small.", "She is concerned that there is not much time.", "She agrees that the request is easy to meet."],
+          "answer": "She is concerned that there is not much time.",
+          "why": "ตอบ She is concerned that there is not much time. เพราะเธอพูดหลังจากรู้ว่าต้องส่ง 40 เครื่องภายในวันพฤหัส และบอกต่อทันทีว่าเพิ่งได้รับมาแค่ 25 เครื่อง tight ในบริบทนี้หมายถึงเวลากระชั้น ส่วนตัวเลือกเรื่องแพ็กแน่นใช้ความหมายตรงตัวของ tight ซึ่งเป็นตัวลวง ไม่มีการพูดถึงงบประมาณ และเธอไม่ได้บอกว่าง่าย"
+        },
+        {
+          "type": "inference",
+          "question": "What will Ms. Tan most likely do next?",
+          "options": ["Arrange for part of the order to be sent", "Call the client", "Check the shipment from this morning", "Cancel the delivery for next Monday"],
+          "answer": "Arrange for part of the order to be sent",
+          "why": "ตอบ Arrange for part of the order to be sent เพราะเธอบอกว่าจะให้คนขับขนเครื่อง 25 เครื่องที่ได้รับขึ้นรถบ่ายนี้ (ส่งบางส่วนก่อน) ส่วนคุณรุยซ์เป็นคนที่จะแจ้งลูกค้า การตรวจสินค้าเป็นสิ่งที่เธอกำลังทำอยู่ตอนต้นแชท และไม่มีการพูดถึงการยกเลิก"
+        }
+      ]
+    },
+    {
+      "id": "p7-training-email",
+      "part": 7,
+      "title": "อีเมลยืนยันการอบรม (เอกสารเดี่ยว)",
+      "passages": [
+        {
+          "kind": "email",
+          "heading": "To: Priya Nair\nFrom: Tom Becker\nDate: October 3\nSubject: Training session",
+          "body": "Dear Ms. Nair,\n\nThank you for agreeing to lead the customer service training session on October 17. As we discussed, the session will run from 9:00 A.M. to noon in Conference Room B. About 30 employees from our sales and support departments will attend.\n\nThe room is equipped with a projector and a whiteboard. If you need any other materials, such as handouts, please send them to me by October 13 so that my assistant can make copies.\n\nLunch will be served in the cafeteria after the session, and you are welcome to join us. Please let me know if you have any dietary requirements.\n\nBest regards,\nTom Becker\nHuman Resources Manager"
+        }
+      ],
+      "questions": [
+        {
+          "type": "purpose",
+          "question": "What is the purpose of the e-mail?",
+          "options": ["To invite Ms. Nair to apply for a job", "To request feedback on a training session", "To announce a change of meeting room", "To confirm details of an upcoming event"],
+          "answer": "To confirm details of an upcoming event",
+          "why": "ตอบ To confirm details of an upcoming event เพราะอีเมลขอบคุณที่ตกลงมาสอน แล้วทวนรายละเอียดที่คุยกันไว้ (As we discussed) ทั้งวัน เวลา ห้อง และผู้เข้าร่วม ส่วนไม่ได้เชิญสมัครงาน การอบรมยังไม่เกิดขึ้นจึงขอความเห็นไม่ได้ และไม่มีการเปลี่ยนห้อง"
+        },
+        {
+          "type": "not",
+          "question": "What is NOT mentioned about the training session?",
+          "options": ["Where it will take place", "How long it will last", "Who will attend", "How much it will cost"],
+          "answer": "How much it will cost",
+          "why": "ตอบ How much it will cost เพราะอีเมลไม่ได้พูดถึงค่าใช้จ่ายเลย ส่วนสถานที่ (Conference Room B) ระยะเวลา (9:00 A.M. to noon) และผู้เข้าร่วม (ประมาณ 30 คนจากฝ่ายขายและฝ่ายสนับสนุน) มีในย่อหน้าแรก"
+        },
+        {
+          "type": "detail",
+          "question": "By when should Ms. Nair send any handouts?",
+          "options": ["October 3", "October 13", "October 17", "Noon on the day of the session"],
+          "answer": "October 13",
+          "why": "ตอบ October 13 เพราะย่อหน้าที่สองเขียนว่า please send them to me by October 13 ส่วน October 3 คือวันที่ของอีเมล October 17 คือวันอบรม และ noon คือเวลาที่การอบรมจบ ทุกตัวเป็นข้อมูลที่มีในอีเมลแต่ตอบคำถามอื่น"
+        },
+        {
+          "type": "synonym",
+          "question": "In the e-mail, the word \"run\" in paragraph 1 is closest in meaning to",
+          "options": ["hurry", "manage", "take place", "operate"],
+          "answer": "take place",
+          "why": "ตอบ take place เพราะ the session will run from 9:00 A.M. to noon หมายถึงการอบรมจะจัดขึ้นช่วงเวลานั้น ส่วน hurry เป็นความหมายตรงตัวของ run (วิ่ง) manage และ operate เป็นความหมายของ run กับธุรกิจหรือเครื่องจักร ซึ่งไม่เข้ากับบริบทนี้"
+        }
+      ]
+    },
+    {
+      "id": "p7-bakery-article",
+      "part": 7,
+      "title": "ข่าวร้านเบเกอรี่ได้รางวัล (เอกสารเดี่ยว)",
+      "passages": [
+        {
+          "kind": "article",
+          "heading": "Local Bakery Wins National Award",
+          "body": "MILFORD — Rosa's Bakery, a family-owned business on Elm Street, has been named \"Best Small Bakery\" by the National Baking Association. [1] The award is given each year to a bakery with fewer than 20 employees that shows excellence in quality and customer service.\n\nRosa Alvarez opened the bakery in 2012 with just two employees. [2] Today, it employs 15 people and sells more than 1,000 loaves of bread each week. Ms. Alvarez credits her staff for the bakery's success. [3]\n\nThe bakery will celebrate the award by offering free samples to customers on Saturday, May 10. [4]"
+        }
+      ],
+      "questions": [
+        {
+          "type": "purpose",
+          "question": "What is the article mainly about?",
+          "options": ["The opening of a new bakery", "Changes to a national association", "A business that received an honor", "A bakery that is hiring new staff"],
+          "answer": "A business that received an honor",
+          "why": "ตอบ A business that received an honor เพราะหัวข่าวและย่อหน้าแรกพูดถึงร้านที่ได้รางวัล (award = honor) ส่วนร้านเปิดมาตั้งแต่ปี 2012 ไม่ใช่ร้านใหม่ ข่าวไม่ได้พูดถึงการเปลี่ยนแปลงของสมาคม และไม่ได้บอกว่ากำลังรับพนักงาน"
+        },
+        {
+          "type": "inference",
+          "question": "What is indicated about Rosa's Bakery?",
+          "options": ["It has more than 20 employees.", "It is located in a shopping mall.", "It sells only bread.", "It has grown since it opened."],
+          "answer": "It has grown since it opened.",
+          "why": "ตอบ It has grown since it opened. เพราะร้านเริ่มจากพนักงาน 2 คนในปี 2012 และตอนนี้มี 15 คน ส่วนรางวัลนี้ให้ร้านที่มีพนักงานไม่ถึง 20 คน ร้านอยู่บน Elm Street ไม่ได้บอกว่าอยู่ในห้าง และข่าวไม่ได้บอกว่าขายแค่ขนมปัง (คำว่า only ในตัวเลือกเป็นสัญญาณให้ตรวจ)"
+        },
+        {
+          "type": "insert",
+          "question": "In which of the positions marked [1], [2], [3], and [4] does the following sentence best belong? \"Many of them have worked there for more than five years.\"",
+          "options": ["[1]", "[2]", "[3]", "[4]"],
+          "answer": "[3]",
+          "why": "ตอบ [3] เพราะ them ในประโยคต้องอ้างถึงกลุ่มคน และประโยคก่อน [3] พูดถึง her staff (พนักงานของเธอ) ประโยคนี้จึงขยายต่อว่าพนักงานหลายคนทำงานมานาน ส่วนที่ [2] ข้างหน้ามีพนักงานแค่สองคน ใช้ many ไม่ได้ ส่วน [1] และ [4] ข้างหน้าไม่มีกลุ่มคนให้ them อ้างถึง"
+        }
+      ]
+    },
+    {
+      "id": "p7-business-cards",
+      "part": 7,
+      "title": "ตารางราคาและอีเมลสั่งนามบัตร (เอกสารคู่)",
+      "passages": [
+        {
+          "kind": "webpage",
+          "heading": "Clearview Printing: Business Card Prices",
+          "body": "Standard cards (white paper, printed on one side)\n250 cards: $25\n500 cards: $40\n\nPremium cards (thick paper, printed on both sides)\n250 cards: $45\n500 cards: $70\n\nOrders are ready in three business days. Need them sooner? Rush service (ready the next business day) is available for an additional $15.\nDelivery is free for orders over $60."
+        },
+        {
+          "kind": "email",
+          "heading": "To: orders@clearviewprinting.com\nFrom: Ken Morita\nDate: Monday, February 10\nSubject: Business card order",
+          "body": "Hello,\n\nI would like to order 500 premium business cards for our new sales manager, Ms. Lara Quinn. The design file is attached. Ms. Quinn starts work on Wednesday, February 12, and will meet clients that day, so we need the cards by Tuesday afternoon. Please include the rush service.\n\nCould you also tell me whether you print envelopes? We may need some for a mailing next month.\n\nThank you,\nKen Morita\nOffice Manager, Brightway Consulting"
+        }
+      ],
+      "questions": [
+        {
+          "type": "purpose",
+          "question": "What is the purpose of the e-mail?",
+          "options": ["To place an order", "To request a price list", "To complain about a late delivery", "To introduce a new employee to clients"],
+          "answer": "To place an order",
+          "why": "ตอบ To place an order เพราะประโยคแรกของอีเมลคือ I would like to order 500 premium business cards ส่วนเขาไม่ได้ขอตารางราคา ยังไม่มีการส่งของที่จะล่าช้า และอีเมลส่งถึงร้านพิมพ์ ไม่ใช่ลูกค้า"
+        },
+        {
+          "type": "detail",
+          "question": "Who is Ms. Quinn?",
+          "options": ["An office manager", "A new employee at Brightway Consulting", "A designer at Clearview Printing", "One of Mr. Morita's clients"],
+          "answer": "A new employee at Brightway Consulting",
+          "why": "ตอบ A new employee at Brightway Consulting เพราะอีเมลเรียกเธอว่า our new sales manager และบอกว่าเธอเริ่มงานวันที่ 12 กุมภาพันธ์ ส่วน office manager คือตำแหน่งของคุณโมริตะเอง และไม่มีข้อมูลว่าเธอเป็นนักออกแบบหรือลูกค้า"
+        },
+        {
+          "type": "cross",
+          "question": "How much will Mr. Morita most likely pay for his order?",
+          "options": ["$55", "$70", "$85", "$100"],
+          "answer": "$85",
+          "why": "ตอบ $85 เพราะต้องใช้ข้อมูลจากสองเอกสาร: อีเมลบอกว่าสั่งนามบัตร premium 500 ใบพร้อมบริการด่วน และตารางราคาบอกว่า premium 500 ใบราคา $70 บริการด่วนเพิ่ม $15 รวม $85 ส่วนค่าส่งฟรีเพราะยอดเกิน $60 ตัวเลือก $70 คือราคาที่ยังไม่รวมบริการด่วน"
+        },
+        {
+          "type": "detail",
+          "question": "Why does Mr. Morita need the cards quickly?",
+          "options": ["The design file was sent late.", "A mailing is planned for next month.", "Ms. Quinn will meet clients on her first day.", "Prices will increase on Wednesday."],
+          "answer": "Ms. Quinn will meet clients on her first day.",
+          "why": "ตอบ Ms. Quinn will meet clients on her first day. เพราะอีเมลบอกว่าเธอเริ่มงานวันพุธและจะพบลูกค้าในวันนั้น จึงต้องได้นามบัตรภายในบ่ายวันอังคาร ส่วนไฟล์แนบมาพร้อมอีเมล การส่งจดหมายเดือนหน้าเกี่ยวกับซอง ไม่ใช่นามบัตร และไม่มีการพูดถึงราคาขึ้น"
+        },
+        {
+          "type": "detail",
+          "question": "What does Mr. Morita ask about?",
+          "options": ["The cost of delivery", "Available paper colors", "Changes to his design", "Another product the company may offer"],
+          "answer": "Another product the company may offer",
+          "why": "ตอบ Another product the company may offer เพราะเขาถามว่าร้านพิมพ์ซองจดหมายด้วยหรือไม่ (envelopes = สินค้าอีกอย่าง) ส่วนค่าส่ง สีกระดาษ และการแก้แบบไม่ได้ถูกถาม"
+        }
+      ]
+    },
+    {
+      "id": "p7-workshops",
+      "part": 7,
+      "title": "ประกาศ แบบฟอร์ม และอีเมลเรื่องเวิร์กช็อป (เอกสารสามชิ้น)",
+      "passages": [
+        {
+          "kind": "notice",
+          "heading": "Lakeside Business Association: Spring Workshops",
+          "body": "All workshops are held at the Lakeside Library, Room 3, from 6:00 to 8:00 P.M.\n\nApril 8: Marketing on a Small Budget (Speaker: Ana Lopez)\nApril 15: Managing Your Finances (Speaker: Raj Patel)\nApril 22: Hiring Your First Employee (Speaker: Grace Kim)\n\nMembers: $20 per workshop. Nonmembers: $35 per workshop.\nRegister online at www.lakesideba.org by April 1."
+        },
+        {
+          "kind": "form",
+          "heading": "Workshop Registration Form",
+          "body": "Name: Omar Haddad\nBusiness: Haddad Bicycle Repair\nMember: Yes\nWorkshops: April 8, April 22\nPayment: $40 (charged to card ending in 4471)\nDate submitted: March 29"
+        },
+        {
+          "kind": "email",
+          "heading": "To: Omar Haddad\nFrom: Lakeside Business Association\nDate: April 10\nSubject: Workshop update",
+          "body": "Dear Mr. Haddad,\n\nThank you for attending our workshop this week. We are writing to let you know that Ms. Kim is unable to speak on April 22 as planned. Her workshop has been moved to April 29 at the same time and place. If you cannot attend on the new date, we will refund your fee for that workshop.\n\nPlease reply to this e-mail by April 20 to let us know your choice.\n\nLakeside Business Association"
+        }
+      ],
+      "questions": [
+        {
+          "type": "detail",
+          "question": "What is indicated about the workshops?",
+          "options": ["They are free for members.", "They take place at different locations.", "They are held in the evening.", "They are led by the same speaker."],
+          "answer": "They are held in the evening.",
+          "why": "ตอบ They are held in the evening. เพราะประกาศบอกว่าทุกครั้งจัดเวลา 6:00 ถึง 8:00 P.M. ส่วนสมาชิกต้องจ่าย $20 จัดที่ห้องเดียวกันทุกครั้ง และมีผู้บรรยายสามคน"
+        },
+        {
+          "type": "cross",
+          "question": "Which workshop did Mr. Haddad most likely attend?",
+          "options": ["Marketing on a Small Budget", "Managing Your Finances", "Hiring Your First Employee", "A workshop about bicycle repair"],
+          "answer": "Marketing on a Small Budget",
+          "why": "ตอบ Marketing on a Small Budget เพราะต้องใช้สามเอกสาร: อีเมลวันที่ 10 เมษายนขอบคุณที่มาร่วม this week แบบฟอร์มบอกว่าเขาลงทะเบียนวันที่ 8 และ 22 เมษายน และประกาศบอกว่าวันที่ 8 คือหัวข้อการตลาด ส่วน Managing Your Finances เขาไม่ได้ลงทะเบียน Hiring Your First Employee ยังไม่ถึงวัน และไม่มีเวิร์กช็อปเรื่องซ่อมจักรยาน (นั่นคือธุรกิจของเขา)"
+        },
+        {
+          "type": "cross",
+          "question": "Why was Mr. Haddad charged $40?",
+          "options": ["He is a nonmember who registered for one workshop.", "He registered after the deadline.", "He is a member who registered for two workshops.", "He requested a printed certificate."],
+          "answer": "He is a member who registered for two workshops.",
+          "why": "ตอบ He is a member who registered for two workshops. เพราะแบบฟอร์มบอกว่าเขาเป็นสมาชิกและลงสองเวิร์กช็อป และประกาศบอกว่าสมาชิกจ่ายครั้งละ $20 รวม $40 ส่วนคนที่ไม่ใช่สมาชิกจ่าย $35 ต่อครั้ง เขาส่งแบบฟอร์มวันที่ 29 มีนาคมซึ่งก่อนกำหนด 1 เมษายน และไม่มีการพูดถึงใบประกาศนียบัตร"
+        },
+        {
+          "type": "cross",
+          "question": "Which workshop has been rescheduled?",
+          "options": ["Marketing on a Small Budget", "Managing Your Finances", "Hiring Your First Employee", "Improving Customer Service"],
+          "answer": "Hiring Your First Employee",
+          "why": "ตอบ Hiring Your First Employee เพราะอีเมลบอกว่าเวิร์กช็อปของ Ms. Kim ในวันที่ 22 เมษายนถูกย้ายไปวันที่ 29 และประกาศบอกว่า Grace Kim บรรยายเรื่อง Hiring Your First Employee ส่วนสองหัวข้อแรกเป็นของผู้บรรยายคนอื่น และ Improving Customer Service ไม่มีในประกาศ"
+        },
+        {
+          "type": "detail",
+          "question": "What is Mr. Haddad asked to do?",
+          "options": ["Pay an additional fee", "Say whether he can attend on a new date", "Register for another workshop", "Contact Ms. Kim directly"],
+          "answer": "Say whether he can attend on a new date",
+          "why": "ตอบ Say whether he can attend on a new date เพราะอีเมลขอให้ตอบกลับภายในวันที่ 20 เมษายนเพื่อแจ้งว่าเลือกทางไหน (มาวันใหม่หรือรับเงินคืน) ส่วนไม่มีค่าใช้จ่ายเพิ่ม ไม่ได้ให้ลงทะเบียนหัวข้ออื่น และให้ตอบอีเมลนี้ ไม่ใช่ติดต่อ Ms. Kim"
+        }
+      ]
+    }
+  ]
+}

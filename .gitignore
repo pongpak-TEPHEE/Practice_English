@@ -3,8 +3,9 @@
 !package.json
 !package-lock.json
 !tsconfig*.json
-# Grammar lessons are content, not keys.
+# Lesson and reading content files are content, not keys.
 !backend/data/grammar/*.json
+!backend/data/reading/*.json
 .env
 backend/bin/
 node_modules/
