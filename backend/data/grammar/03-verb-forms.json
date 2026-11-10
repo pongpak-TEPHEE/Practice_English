@@ -1,0 +1,741 @@
+{
+  "id": "verb-forms",
+  "title": "รูปกริยา",
+  "english": "Verb Forms",
+  "summary": "Tense จากคำบอกเวลา, active กับ passive, กริยาที่ไม่ใช่กริยาหลัก, to + V กับ V-ing และการสอดคล้องกับประธาน",
+  "analysis": {
+    "parts": "Reading Part 5 (เติมประโยค 30 ข้อ) และ Part 6 (เติมข้อความ 16 ข้อ)",
+    "questions": "ประมาณ 3–5 ข้อใน Part 5 และอีก 1–3 ข้อใน Part 6 ต่อการสอบหนึ่งครั้ง (Part 6 ชอบให้เลือก tense จากเนื้อหารอบ ๆ)",
+    "points": "ประมาณ 20–40 คะแนน จาก 495 คะแนนของ Reading (คิดคร่าว ๆ ข้อละ 5 คะแนน)",
+    "covers": [
+      "เลือก tense จากคำบอกเวลา (yesterday, since, next, currently)",
+      "active กับ passive โดยดูว่าหลังช่องว่างมีกรรมหรือไม่",
+      "ประโยคที่มีกริยาหลักแล้ว ช่องว่างต้องเป็น V-ing หรือ V3 ขยายคำนาม",
+      "กริยาที่ตามด้วย to + V หรือ V-ing (plan to, avoid -ing, look forward to -ing)",
+      "ประธานเอกพจน์และพหูพจน์ (each, the number of, a number of)",
+      "อนาคตในประโยค when / if ที่ใช้ present simple"
+    ],
+    "notCovered": [
+      "ชนิดคำ (มีบทแยกแล้ว)",
+      "คำเชื่อมและ relative pronoun (who / which / that)",
+      "สรรพนาม และขั้นกว่าขั้นสุด",
+      "conditional แบบสมมติ (If I were, would have) ซึ่งออกน้อยมาก"
+    ],
+    "note": "ETS ไม่เปิดเผยสัดส่วนหัวข้อในข้อสอบ ตัวเลขนี้ประมาณจากการวิเคราะห์ข้อสอบของหนังสือเตรียมสอบ และตารางแปลงคะแนนต่างกันในแต่ละชุด ใช้เพื่อจัดลำดับว่าควรฝึกอะไรก่อน ไม่ใช่การรับประกันคะแนน"
+  },
+  "strategy": [
+    "ดูตัวเลือกก่อน ถ้าเป็นกริยาตัวเดียวกันคนละรูป (submit / submitted / is submitted / will submit) คือข้อรูปกริยา",
+    "เช็กว่าประโยคมีกริยาหลักแล้วหรือยัง ถ้ามีแล้ว ช่องว่างต้องเป็น V-ing, V3 หรือ to + V ไม่ใช่กริยาหลักตัวที่สอง",
+    "ดูหลังช่องว่าง: มีกรรม (คำนาม) ตามมาให้ใช้ active ไม่มีกรรมหรือมี by ให้ใช้ passive และถามว่าประธานทำเองได้ไหม",
+    "หาคำบอกเวลาในประโยค (yesterday, since, next week, currently) เพื่อเลือก tense",
+    "ดูประธานว่าเป็นเอกพจน์หรือพหูพจน์ ระวังคำคั่นกลาง (The list of suppliers is)",
+    "เป้าเวลาข้อละไม่เกิน 15 วินาที"
+  ],
+  "sections": [
+    {
+      "id": "passive",
+      "title": "Active กับ Passive",
+      "priority": "high",
+      "intro": "ข้อสอบชอบให้เลือกระหว่างรูป active กับ passive ของกริยาเดียวกัน ดูสองอย่าง: หลังช่องว่างมีกรรมไหม และประธานเป็นผู้ทำหรือผู้ถูกกระทำ",
+      "rules": [
+        {
+          "word": "active",
+          "use": "ประธานเป็นผู้ทำ และมีกรรมตามหลังกริยา",
+          "examples": "Our technicians inspect the equipment."
+        },
+        {
+          "word": "passive (be + V3)",
+          "use": "ประธานถูกกระทำ ไม่มีกรรมตามหลัง อาจมี by",
+          "examples": "The equipment is inspected every month."
+        },
+        {
+          "word": "modal + be + V3",
+          "use": "passive หลัง must / will / can / should",
+          "examples": "must be submitted, will be installed"
+        },
+        {
+          "word": "have / has been + V3",
+          "use": "passive ของ present perfect",
+          "examples": "has been reserved, have been shipped"
+        },
+        {
+          "word": "be required / be asked / be encouraged + to V",
+          "use": "passive ที่เจอบ่อยในประกาศ",
+          "examples": "Visitors are required to wear helmets."
+        }
+      ],
+      "examples": [
+        {
+          "en": "All expense reports must be submitted by Friday.",
+          "th": "ต้องส่งรายงานค่าใช้จ่ายทั้งหมดภายในวันศุกร์",
+          "mark": "must be submitted"
+        },
+        {
+          "en": "Our technicians inspect the equipment every month.",
+          "th": "ช่างของเราตรวจอุปกรณ์ทุกเดือน",
+          "mark": "inspect"
+        },
+        {
+          "en": "The conference room has been reserved for the client meeting.",
+          "th": "ห้องประชุมถูกจองไว้สำหรับการประชุมกับลูกค้าแล้ว",
+          "mark": "has been reserved"
+        }
+      ],
+      "tip": "ถามว่าประธานทำกริยานั้นเองได้ไหม รายงานส่งตัวเองไม่ได้ ห้องจองตัวเองไม่ได้ จึงต้องเป็น passive และถ้าหลังช่องว่างมีคำนามที่เป็นกรรม เกือบทุกครั้งต้องเป็น active",
+      "drills": [
+        {
+          "sentence": "All expense reports must ___ by Friday.",
+          "options": [
+            "be submitted",
+            "submit",
+            "submitting",
+            "have submitted"
+          ],
+          "answer": "be submitted",
+          "why": "ตอบ be submitted เพราะรายงานส่งตัวเองไม่ได้และหลังช่องว่างไม่มีกรรม จึงต้องเป็น passive หลัง must คือ be + V3 ส่วน submit และ have submitted เป็น active ซึ่งแปลว่ารายงานเป็นผู้ส่ง และ submitting ใช้หลัง must ไม่ได้"
+        },
+        {
+          "sentence": "The award ___ to Ms. Kim at the annual banquet last night.",
+          "options": [
+            "was presented",
+            "presented",
+            "presents",
+            "is presenting"
+          ],
+          "answer": "was presented",
+          "why": "รางวัลถูกมอบ ไม่มีกรรมตามหลัง และ last night บอกอดีต จึงเป็น passive อดีต was presented ส่วน presented และ presents เป็น active และ is presenting เป็นปัจจุบัน"
+        },
+        {
+          "sentence": "Our technicians ___ the equipment every month.",
+          "options": [
+            "inspect",
+            "are inspected",
+            "were inspected",
+            "inspection"
+          ],
+          "answer": "inspect",
+          "why": "ช่างเป็นผู้ตรวจ และมีกรรม the equipment ตามหลัง จึงเป็น active และ every month บอกกิจวัตรจึงใช้ present simple ส่วน are inspected และ were inspected เป็น passive ซึ่งตามด้วยกรรมไม่ได้ และ inspection เป็นคำนาม"
+        },
+        {
+          "sentence": "The conference room ___ for a client meeting this afternoon.",
+          "options": [
+            "has been reserved",
+            "has reserved",
+            "reserving",
+            "reserve"
+          ],
+          "answer": "has been reserved",
+          "why": "ห้องประชุมถูกจอง ไม่ได้จองเอง และไม่มีกรรมตามหลัง จึงเป็น passive has been reserved ส่วน has reserved เป็น active reserving ไม่ใช่กริยาหลัก และ reserve ไม่สอดคล้องกับประธานเอกพจน์"
+        },
+        {
+          "sentence": "Visitors are ___ to wear safety helmets on the factory floor.",
+          "options": [
+            "required",
+            "requiring",
+            "require",
+            "requirement"
+          ],
+          "answer": "required",
+          "why": "ผู้มาเยือนถูกกำหนดให้สวมหมวก จึงเป็น passive be required to + V ส่วน are requiring แปลว่าผู้มาเยือนเป็นผู้กำหนด require ใช้หลัง are ไม่ได้ และ requirement เป็นคำนาม"
+        },
+        {
+          "sentence": "The new accounting software ___ by the IT team next week.",
+          "options": [
+            "will be installed",
+            "will install",
+            "installed",
+            "installing"
+          ],
+          "answer": "will be installed",
+          "why": "ซอฟต์แวร์ถูกติดตั้งโดยทีม IT (มี by) และ next week บอกอนาคต จึงเป็น will be installed ส่วน will install เป็น active installed เป็นอดีต และ installing ไม่ใช่กริยาหลัก"
+        },
+        {
+          "sentence": "Mr. Lee ___ the contract before he left the office.",
+          "options": [
+            "signed",
+            "was signed",
+            "signing",
+            "sign"
+          ],
+          "answer": "signed",
+          "why": "คุณลีเป็นผู้ลงนาม และมีกรรม the contract จึงเป็น active และ left บอกอดีต จึงใช้ signed ส่วน was signed เป็น passive ซึ่งตามด้วยกรรมไม่ได้ signing ไม่ใช่กริยาหลัก และ sign ไม่ใช่อดีต"
+        }
+      ]
+    },
+    {
+      "id": "tense",
+      "title": "Tense จากคำบอกเวลา",
+      "priority": "high",
+      "intro": "ข้อ tense ใน Part 5 มักมีคำบอกเวลาเป็นตัวตัดสิน หาคำนั้นให้เจอก่อนแล้วเลือก tense ที่เข้ากัน ส่วน Part 6 ต้องดูเวลาจากประโยครอบ ๆ เช่น อีเมลที่พูดถึงงานที่จะเกิดขึ้นสัปดาห์หน้า",
+      "rules": [
+        {
+          "word": "yesterday, last week, ago, in 2020",
+          "use": "past simple (V2)",
+          "examples": "visited last month"
+        },
+        {
+          "word": "since, for + ระยะเวลา, over the past",
+          "use": "present perfect (have / has + V3)",
+          "examples": "has been located here since 2015"
+        },
+        {
+          "word": "next, tomorrow, soon, upcoming",
+          "use": "future (will + V1)",
+          "examples": "will open next spring"
+        },
+        {
+          "word": "every, usually, always, regularly",
+          "use": "present simple (V1 / V-s)",
+          "examples": "offers tours every Saturday"
+        },
+        {
+          "word": "currently, now, at the moment",
+          "use": "present continuous (is / are + V-ing)",
+          "examples": "is currently working on"
+        },
+        {
+          "word": "by the time / by + เวลาในอนาคต",
+          "use": "future perfect (will have + V3)",
+          "examples": "will have finished by Friday"
+        }
+      ],
+      "examples": [
+        {
+          "en": "Mr. Tanaka visited the Singapore office last month.",
+          "th": "คุณทานากะไปเยี่ยมสำนักงานสิงคโปร์เมื่อเดือนที่แล้ว",
+          "mark": "visited"
+        },
+        {
+          "en": "The company has been located here since 2015.",
+          "th": "บริษัทตั้งอยู่ที่นี่มาตั้งแต่ปี 2015",
+          "mark": "has been located"
+        },
+        {
+          "en": "Ms. Rivera is currently working on the budget.",
+          "th": "คุณริเวร่ากำลังทำงบประมาณอยู่ตอนนี้",
+          "mark": "is currently working"
+        }
+      ],
+      "tip": "since และ over the past + ระยะเวลา คู่กับ have / has + V3 เกือบเสมอ ถ้าเห็นสองคำนี้ ตัดตัวเลือกที่เป็น past simple และ present simple ทิ้งได้เลย",
+      "drills": [
+        {
+          "sentence": "Mr. Tanaka ___ the Singapore office last month.",
+          "options": [
+            "visited",
+            "visits",
+            "will visit",
+            "has visited"
+          ],
+          "answer": "visited",
+          "why": "last month บอกเวลาในอดีตที่จบแล้ว จึงใช้ past simple ส่วน has visited ใช้กับเวลาที่ระบุชัดในอดีตไม่ได้ visits เป็นปัจจุบัน และ will visit เป็นอนาคต"
+        },
+        {
+          "sentence": "The company ___ in this building since 2015.",
+          "options": [
+            "has been located",
+            "was located",
+            "is located",
+            "will be located"
+          ],
+          "answer": "has been located",
+          "why": "ตอบ has been located เพราะ since 2015 บอกว่าเริ่มในอดีตและยังเป็นอยู่ จึงใช้ present perfect ส่วน was located, is located และ will be located ใช้กับ since ไม่ได้"
+        },
+        {
+          "sentence": "The new branch ___ next spring.",
+          "options": [
+            "will open",
+            "opened",
+            "has opened",
+            "opening"
+          ],
+          "answer": "will open",
+          "why": "next spring บอกอนาคต จึงใช้ will open ส่วน opened และ has opened เป็นอดีต และ opening ไม่ใช่กริยาหลัก"
+        },
+        {
+          "sentence": "The city museum ___ free guided tours every Saturday morning.",
+          "options": [
+            "offers",
+            "offering",
+            "have offered",
+            "to offer"
+          ],
+          "answer": "offers",
+          "why": "ตอบ offers เพราะ every Saturday บอกกิจวัตร ใช้ present simple และประธานเป็นเอกพจน์จึงเติม s ส่วน offering และ to offer ไม่ใช่กริยาหลัก และ have offered ไม่สอดคล้องกับประธานเอกพจน์"
+        },
+        {
+          "sentence": "Ms. Rivera ___ on the budget report at the moment, so she cannot take any calls.",
+          "options": [
+            "is working",
+            "works",
+            "worked",
+            "has worked"
+          ],
+          "answer": "is working",
+          "why": "ตอบ is working เพราะ at the moment บอกว่ากำลังทำอยู่ตอนนี้ จึงใช้ present continuous ส่วน works ใช้กับกิจวัตร worked เป็นอดีต และ has worked ไม่ได้บอกว่ากำลังทำอยู่"
+        },
+        {
+          "sentence": "By the time the director arrives, the team ___ the presentation.",
+          "options": [
+            "will have finished",
+            "finished",
+            "has finished",
+            "finishes"
+          ],
+          "answer": "will have finished",
+          "why": "ตอบ will have finished เพราะ by the time + เหตุการณ์ในอนาคต บอกว่างานจะเสร็จก่อนจุดนั้น จึงใช้ future perfect ส่วน finished เป็นอดีต has finished และ finishes ไม่ได้บอกว่าเสร็จก่อนเวลาในอนาคต"
+        },
+        {
+          "sentence": "Online sales ___ by 15 percent over the past three years.",
+          "options": [
+            "have grown",
+            "grow",
+            "will grow",
+            "growing"
+          ],
+          "answer": "have grown",
+          "why": "ตอบ have grown เพราะ over the past three years บอกช่วงเวลาจากอดีตถึงปัจจุบัน จึงใช้ present perfect ส่วน grow เป็นปัจจุบัน will grow เป็นอนาคต และ growing ไม่ใช่กริยาหลัก"
+        }
+      ]
+    },
+    {
+      "id": "nonfinite",
+      "title": "มีกริยาหลักแล้ว: V-ing และ V3 ที่ขยายคำนาม",
+      "priority": "high",
+      "intro": "ประโยคหนึ่งมีกริยาหลักได้ตัวเดียว (ถ้าไม่มีคำเชื่อม) ถ้าประโยคมีกริยาหลักแล้ว ช่องว่างต้องเป็น V-ing หรือ V3 ที่ขยายคำนามข้างหน้า หรือขึ้นต้นประโยค ข้อแบบนี้หลอกด้วยตัวเลือกที่เป็นกริยาหลักอีกตัว",
+      "rules": [
+        {
+          "word": "คำนาม + V3 + ...",
+          "use": "คำนามนั้นถูกกระทำ (ย่อจาก which was / which is)",
+          "examples": "The report submitted yesterday contains errors."
+        },
+        {
+          "word": "คำนาม + V-ing + ...",
+          "use": "คำนามนั้นเป็นผู้ทำ (ย่อจาก who wish)",
+          "examples": "Employees wishing to attend should register."
+        },
+        {
+          "word": "V-ing ..., ประโยคหลัก",
+          "use": "ผู้ทำคือประธานของประโยคหลัก",
+          "examples": "Using the new software, staff work faster."
+        },
+        {
+          "word": "V3 ..., ประโยคหลัก",
+          "use": "ประธานของประโยคหลักถูกกระทำ",
+          "examples": "Founded in 1990, the firm now has 50 offices."
+        }
+      ],
+      "examples": [
+        {
+          "en": "The report submitted yesterday contains several errors.",
+          "th": "รายงานที่ส่งมาเมื่อวานมีข้อผิดพลาดหลายจุด",
+          "mark": "submitted"
+        },
+        {
+          "en": "Employees wishing to attend the seminar should register by Friday.",
+          "th": "พนักงานที่ต้องการเข้าร่วมสัมมนาควรลงทะเบียนภายในวันศุกร์",
+          "mark": "wishing"
+        },
+        {
+          "en": "Founded in 1990, the firm now has 50 offices.",
+          "th": "บริษัทก่อตั้งในปี 1990 และตอนนี้มีสำนักงาน 50 แห่ง",
+          "mark": "Founded"
+        }
+      ],
+      "tip": "นับกริยาหลักในประโยค ถ้ามีแล้วหนึ่งตัวและไม่มีคำเชื่อม ตัดตัวเลือกที่เป็นกริยาหลัก (is, was, submits) ทิ้ง เหลือ V-ing กับ V3 แล้วถามว่าคำนามนั้นทำหรือถูกทำ",
+      "drills": [
+        {
+          "sentence": "The report ___ yesterday contains several errors.",
+          "options": [
+            "submitted",
+            "submitting",
+            "submits",
+            "was submitted"
+          ],
+          "answer": "submitted",
+          "why": "ประโยคมีกริยาหลักแล้วคือ contains ช่องว่างจึงขยาย The report และรายงานถูกส่ง จึงใช้ V3 ส่วน was submitted และ submits จะเป็นกริยาหลักตัวที่สอง และ submitting แปลว่ารายงานเป็นผู้ส่ง"
+        },
+        {
+          "sentence": "Employees ___ to attend the seminar should register by Friday.",
+          "options": [
+            "wishing",
+            "wish",
+            "wished",
+            "to wish"
+          ],
+          "answer": "wishing",
+          "why": "ตอบ wishing เพราะกริยาหลักคือ should register ช่องว่างขยาย Employees และพนักงานเป็นผู้ต้องการ จึงใช้ V-ing (ย่อจาก who wish) ส่วน wish จะเป็นกริยาหลักตัวที่สอง wished แปลว่าถูกต้องการ และ to wish ไม่ใช้ขยายคำนามในความหมายนี้"
+        },
+        {
+          "sentence": "Please read the instructions ___ with the product before use.",
+          "options": [
+            "included",
+            "including",
+            "include",
+            "includes"
+          ],
+          "answer": "included",
+          "why": "ตอบ included เพราะกริยาหลักคือ read ช่องว่างขยาย the instructions และคู่มือถูกใส่มากับสินค้า จึงใช้ V3 ส่วน including จะแปลว่าคู่มือเป็นผู้ใส่ include และ includes เป็นกริยาหลัก"
+        },
+        {
+          "sentence": "___ the new software, staff can now process orders twice as fast.",
+          "options": [
+            "Using",
+            "Used",
+            "Use",
+            "Uses"
+          ],
+          "answer": "Using",
+          "why": "ตอบ Using เพราะประโยคหลักคือ staff can process ช่องว่างขึ้นต้นวลีที่มีผู้ทำคือ staff (พนักงานเป็นผู้ใช้) จึงใช้ V-ing ส่วน Used แปลว่าพนักงานถูกใช้ และ Use กับ Uses จะเป็นกริยาหลักที่ไม่มีคำเชื่อม"
+        },
+        {
+          "sentence": "Tickets ___ online are not refundable.",
+          "options": [
+            "purchased",
+            "purchasing",
+            "purchase",
+            "purchases"
+          ],
+          "answer": "purchased",
+          "why": "ตอบ purchased เพราะกริยาหลักคือ are ช่องว่างขยาย Tickets และตั๋วถูกซื้อ จึงใช้ V3 ส่วน purchasing แปลว่าตั๋วเป็นผู้ซื้อ และ purchase กับ purchases ทำให้มีกริยาหลักสองตัว"
+        },
+        {
+          "sentence": "___ in 1990, the law firm now has offices in 12 countries.",
+          "options": [
+            "Founded",
+            "Founding",
+            "Founds",
+            "Found"
+          ],
+          "answer": "Founded",
+          "why": "ตอบ Founded เพราะประโยคหลักคือ the law firm now has บริษัทถูกก่อตั้ง จึงใช้ V3 ขึ้นต้นวลี ส่วน Founding แปลว่าบริษัทเป็นผู้ก่อตั้ง และ Founds กับ Found จะเป็นกริยาหลักที่ไม่มีคำเชื่อม"
+        }
+      ]
+    },
+    {
+      "id": "to-or-ing",
+      "title": "to + V หรือ V-ing หลังกริยา",
+      "priority": "medium",
+      "intro": "กริยาบางตัวตามด้วย to + V บางตัวตามด้วย V-ing ต้องจำเป็นคู่ และบุพบท (รวม to ในบางสำนวน) ตามด้วย V-ing เสมอ",
+      "rules": [
+        {
+          "word": "+ to V",
+          "use": "plan, agree, decide, hope, expect, want, need, offer, promise, refuse, fail, afford",
+          "examples": "plan to build, agree to extend"
+        },
+        {
+          "word": "+ V-ing",
+          "use": "avoid, consider, suggest, recommend, finish, enjoy, mind, postpone, delay",
+          "examples": "avoid using, suggest moving"
+        },
+        {
+          "word": "บุพบท + V-ing",
+          "use": "for, by, in, without, before, after, about",
+          "examples": "responsible for training, by using"
+        },
+        {
+          "word": "to ที่เป็นบุพบท + V-ing",
+          "use": "look forward to, be committed to, be dedicated to, be used to",
+          "examples": "look forward to seeing you"
+        },
+        {
+          "word": "be + V3 + to V",
+          "use": "be encouraged / required / asked / expected to",
+          "examples": "are encouraged to participate"
+        }
+      ],
+      "examples": [
+        {
+          "en": "The company plans to build a new factory in Vietnam.",
+          "th": "บริษัทวางแผนจะสร้างโรงงานใหม่ในเวียดนาม",
+          "mark": "plans to build"
+        },
+        {
+          "en": "Please avoid using your phone during the meeting.",
+          "th": "กรุณาหลีกเลี่ยงการใช้โทรศัพท์ระหว่างประชุม",
+          "mark": "avoid using"
+        },
+        {
+          "en": "We look forward to seeing you at the conference.",
+          "th": "เราหวังว่าจะได้พบคุณที่งานประชุม",
+          "mark": "look forward to seeing"
+        }
+      ],
+      "tip": "look forward to, be committed to และ be dedicated to เป็นกับดักที่ออกบ่อย to ในสำนวนเหล่านี้เป็นบุพบท จึงตามด้วย V-ing ไม่ใช่ V1",
+      "drills": [
+        {
+          "sentence": "The company plans ___ a new factory in Vietnam next year.",
+          "options": [
+            "to build",
+            "building",
+            "built",
+            "builds"
+          ],
+          "answer": "to build",
+          "why": "ตอบ to build เพราะ plan ตามด้วย to + V ส่วน building ใช้หลัง plan ไม่ได้ และ built กับ builds เป็นกริยาหลัก"
+        },
+        {
+          "sentence": "Please avoid ___ your phone during the meeting.",
+          "options": [
+            "using",
+            "to use",
+            "use",
+            "used"
+          ],
+          "answer": "using",
+          "why": "ตอบ using เพราะ avoid ตามด้วย V-ing ส่วน to use, use และ used ใช้หลัง avoid ไม่ได้"
+        },
+        {
+          "sentence": "We look forward to ___ you at the conference in May.",
+          "options": [
+            "seeing",
+            "see",
+            "seen",
+            "saw"
+          ],
+          "answer": "seeing",
+          "why": "ตอบ seeing เพราะ to ใน look forward to เป็นบุพบท จึงตามด้วย V-ing ส่วน see เป็นกับดักที่คิดว่าเป็น to + V และ seen กับ saw ใช้หลังบุพบทไม่ได้"
+        },
+        {
+          "sentence": "The manager agreed ___ the project deadline by one week.",
+          "options": [
+            "to extend",
+            "extending",
+            "extended",
+            "extends"
+          ],
+          "answer": "to extend",
+          "why": "ตอบ to extend เพราะ agree ตามด้วย to + V ส่วน extending ใช้หลัง agree ไม่ได้ และ extended กับ extends เป็นกริยาหลักซึ่งซ้อนกับ agreed"
+        },
+        {
+          "sentence": "Mr. Park suggested ___ the meeting to Thursday afternoon.",
+          "options": [
+            "moving",
+            "to move",
+            "moved",
+            "moves"
+          ],
+          "answer": "moving",
+          "why": "ตอบ moving เพราะ suggest ตามด้วย V-ing (หรือ that + ประโยค) ไม่ใช่ to + V ส่วน moved และ moves เป็นกริยาหลักซึ่งซ้อนกับ suggested"
+        },
+        {
+          "sentence": "Ms. Ito is responsible for ___ all new sales staff.",
+          "options": [
+            "training",
+            "train",
+            "trained",
+            "to train"
+          ],
+          "answer": "training",
+          "why": "ตอบ training เพราะหลังบุพบท for ต้องเป็น V-ing ส่วน train, trained และ to train ใช้หลังบุพบทไม่ได้"
+        },
+        {
+          "sentence": "All employees are encouraged ___ in the annual customer survey.",
+          "options": [
+            "to participate",
+            "participating",
+            "participate",
+            "participated"
+          ],
+          "answer": "to participate",
+          "why": "ตอบ to participate เพราะ be encouraged ตามด้วย to + V ส่วน participating, participate และ participated ใช้หลัง are encouraged ไม่ได้"
+        }
+      ]
+    },
+    {
+      "id": "agreement",
+      "title": "ประธานเอกพจน์และพหูพจน์",
+      "priority": "medium",
+      "intro": "กริยาต้องสอดคล้องกับประธาน ข้อสอบหลอกด้วยการใส่วลีคั่นระหว่างประธานกับกริยา หรือใช้คำที่ดูเหมือนพหูพจน์แต่เป็นเอกพจน์",
+      "rules": [
+        {
+          "word": "The list / The number / Each + of + พหูพจน์",
+          "use": "ประธานจริงคือคำหน้า of ซึ่งเป็นเอกพจน์",
+          "examples": "The list of suppliers is updated."
+        },
+        {
+          "word": "A number of + พหูพจน์",
+          "use": "แปลว่าหลาย ใช้กริยาพหูพจน์",
+          "examples": "A number of customers have complained."
+        },
+        {
+          "word": "Each / Every + คำนามเอกพจน์",
+          "use": "กริยาเอกพจน์",
+          "examples": "Each employee receives a laptop."
+        },
+        {
+          "word": "ประธาน + who / that ... + กริยา",
+          "use": "ดูประธานหลัก ไม่ใช่คำที่อยู่ใกล้กริยา",
+          "examples": "The managers who attended have given feedback."
+        },
+        {
+          "word": "Neither A nor B / Either A or B",
+          "use": "กริยาตาม B (คำที่อยู่ใกล้)",
+          "examples": "Neither the manager nor the assistants are available."
+        }
+      ],
+      "examples": [
+        {
+          "en": "The list of approved suppliers is updated every quarter.",
+          "th": "รายชื่อผู้จำหน่ายที่ได้รับอนุมัติจะอัปเดตทุกไตรมาส",
+          "mark": "is updated"
+        },
+        {
+          "en": "A number of customers have complained about the delay.",
+          "th": "ลูกค้าหลายรายร้องเรียนเรื่องความล่าช้า",
+          "mark": "have complained"
+        },
+        {
+          "en": "The number of applicants has increased this year.",
+          "th": "จำนวนผู้สมัครเพิ่มขึ้นในปีนี้",
+          "mark": "has increased"
+        }
+      ],
+      "tip": "The number of = จำนวน (เอกพจน์) แต่ A number of = หลาย (พหูพจน์) เป็นคู่ที่ออกสอบบ่อย ส่วนวลีที่อยู่หลัง of หรือ who ให้ข้ามไปเวลาหาประธาน",
+      "drills": [
+        {
+          "sentence": "The list of approved suppliers ___ updated every quarter.",
+          "options": [
+            "is",
+            "are",
+            "be",
+            "being"
+          ],
+          "answer": "is",
+          "why": "ประธานจริงคือ The list (เอกพจน์) ไม่ใช่ suppliers จึงใช้ is ส่วน are ใช้กับพหูพจน์ และ be กับ being ไม่ใช่กริยาหลัก"
+        },
+        {
+          "sentence": "Each of the new employees ___ a laptop on the first day.",
+          "options": [
+            "receives",
+            "receive",
+            "receiving",
+            "have received"
+          ],
+          "answer": "receives",
+          "why": "Each of + พหูพจน์ ใช้กริยาเอกพจน์ จึงเป็น receives ส่วน receive และ have received ใช้กับประธานพหูพจน์ และ receiving ไม่ใช่กริยาหลัก"
+        },
+        {
+          "sentence": "The managers who attended the workshop ___ very positive feedback.",
+          "options": [
+            "have given",
+            "has given",
+            "giving",
+            "gives"
+          ],
+          "answer": "have given",
+          "why": "ประธานหลักคือ The managers (พหูพจน์) ส่วน who attended the workshop เป็นวลีขยาย จึงใช้ have given ส่วน has given และ gives ใช้กับเอกพจน์ และ giving ไม่ใช่กริยาหลัก"
+        },
+        {
+          "sentence": "The number of applicants for the position ___ increased this year.",
+          "options": [
+            "has",
+            "have",
+            "having",
+            "are"
+          ],
+          "answer": "has",
+          "why": "The number of แปลว่าจำนวน เป็นเอกพจน์ จึงใช้ has ส่วน have ใช้กับพหูพจน์ having ไม่ใช่กริยาหลัก และ are increased มีรูปผิดและไม่สอดคล้องกับประธาน"
+        },
+        {
+          "sentence": "A number of customers ___ about the delivery delays.",
+          "options": [
+            "have complained",
+            "has complained",
+            "complaining",
+            "complains"
+          ],
+          "answer": "have complained",
+          "why": "A number of แปลว่าหลาย ใช้กริยาพหูพจน์ จึงเป็น have complained ส่วน has complained และ complains ใช้กับเอกพจน์ และ complaining ไม่ใช่กริยาหลัก"
+        },
+        {
+          "sentence": "Neither the manager nor her assistants ___ available this afternoon.",
+          "options": [
+            "are",
+            "is",
+            "be",
+            "being"
+          ],
+          "answer": "are",
+          "why": "Neither A nor B ใช้กริยาตามคำที่อยู่ใกล้คือ her assistants (พหูพจน์) จึงใช้ are ส่วน is ใช้กับเอกพจน์ และ be กับ being ไม่ใช่กริยาหลัก"
+        }
+      ]
+    },
+    {
+      "id": "time-clauses",
+      "title": "อนาคตในประโยค when / if / as soon as",
+      "priority": "medium",
+      "intro": "ในประโยคย่อยที่ขึ้นต้นด้วย when, if, as soon as, after, before, until ใช้ present simple แทน will แม้จะหมายถึงอนาคต ข้อสอบชอบใส่ will เป็นตัวลวง",
+      "rules": [
+        {
+          "word": "when / if / as soon as / after / before / until + present simple",
+          "use": "บอกอนาคตในประโยคย่อย",
+          "examples": "When the shipment arrives, we will call you."
+        },
+        {
+          "word": "ประโยคหลัก",
+          "use": "ใช้ will หรือประโยคคำสั่งตามปกติ",
+          "examples": "If you have questions, please contact us."
+        }
+      ],
+      "examples": [
+        {
+          "en": "When the shipment arrives, we will call you.",
+          "th": "เมื่อสินค้ามาถึง เราจะโทรหาคุณ",
+          "mark": "arrives"
+        },
+        {
+          "en": "If you have any questions, please contact the front desk.",
+          "th": "หากมีคำถาม กรุณาติดต่อแผนกต้อนรับ",
+          "mark": "have"
+        }
+      ],
+      "tip": "เจอ when / if / as soon as + ช่องว่าง และประโยคหลักเป็น will หรือ please ให้ตัด will ทิ้งในช่องว่าง แล้วเลือก present simple ที่สอดคล้องกับประธาน",
+      "drills": [
+        {
+          "sentence": "When the shipment ___, we will call you to arrange delivery.",
+          "options": [
+            "arrives",
+            "will arrive",
+            "arrived",
+            "arriving"
+          ],
+          "answer": "arrives",
+          "why": "ตอบ arrives เพราะประโยคย่อย when บอกอนาคตด้วย present simple ไม่ใช้ will ส่วน arrived เป็นอดีต และ arriving ไม่ใช่กริยาหลัก"
+        },
+        {
+          "sentence": "If you ___ any questions, please contact the front desk.",
+          "options": [
+            "have",
+            "will have",
+            "had",
+            "having"
+          ],
+          "answer": "have",
+          "why": "ประโยคย่อย if ที่ประโยคหลักเป็นคำขอ (please) ใช้ present simple ส่วน will have ไม่ใช้ในประโยค if แบบนี้ had ทำให้เป็นประโยคสมมติ และ having ไม่ใช่กริยาหลัก"
+        },
+        {
+          "sentence": "As soon as Ms. Wong ___ the report, she will send it to the client.",
+          "options": [
+            "finishes",
+            "will finish",
+            "finished",
+            "finishing"
+          ],
+          "answer": "finishes",
+          "why": "ตอบ finishes เพราะประโยคย่อย as soon as บอกอนาคตด้วย present simple และประธานเป็นเอกพจน์จึงเติม es ส่วน will finish ไม่ใช้ในประโยคย่อยนี้ finished เป็นอดีต และ finishing ไม่ใช่กริยาหลัก"
+        },
+        {
+          "sentence": "The meeting will begin after all the board members ___.",
+          "options": [
+            "arrive",
+            "will arrive",
+            "arrived",
+            "arriving"
+          ],
+          "answer": "arrive",
+          "why": "ประโยคย่อย after บอกอนาคตด้วย present simple และประธานเป็นพหูพจน์ ส่วน will arrive ไม่ใช้ในประโยคย่อยนี้ arrived เป็นอดีตซึ่งไม่เข้ากับ will begin และ arriving ไม่ใช่กริยาหลัก"
+        }
+      ]
+    }
+  ]
+}
