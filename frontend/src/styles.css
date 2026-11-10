@@ -1615,7 +1615,12 @@ kbd {
   font-family: var(--serif);
   font-weight: 600;
   font-size: 1.05rem;
-  white-space: nowrap;
+  width: 30%;
+  overflow-wrap: anywhere;
+}
+
+.rules tbody td:nth-child(2) {
+  min-width: 10em;
 }
 
 .rules td[lang="en"] {
@@ -1623,15 +1628,15 @@ kbd {
   color: var(--ink-soft);
 }
 
-/* On narrow screens each rule becomes a small block instead of a squeezed table. */
+/* On narrow screens each rule becomes a small stacked block instead of a squeezed table. */
 @media (max-width: 599px) {
   .rules thead {
     display: none;
   }
   .rules tr {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    column-gap: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
     padding: 10px 0;
     border-bottom: 1px solid var(--line);
   }
@@ -1641,7 +1646,12 @@ kbd {
     padding: 0;
   }
   .rules tbody th {
-    grid-row: span 2;
+    width: auto;
+  }
+  .quiz-topics tr {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 12px;
   }
 }
 
