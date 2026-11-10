@@ -71,3 +71,30 @@ settings page with its tab and row number: a drill whose answer is not one of it
 four options, a sentence without exactly one `___`, a duplicate or unknown id, and
 so on. An unknown priority falls back to `medium`, and an example whose `mark`
 is not in the sentence is shown without a highlight.
+
+## reading/ — Reading Part 6 and Part 7 sets
+
+`part6.json` and `part7.json` each hold the part's guide (what it is worth, how to
+answer it, question types) and its practice sets. Passages and questions were
+written for this project in the format of the current TOEIC test; they are not
+ETS material. Like grammar, these files only seed the sheet:
+
+    go run ./cmd/seed -reading data/reading          # first time
+    go run ./cmd/seed -reading data/reading -force   # replace what is in the sheet
+
+| Tab | Columns |
+|---|---|
+| `reading_guides` | part, title, summary, parts, questions, points, covers, not_covered, note, strategy, question_types (one `name: how` per line) |
+| `reading_sets` | set_id, part (6 or 7), title |
+| `reading_passages` | set_id, kind, heading, body |
+| `reading_questions` | set_id, type, question, option_a–option_d, answer, why |
+
+- `kind`: email, letter, memo, notice, advertisement, article, text-chain, form, webpage, schedule
+- `type`: Part 6 — grammar, vocabulary, transition, sentence; Part 7 — purpose,
+  detail, not, inference, synonym, insert, intent, cross
+- Part 6 bodies mark each blank as `{{1}}`…`{{4}}` in question order (the test
+  always has 4 questions per text). A Part 7 `insert` question needs `[1]`…`[4]`
+  in the passage. Options of `insert` questions keep their order; others are
+  shuffled on screen.
+- A set without passages or questions, or a question whose answer is not among
+  its options, is skipped and listed on the settings page.

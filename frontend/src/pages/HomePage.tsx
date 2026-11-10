@@ -42,7 +42,15 @@ export function HomePage({ onError }: { onError: (e: Error) => void }) {
               <span className="activity-note">
                 บทเรียนและแบบฝึกแบบ Part 5–6 พร้อมเฉลย
                 <br />
-                บทแรก: คำบุพบทและคำเชื่อม
+                ชนิดคำ รูปกริยา บุพบท คำเชื่อม สรรพนาม
+              </span>
+            </a>
+            <a href="#/reading" className="activity activity-reading">
+              <span className="activity-title">การอ่าน Part 6–7</span>
+              <span className="activity-note">
+                อีเมล ประกาศ บทความ แชท และชุดเอกสาร 2–3 ชิ้น
+                <br />
+                จับเวลาเทียบกับข้อสอบจริง
               </span>
             </a>
           </nav>

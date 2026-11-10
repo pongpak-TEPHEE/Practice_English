@@ -46,6 +46,8 @@ func NewHandler(svc *study.Service, opts Options) http.Handler {
 	api.HandleFunc("GET /api/achievements", h.achievements)
 	api.HandleFunc("GET /api/grammar", h.grammarList)
 	api.HandleFunc("GET /api/grammar/{id}", h.grammarLesson)
+	api.HandleFunc("GET /api/reading", h.readingOverview)
+	api.HandleFunc("GET /api/reading/{id}", h.readingSet)
 	api.HandleFunc("GET /api/settings", h.getSettings)
 	api.HandleFunc("PUT /api/settings", h.putSettings)
 	api.HandleFunc("POST /api/admin/reload", h.reload)
@@ -255,6 +257,19 @@ func (h *handler) grammarLesson(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, l)
 }
 
+func (h *handler) readingOverview(w http.ResponseWriter, _ *http.Request) {
+	writeJSON(w, http.StatusOK, h.svc.Reading())
+}
+
+func (h *handler) readingSet(w http.ResponseWriter, r *http.Request) {
+	set, err := h.svc.ReadingSet(r.PathValue("id"))
+	if err != nil {
+		h.fail(w, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, set)
+}
+
 // reload re-reads the sheet after it was edited by hand and says what was loaded.
 func (h *handler) reload(w http.ResponseWriter, r *http.Request) {
 	if err := h.svc.Reload(r.Context()); err != nil {
@@ -265,11 +280,13 @@ func (h *handler) reload(w http.ResponseWriter, r *http.Request) {
 		"words":           h.svc.Stats().Total,
 		"lessons":         len(h.svc.GrammarLessons()),
 		"grammarProblems": h.svc.GrammarProblems(),
+		"readingSets":     len(h.svc.Reading().Sets),
+		"readingProblems": h.svc.ReadingProblems(),
 	})
 }
 
 func (h *handler) fail(w http.ResponseWriter, err error) {
-	if errors.Is(err, study.ErrWordNotFound) || errors.Is(err, study.ErrLessonNotFound) {
+	if errors.Is(err, study.ErrWordNotFound) || errors.Is(err, study.ErrLessonNotFound) || errors.Is(err, study.ErrSetNotFound) {
 		writeError(w, http.StatusNotFound, err.Error())
 		return
 	}

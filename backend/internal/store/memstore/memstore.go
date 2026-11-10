@@ -10,6 +10,7 @@ import (
 	"sync"
 
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/grammar"
+	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/reading"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/vocab"
 )
 
@@ -20,6 +21,7 @@ type Store struct {
 	settings map[string]string
 	log      []vocab.LogEntry
 	grammar  grammar.Tables
+	reading  reading.Tables
 }
 
 func New(words []vocab.Word) *Store {
@@ -86,4 +88,17 @@ func (s *Store) LoadGrammar(context.Context) (grammar.Tables, error) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 	return maps.Clone(s.grammar), nil
+}
+
+// SetReading stores reading sets in their sheet form.
+func (s *Store) SetReading(t reading.Tables) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	s.reading = maps.Clone(t)
+}
+
+func (s *Store) LoadReading(context.Context) (reading.Tables, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	return maps.Clone(s.reading), nil
 }

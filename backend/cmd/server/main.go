@@ -15,6 +15,7 @@ import (
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/config"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/grammar"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/httpapi"
+	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/reading"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/store/memstore"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/store/sheetstore"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/study"
@@ -62,8 +63,11 @@ func run(log *slog.Logger) error {
 	for _, p := range svc.GrammarProblems() {
 		log.Warn("grammar row skipped", "problem", p)
 	}
+	for _, p := range svc.ReadingProblems() {
+		log.Warn("reading row skipped", "problem", p)
+	}
 	log.Info("listening", "addr", srv.Addr, "store", cfg.Store, "words", st.Total, "dueToday", st.DueToday,
-		"grammarLessons", len(svc.GrammarLessons()))
+		"grammarLessons", len(svc.GrammarLessons()), "readingSets", len(svc.Reading().Sets))
 
 	errCh := make(chan error, 1)
 	go func() { errCh <- srv.ListenAndServe() }()
@@ -107,6 +111,13 @@ func buildStore(ctx context.Context, cfg config.Config) (study.Store, error) {
 			return nil, fmt.Errorf("GRAMMAR_DIR: %w", err)
 		}
 		mem.SetGrammar(grammar.Flatten(lessons))
+	}
+	if cfg.ReadingDir != "" {
+		content, err := reading.ReadDir(cfg.ReadingDir)
+		if err != nil {
+			return nil, fmt.Errorf("READING_DIR: %w", err)
+		}
+		mem.SetReading(reading.Flatten(content))
 	}
 	return mem, nil
 }

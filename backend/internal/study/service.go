@@ -15,12 +15,14 @@ import (
 	"time"
 
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/grammar"
+	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/reading"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/vocab"
 )
 
 var (
 	ErrWordNotFound   = errors.New("word not found")
 	ErrLessonNotFound = errors.New("lesson not found")
+	ErrSetNotFound    = errors.New("reading set not found")
 	// ErrLogNotSaved means the answer counted but its history row could not be written.
 	ErrLogNotSaved = errors.New("answer saved but history not recorded")
 )
@@ -36,6 +38,7 @@ type Store interface {
 	LoadLog(ctx context.Context) ([]vocab.LogEntry, error)
 	AppendLog(ctx context.Context, es ...vocab.LogEntry) error
 	LoadGrammar(ctx context.Context) (grammar.Tables, error)
+	LoadReading(ctx context.Context) (reading.Tables, error)
 }
 
 // WordView is a word together with the learner's progress on it.
@@ -61,6 +64,9 @@ type Service struct {
 
 	lessons         []grammar.Lesson
 	grammarProblems []string // rows in the grammar tabs that could not be used
+
+	reading         reading.Content
+	readingProblems []string
 }
 
 func NewService(ctx context.Context, store Store, loc *time.Location) (*Service, error) {
@@ -95,6 +101,11 @@ func (s *Service) Reload(ctx context.Context) error {
 		return fmt.Errorf("load grammar: %w", err)
 	}
 	lessons, problems := grammar.Assemble(tables)
+	readingTables, err := s.store.LoadReading(ctx)
+	if err != nil {
+		return fmt.Errorf("load reading: %w", err)
+	}
+	readingContent, readingProblems := reading.Assemble(readingTables)
 
 	byID := make(map[int]vocab.Word, len(words))
 	for _, w := range words {
@@ -108,6 +119,7 @@ func (s *Service) Reload(ctx context.Context) error {
 	s.mu.Lock()
 	s.words, s.wordByID, s.progress, s.settings, s.log = words, byID, pm, settingsFromMap(kv), log
 	s.lessons, s.grammarProblems = lessons, problems
+	s.reading, s.readingProblems = readingContent, readingProblems
 	s.mu.Unlock()
 	return nil
 }
@@ -156,6 +168,45 @@ func (s *Service) GrammarProblems() []string {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	return append([]string{}, s.grammarProblems...)
+}
+
+// ---- reading ----
+
+// ReadingOverview is the reading page: each part's guide and its sets.
+type ReadingOverview struct {
+	Guides []reading.Guide   `json:"guides"`
+	Sets   []reading.Summary `json:"sets"`
+}
+
+func (s *Service) Reading() ReadingOverview {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	o := ReadingOverview{Guides: s.reading.Guides, Sets: []reading.Summary{}}
+	if o.Guides == nil {
+		o.Guides = []reading.Guide{}
+	}
+	for _, set := range s.reading.Sets {
+		o.Sets = append(o.Sets, set.Summarize())
+	}
+	return o
+}
+
+func (s *Service) ReadingSet(id string) (reading.Set, error) {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	for _, set := range s.reading.Sets {
+		if set.ID == id {
+			return set, nil
+		}
+	}
+	return reading.Set{}, ErrSetNotFound
+}
+
+// ReadingProblems lists reading rows that were left out at the last load. Never nil.
+func (s *Service) ReadingProblems() []string {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	return append([]string{}, s.readingProblems...)
 }
 
 // ---- settings ----

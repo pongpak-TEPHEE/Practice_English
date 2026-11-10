@@ -16,6 +16,7 @@ import (
 
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/config"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/grammar"
+	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/reading"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/store/sheetstore"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/vocab"
 )
@@ -25,14 +26,15 @@ func main() {
 	force := flag.Bool("force", false, "replace the words tab even if it already has words")
 	resetProgress := flag.Bool("reset-progress", false, "delete all learning progress (start over)")
 	grammarDir := flag.String("grammar", "", "folder of grammar lesson JSON files to load into the grammar tabs")
+	readingDir := flag.String("reading", "", "folder of reading set JSON files to load into the reading tabs")
 	flag.Parse()
-	if err := run(*csvPath, *grammarDir, *force, *resetProgress); err != nil {
+	if err := run(*csvPath, *grammarDir, *readingDir, *force, *resetProgress); err != nil {
 		fmt.Fprintln(os.Stderr, "seed:", err)
 		os.Exit(1)
 	}
 }
 
-func run(csvPath, grammarDir string, force, resetProgress bool) error {
+func run(csvPath, grammarDir, readingDir string, force, resetProgress bool) error {
 	sheetID := os.Getenv("GOOGLE_SHEET_ID")
 	if sheetID == "" {
 		return errors.New("GOOGLE_SHEET_ID is required")
@@ -58,6 +60,11 @@ func run(csvPath, grammarDir string, force, resetProgress bool) error {
 	}
 	if grammarDir != "" {
 		if err := seedGrammar(ctx, store, grammarDir, force); err != nil {
+			return err
+		}
+	}
+	if readingDir != "" {
+		if err := seedReading(ctx, store, readingDir, force); err != nil {
 			return err
 		}
 	}
@@ -107,5 +114,29 @@ func seedGrammar(ctx context.Context, store *sheetstore.Store, dir string, force
 	fmt.Printf("wrote %d grammar lessons (%d sections, %d rules, %d examples, %d drills)\n",
 		len(tables[grammar.TabLessons]), len(tables[grammar.TabSections]), len(tables[grammar.TabRules]),
 		len(tables[grammar.TabExamples]), len(tables[grammar.TabDrills]))
+	return nil
+}
+
+func seedReading(ctx context.Context, store *sheetstore.Store, dir string, force bool) error {
+	content, err := reading.ReadDir(dir)
+	if err != nil {
+		return err
+	}
+	tables := reading.Flatten(content)
+	if _, problems := reading.Assemble(tables); len(problems) > 0 {
+		return fmt.Errorf("reading files have problems:\n  %s", strings.Join(problems, "\n  "))
+	}
+	existing, err := store.LoadReading(ctx)
+	if err != nil {
+		return err
+	}
+	if n := len(existing[reading.TabSets]); n > 0 && !force {
+		return fmt.Errorf("reading tabs already have %d sets; pass -force to replace them", n)
+	}
+	if err := store.ReplaceReading(ctx, tables); err != nil {
+		return err
+	}
+	fmt.Printf("wrote %d reading guides, %d sets (%d passages, %d questions)\n",
+		len(tables[reading.TabGuides]), len(tables[reading.TabSets]), len(tables[reading.TabPassages]), len(tables[reading.TabQuestions]))
 	return nil
 }

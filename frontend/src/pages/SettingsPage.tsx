@@ -194,7 +194,8 @@ function SheetReload({ onError }: { onError: (e: Error) => void }) {
       {report && (
         <div className="reload-report" role="status">
           <p>
-            โหลดแล้ว: คำศัพท์ {report.words.toLocaleString()} คำ บทเรียนไวยากรณ์ {report.lessons} บท
+            โหลดแล้ว: คำศัพท์ {report.words.toLocaleString()} คำ บทเรียนไวยากรณ์ {report.lessons} บท ชุดฝึกการอ่าน{" "}
+            {report.readingSets} ชุด
           </p>
           {report.grammarProblems.length > 0 && (
             <>

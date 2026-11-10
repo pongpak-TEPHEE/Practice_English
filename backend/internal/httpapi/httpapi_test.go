@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/grammar"
+	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/reading"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/store/memstore"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/study"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/vocab"
@@ -29,6 +30,11 @@ func newServer(t *testing.T) *httptest.Server {
 			{"time", "clock", "Leave ___ 9.", "at", "on", "in", "by", "at", "เวลาเป๊ะใช้ at"},
 			{"time", "clock", "Leave ___ 9.", "at", "on", "in", "by", "for", "คำตอบไม่อยู่ในตัวเลือก"},
 		},
+	})
+	store.SetReading(reading.Tables{
+		reading.TabSets:      {{"r1", "7", "Notice"}},
+		reading.TabPassages:  {{"r1", "notice", "Notice", "The office closes at noon on Friday."}},
+		reading.TabQuestions: {{"r1", "detail", "When does the office close?", "At noon", "At 5 P.M.", "On Monday", "Never", "At noon", "เพราะ"}},
 	})
 	svc, err := study.NewService(context.Background(), store, time.UTC)
 	if err != nil {
@@ -263,6 +269,21 @@ func TestGrammar(t *testing.T) {
 	}
 	if report.Words != 10 || report.Lessons != 1 || len(report.GrammarProblems) != 1 {
 		t.Errorf("reload report = %+v", report)
+	}
+}
+
+func TestReading(t *testing.T) {
+	srv := newServer(t)
+	var o study.ReadingOverview
+	if code := call(t, srv, "GET", "/api/reading", "", &o); code != 200 || len(o.Sets) != 1 || o.Sets[0].Questions != 1 {
+		t.Fatalf("overview: %d %+v", code, o)
+	}
+	var set reading.Set
+	if code := call(t, srv, "GET", "/api/reading/r1", "", &set); code != 200 || set.Passages[0].Kind != "notice" {
+		t.Fatalf("set: %d %+v", code, set)
+	}
+	if code := call(t, srv, "GET", "/api/reading/nope", "", nil); code != 404 {
+		t.Errorf("unknown set: status %d, want 404", code)
 	}
 }
 

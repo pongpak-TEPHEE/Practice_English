@@ -9,6 +9,7 @@
 //	settings: key | value
 //	log:      date | time | word_id | mode | result   (one row per answer)
 //	grammar_*: grammar lessons, see package grammar for the five tabs' columns
+//	reading_*: Reading Part 6 and 7 sets, see package reading
 package sheetstore
 
 import (
@@ -27,6 +28,7 @@ import (
 	"google.golang.org/api/sheets/v4"
 
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/grammar"
+	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/reading"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/vocab"
 )
 
@@ -261,8 +263,8 @@ func (s *Store) Setup(ctx context.Context) error {
 	}
 	var add []*sheets.Request
 	tabs := []string{wordsTab, progressTab, settingsTab, logTab}
-	for _, g := range grammar.Tabs {
-		tabs = append(tabs, g.Name)
+	for _, t := range contentTabs() {
+		tabs = append(tabs, t.name)
 	}
 	for _, tab := range tabs {
 		if !have[tab] {
@@ -285,7 +287,7 @@ func (s *Store) Setup(ctx context.Context) error {
 			{Range: progressTab + "!A1:" + progressCols + "1", Values: [][]any{progressHeader}},
 			{Range: settingsTab + "!A1:B1", Values: [][]any{settingsHeader}},
 			{Range: logTab + "!A1:E1", Values: [][]any{logHeader}},
-		}, grammarHeaders()...),
+		}, contentHeaders()...),
 	}).Context(ctx).Do()
 	if err != nil {
 		return fmt.Errorf("write headers: %w", err)
@@ -293,37 +295,61 @@ func (s *Store) Setup(ctx context.Context) error {
 	return nil
 }
 
-func grammarHeaders() []*sheets.ValueRange {
-	var out []*sheets.ValueRange
-	for _, g := range grammar.Tabs {
-		row := make([]any, len(g.Header))
-		for i, h := range g.Header {
-			row[i] = h
-		}
-		out = append(out, &sheets.ValueRange{Range: fmt.Sprintf("%s!A1:%s1", g.Name, column(len(g.Header))), Values: [][]any{row}})
+// tabSpec is a content tab (grammar or reading) and its header row.
+type tabSpec struct {
+	name   string
+	header []string
+}
+
+func grammarTabs() []tabSpec {
+	out := make([]tabSpec, len(grammar.Tabs))
+	for i, g := range grammar.Tabs {
+		out[i] = tabSpec{g.Name, g.Header}
 	}
 	return out
 }
 
-// grammarRange is a tab's data rows (below the header) across all its columns.
-func grammarRange(name string, width int) string {
-	return fmt.Sprintf("%s!A2:%s", name, column(width))
+func readingTabs() []tabSpec {
+	out := make([]tabSpec, len(reading.Tabs))
+	for i, r := range reading.Tabs {
+		out[i] = tabSpec{r.Name, r.Header}
+	}
+	return out
 }
 
-// column returns the letter of the n-th column (1 = A); grammar tabs stay within A–Z.
+func contentTabs() []tabSpec { return append(grammarTabs(), readingTabs()...) }
+
+func contentHeaders() []*sheets.ValueRange {
+	var out []*sheets.ValueRange
+	for _, t := range contentTabs() {
+		row := make([]any, len(t.header))
+		for i, h := range t.header {
+			row[i] = h
+		}
+		out = append(out, &sheets.ValueRange{Range: fmt.Sprintf("%s!A1:%s1", t.name, column(len(t.header))), Values: [][]any{row}})
+	}
+	return out
+}
+
+// dataRange is a tab's data rows (below the header) across all its columns.
+func dataRange(t tabSpec) string {
+	return fmt.Sprintf("%s!A2:%s", t.name, column(len(t.header)))
+}
+
+// column returns the letter of the n-th column (1 = A); content tabs stay within A–Z.
 func column(n int) string { return string(rune('A' + n - 1)) }
 
-// LoadGrammar reads all grammar tabs in one request.
-func (s *Store) LoadGrammar(ctx context.Context) (grammar.Tables, error) {
-	ranges := make([]string, len(grammar.Tabs))
-	for i, g := range grammar.Tabs {
-		ranges[i] = grammarRange(g.Name, len(g.Header))
+// loadTabs reads the data rows of several tabs in one request.
+func (s *Store) loadTabs(ctx context.Context, tabs []tabSpec) (map[string][][]string, error) {
+	ranges := make([]string, len(tabs))
+	for i, t := range tabs {
+		ranges[i] = dataRange(t)
 	}
 	resp, err := s.api.Spreadsheets.Values.BatchGet(s.spreadsheetID).Ranges(ranges...).Context(ctx).Do()
 	if err != nil {
-		return nil, fmt.Errorf("read grammar tabs: %w", err)
+		return nil, fmt.Errorf("read %s: %w", strings.Join(ranges, ", "), err)
 	}
-	t := grammar.Tables{}
+	out := map[string][][]string{}
 	for i, vr := range resp.ValueRanges {
 		rows := make([][]string, len(vr.Values))
 		for r, row := range vr.Values {
@@ -332,29 +358,28 @@ func (s *Store) LoadGrammar(ctx context.Context) (grammar.Tables, error) {
 				rows[r][c] = cell(row, c)
 			}
 		}
-		t[grammar.Tabs[i].Name] = rows
+		out[tabs[i].name] = rows
 	}
-	return t, nil
+	return out, nil
 }
 
-// ReplaceGrammar clears the grammar tabs and writes t.
-func (s *Store) ReplaceGrammar(ctx context.Context, t grammar.Tables) error {
-	ranges := make([]string, len(grammar.Tabs))
-	for i, g := range grammar.Tabs {
-		ranges[i] = grammarRange(g.Name, len(g.Header))
+// replaceTabs clears the data rows of tabs and writes rows in their place.
+func (s *Store) replaceTabs(ctx context.Context, tabs []tabSpec, rows map[string][][]string) error {
+	ranges := make([]string, len(tabs))
+	for i, t := range tabs {
+		ranges[i] = dataRange(t)
 	}
 	_, err := s.api.Spreadsheets.Values.BatchClear(s.spreadsheetID, &sheets.BatchClearValuesRequest{Ranges: ranges}).
 		Context(ctx).Do()
 	if err != nil {
-		return fmt.Errorf("clear grammar tabs: %w", err)
+		return fmt.Errorf("clear tabs: %w", err)
 	}
-	for i, g := range grammar.Tabs {
-		rows := t[g.Name]
-		if len(rows) == 0 {
+	for i, t := range tabs {
+		if len(rows[t.name]) == 0 {
 			continue
 		}
-		values := make([][]any, len(rows))
-		for r, row := range rows {
+		values := make([][]any, len(rows[t.name]))
+		for r, row := range rows[t.name] {
 			values[r] = make([]any, len(row))
 			for c, v := range row {
 				values[r][c] = v
@@ -364,10 +389,26 @@ func (s *Store) ReplaceGrammar(ctx context.Context, t grammar.Tables) error {
 		_, err := s.api.Spreadsheets.Values.Append(s.spreadsheetID, ranges[i], &sheets.ValueRange{Values: values}).
 			ValueInputOption("RAW").InsertDataOption("INSERT_ROWS").Context(ctx).Do()
 		if err != nil {
-			return fmt.Errorf("write %s: %w", g.Name, err)
+			return fmt.Errorf("write %s: %w", t.name, err)
 		}
 	}
 	return nil
+}
+
+func (s *Store) LoadGrammar(ctx context.Context) (grammar.Tables, error) {
+	return s.loadTabs(ctx, grammarTabs())
+}
+
+func (s *Store) ReplaceGrammar(ctx context.Context, t grammar.Tables) error {
+	return s.replaceTabs(ctx, grammarTabs(), t)
+}
+
+func (s *Store) LoadReading(ctx context.Context) (reading.Tables, error) {
+	return s.loadTabs(ctx, readingTabs())
+}
+
+func (s *Store) ReplaceReading(ctx context.Context, t reading.Tables) error {
+	return s.replaceTabs(ctx, readingTabs(), t)
 }
 
 // ReplaceWords clears the words tab and writes the given list.

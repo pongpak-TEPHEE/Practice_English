@@ -9,6 +9,8 @@ import { LearnPage } from "./pages/LearnPage";
 import { VocabPage } from "./pages/VocabPage";
 import { GrammarPage } from "./pages/GrammarPage";
 import { LessonPage } from "./pages/LessonPage";
+import { ReadingPage } from "./pages/ReadingPage";
+import { ReadingSetPage } from "./pages/ReadingSetPage";
 import { ReviewPage } from "./pages/ReviewPage";
 import { SettingsPage } from "./pages/SettingsPage";
 import { WordsPage } from "./pages/WordsPage";
@@ -19,6 +21,7 @@ const TABS = [
   { id: "home", label: "หน้าแรก" },
   { id: "vocab", label: "ท่องศัพท์" },
   { id: "grammar", label: "ไวยากรณ์" },
+  { id: "reading", label: "การอ่าน" },
   { id: "words", label: "คำศัพท์" },
   { id: "settings", label: "ตั้งค่า" },
 ] as const;
@@ -32,6 +35,8 @@ const PAGE_IDS = [
   "home",
   "grammar",
   "lesson",
+  "reading",
+  "readingSet",
   "vocab",
   "learn",
   "review",
@@ -45,6 +50,8 @@ const TAB_OF: Record<PageId, string> = {
   home: "home",
   grammar: "grammar",
   lesson: "grammar",
+  reading: "reading",
+  readingSet: "reading",
   vocab: "vocab",
   learn: "vocab",
   review: "vocab",
@@ -54,14 +61,21 @@ const TAB_OF: Record<PageId, string> = {
   settings: "settings",
 };
 
-// "#/grammar/<lesson>" opens a lesson; everything else is "#/<page>".
+// "#/grammar/<lesson>" and "#/reading/<set>" open one item; everything else is "#/<page>".
+function itemFromHash(): { section: string; id: string } {
+  const m = /^#\/(grammar|reading)\/([\w-]+)/.exec(window.location.hash);
+  return m ? { section: m[1], id: m[2] } : { section: "", id: "" };
+}
+
 function lessonFromHash(): string {
-  const m = /^#\/grammar\/([\w-]+)/.exec(window.location.hash);
-  return m ? m[1] : "";
+  const item = itemFromHash();
+  return item.section ? item.id : "";
 }
 
 function pageFromHash(): PageId {
-  if (lessonFromHash()) return "lesson";
+  const item = itemFromHash();
+  if (item.section === "grammar") return "lesson";
+  if (item.section === "reading") return "readingSet";
   const id = window.location.hash.replace("#/", "");
   return (PAGE_IDS as readonly string[]).includes(id) ? (id as PageId) : "home";
 }
@@ -165,6 +179,9 @@ export function App() {
           <a {...link("grammar")} className={tab === "grammar" ? "is-on" : ""}>
             ไวยากรณ์
           </a>
+          <a {...link("reading")} className={tab === "reading" ? "is-on" : ""}>
+            การอ่าน Part 6–7
+          </a>
           <a {...link("words")}>คำศัพท์ทั้งหมด</a>
           <a {...link("settings")}>ตั้งค่า</a>
         </nav>
@@ -179,6 +196,8 @@ export function App() {
         {page === "home" && <HomePage onError={handleError} />}
         {page === "grammar" && <GrammarPage onError={handleError} />}
         {page === "lesson" && <LessonPage id={lessonId} accent={accent} onError={handleError} />}
+        {page === "reading" && <ReadingPage onError={handleError} />}
+        {page === "readingSet" && <ReadingSetPage id={lessonId} onError={handleError} />}
         {page === "vocab" && <VocabPage key={level} level={level} onLevel={changeLevel} onError={handleError} />}
         {page === "learn" && <LearnPage key={level} onStart={start} onError={handleError} />}
         {page === "review" && <ReviewPage level={level} onStart={start} onError={handleError} />}
