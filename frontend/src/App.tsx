@@ -7,6 +7,8 @@ import { HistoryPage } from "./pages/HistoryPage";
 import { HomePage } from "./pages/HomePage";
 import { LearnPage } from "./pages/LearnPage";
 import { VocabPage } from "./pages/VocabPage";
+import { GrammarPage } from "./pages/GrammarPage";
+import { LessonPage } from "./pages/LessonPage";
 import { ReviewPage } from "./pages/ReviewPage";
 import { SettingsPage } from "./pages/SettingsPage";
 import { WordsPage } from "./pages/WordsPage";
@@ -16,6 +18,7 @@ import type { Accent, Level } from "./types";
 const TABS = [
   { id: "home", label: "หน้าแรก" },
   { id: "vocab", label: "ท่องศัพท์" },
+  { id: "grammar", label: "ไวยากรณ์" },
   { id: "words", label: "คำศัพท์" },
   { id: "settings", label: "ตั้งค่า" },
 ] as const;
@@ -25,10 +28,23 @@ const STUDY = [
   { id: "history", label: "ประวัติ" },
   { id: "goals", label: "ความสำเร็จ" },
 ] as const;
-const PAGE_IDS = ["home", "vocab", "learn", "review", "history", "goals", "words", "settings"] as const;
+const PAGE_IDS = [
+  "home",
+  "grammar",
+  "lesson",
+  "vocab",
+  "learn",
+  "review",
+  "history",
+  "goals",
+  "words",
+  "settings",
+] as const;
 type PageId = (typeof PAGE_IDS)[number];
 const TAB_OF: Record<PageId, string> = {
   home: "home",
+  grammar: "grammar",
+  lesson: "grammar",
   vocab: "vocab",
   learn: "vocab",
   review: "vocab",
@@ -38,7 +54,14 @@ const TAB_OF: Record<PageId, string> = {
   settings: "settings",
 };
 
+// "#/grammar/<lesson>" opens a lesson; everything else is "#/<page>".
+function lessonFromHash(): string {
+  const m = /^#\/grammar\/([\w-]+)/.exec(window.location.hash);
+  return m ? m[1] : "";
+}
+
 function pageFromHash(): PageId {
+  if (lessonFromHash()) return "lesson";
   const id = window.location.hash.replace("#/", "");
   return (PAGE_IDS as readonly string[]).includes(id) ? (id as PageId) : "home";
 }
@@ -46,6 +69,7 @@ function pageFromHash(): PageId {
 export function App() {
   const [signedIn, setSignedIn] = useState(Boolean(getToken()));
   const [page, setPage] = useState<PageId>(pageFromHash);
+  const [lessonId, setLessonId] = useState(lessonFromHash);
   const [session, setSession] = useState<SessionSpec | null>(null);
   const [accent, setAccent] = useState<Accent>("us");
   const [level, setLevel] = useState<Level>("A1");
@@ -53,7 +77,11 @@ export function App() {
   const [visit, setVisit] = useState(0); // remounts the page after a session so it reloads
 
   useEffect(() => {
-    const onHash = () => setPage(pageFromHash());
+    const onHash = () => {
+      setPage(pageFromHash());
+      setLessonId(lessonFromHash());
+      window.scrollTo(0, 0);
+    };
     window.addEventListener("hashchange", onHash);
     return () => window.removeEventListener("hashchange", onHash);
   }, []);
@@ -134,18 +162,23 @@ export function App() {
               </a>
             ))}
           </div>
+          <a {...link("grammar")} className={tab === "grammar" ? "is-on" : ""}>
+            ไวยากรณ์
+          </a>
           <a {...link("words")}>คำศัพท์ทั้งหมด</a>
           <a {...link("settings")}>ตั้งค่า</a>
         </nav>
       </aside>
 
-      <main key={`${page}-${visit}`}>
+      <main key={`${page}-${lessonId}-${visit}`}>
         {error && (
           <p className="notice" role="alert" onClick={() => setError("")}>
             {error}
           </p>
         )}
         {page === "home" && <HomePage onError={handleError} />}
+        {page === "grammar" && <GrammarPage />}
+        {page === "lesson" && <LessonPage id={lessonId} accent={accent} />}
         {page === "vocab" && <VocabPage key={level} level={level} onLevel={changeLevel} onError={handleError} />}
         {page === "learn" && <LearnPage key={level} onStart={start} onError={handleError} />}
         {page === "review" && <ReviewPage level={level} onStart={start} onError={handleError} />}

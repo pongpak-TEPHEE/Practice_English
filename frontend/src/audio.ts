@@ -19,7 +19,7 @@ export function playWord(word: Word, accent: Accent) {
   audio.play().catch(fallback);
 }
 
-function speak(text: string, accent: Accent) {
+export function speak(text: string, accent: Accent) {
   if (!("speechSynthesis" in window)) return;
   const u = new SpeechSynthesisUtterance(text);
   u.lang = accent === "uk" ? "en-GB" : "en-US";

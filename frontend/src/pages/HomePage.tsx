@@ -37,6 +37,14 @@ export function HomePage({ onError }: { onError: (e: Error) => void }) {
                 )}
               </span>
             </a>
+            <a href="#/grammar" className="activity activity-grammar">
+              <span className="activity-title">ไวยากรณ์</span>
+              <span className="activity-note">
+                บทเรียนพร้อมแบบฝึกที่เฉลยทันที
+                <br />
+                เริ่มจากคำบุพบท at / on / in, by / until
+              </span>
+            </a>
           </nav>
         </section>
 
