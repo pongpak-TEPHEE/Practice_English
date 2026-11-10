@@ -1,0 +1,1008 @@
+{
+  "id": "word-forms",
+  "title": "ชนิดคำ",
+  "english": "Word Forms",
+  "summary": "เลือกคำนาม คุณศัพท์ adverb หรือกริยาจากตำแหน่งในประโยค แบบที่ออกมากที่สุดใน Part 5",
+  "analysis": {
+    "parts": "Reading Part 5 (เติมประโยค 30 ข้อ) และ Part 6 (เติมข้อความ 16 ข้อ)",
+    "questions": "ประมาณ 7–9 ข้อใน Part 5 และอีก 1–2 ข้อใน Part 6 ต่อการสอบหนึ่งครั้ง มากที่สุดในบรรดาหัวข้อไวยากรณ์",
+    "points": "ประมาณ 40–55 คะแนน จาก 495 คะแนนของ Reading (คิดคร่าว ๆ ข้อละ 5 คะแนน) และเมื่อแม่นแล้วตอบได้ในข้อละ 5–10 วินาที จึงเหลือเวลาให้ Part 7 มากขึ้น",
+    "covers": [
+      "รู้ชนิดคำจากคำลงท้าย รวมคำหลอกที่เจอบ่อย (friendly, costly เป็นคุณศัพท์ / approval, arrival เป็นคำนาม)",
+      "ตำแหน่งที่ต้องเป็นคำนาม คุณศัพท์ adverb และกริยา ซึ่งตัดสินข้อชนิดคำได้เกือบทุกข้อโดยไม่ต้องแปลทั้งประโยค",
+      "ข้อที่มีตัวเลือกชนิดเดียวกันสองตัว: คนกับสิ่ง (applicant / application) และ -ing กับ -ed (satisfied / satisfying)",
+      "คุณศัพท์คู่ที่หน้าตาคล้ายกัน (economic / economical) สำหรับเป้าคะแนนสูง"
+    ],
+    "notCovered": [
+      "Tense, passive และ to + V / V-ing (บทรูปกริยา)",
+      "สรรพนาม (his / him / himself)",
+      "ขั้นกว่าและขั้นสุด",
+      "ข้อคำศัพท์ที่ตัวเลือกเป็นคนละคำกัน (ใช้ตัวท่องศัพท์ช่วย)"
+    ],
+    "note": "ETS ไม่เปิดเผยสัดส่วนหัวข้อในข้อสอบ ตัวเลขนี้ประมาณจากการวิเคราะห์ข้อสอบของหนังสือเตรียมสอบ และตารางแปลงคะแนนต่างกันในแต่ละชุด ใช้เพื่อจัดลำดับว่าควรฝึกอะไรก่อน ไม่ใช่การรับประกันคะแนน"
+  },
+  "strategy": [
+    "ดูตัวเลือกก่อน ถ้าเป็นคำเดียวกันคนละรูป (decide / decision / decisive / decisively) คือข้อชนิดคำ ไม่ต้องแปลทั้งประโยค",
+    "อ่านเฉพาะ 2–3 คำรอบช่องว่าง เพื่อหาว่าตำแหน่งนี้ต้องเป็นชนิดอะไร: หลัง a / the / his ต้องเป็นคำนาม, ระหว่าง the กับคำนามต้องเป็นคุณศัพท์, หลัง be / become ต้องเป็นคุณศัพท์, ระหว่าง has / will กับกริยาต้องเป็น adverb, หลัง will / to / please ต้องเป็นกริยาช่อง 1",
+    "ถ้าตัดช่องว่างทิ้งแล้วประโยคยังครบ ช่องนั้นคือ adverb เกือบทุกครั้ง",
+    "ดูคำลงท้ายของตัวเลือกเพื่อหาตัวที่เป็นชนิดนั้น ระวังคำหลอกในตาราง (friendly เป็นคุณศัพท์, approval เป็นคำนาม)",
+    "ถ้ามีตัวเลือกชนิดเดียวกันสองตัว ค่อยดูความหมาย: เป็นคนหรือสิ่งของ และเป็นผู้รู้สึกหรือสิ่งที่ทำให้รู้สึก",
+    "เป้าเวลาข้อละไม่เกิน 10 วินาที ข้อชนิดคำควรเป็นข้อที่เร็วที่สุดใน Part 5"
+  ],
+  "sections": [
+    {
+      "id": "suffixes",
+      "title": "รู้ชนิดคำจากคำลงท้าย",
+      "priority": "high",
+      "intro": "ทุกข้อชนิดคำเริ่มจากการรู้ว่าตัวเลือกแต่ละตัวเป็นชนิดอะไร คำลงท้ายบอกได้เกือบทุกครั้ง ตารางนี้ต้องจำให้ขึ้นใจก่อนหัวข้ออื่น และต้องรู้คำหลอกที่ลงท้ายเหมือนชนิดอื่น",
+      "rules": [
+        {
+          "word": "-tion, -sion, -ment, -ness, -ity, -ance, -ence, -ship, -ure, -age",
+          "use": "คำนาม (สิ่ง การกระทำ แนวคิด)",
+          "examples": "decision, payment, awareness, ability, performance, ownership, procedure, shortage"
+        },
+        {
+          "word": "-er, -or, -ist, -ant, -ent, -ee",
+          "use": "คำนาม (คน)",
+          "examples": "employer, supervisor, specialist, applicant, resident, employee"
+        },
+        {
+          "word": "-ize, -ify, -ate, -en",
+          "use": "คำกริยา",
+          "examples": "finalize, notify, generate, strengthen"
+        },
+        {
+          "word": "-ive, -able, -ible, -al, -ful, -less, -ous, -ic, -ant, -ent, -ary",
+          "use": "คำคุณศัพท์",
+          "examples": "effective, reliable, flexible, financial, successful, careless, generous, economic, significant, confident, necessary"
+        },
+        {
+          "word": "คุณศัพท์ + -ly",
+          "use": "adverb",
+          "examples": "effectively, reliably, financially, successfully"
+        },
+        {
+          "word": "friendly, costly, timely, likely, orderly",
+          "use": "คำหลอก: ลงท้าย -ly แต่เป็นคุณศัพท์",
+          "examples": "a friendly manner, a costly repair, a timely reply"
+        },
+        {
+          "word": "approval, arrival, proposal, renewal, rental",
+          "use": "คำหลอก: ลงท้าย -al แต่เป็นคำนาม",
+          "examples": "pending approval, the arrival of the shipment"
+        }
+      ],
+      "examples": [
+        {
+          "en": "The board will announce its decision on Friday.",
+          "th": "คณะกรรมการจะประกาศการตัดสินใจในวันศุกร์",
+          "mark": "decision"
+        },
+        {
+          "en": "We need a more effective way to track orders.",
+          "th": "เราต้องการวิธีติดตามคำสั่งซื้อที่ได้ผลกว่านี้",
+          "mark": "effective"
+        },
+        {
+          "en": "The new system has effectively reduced delays.",
+          "th": "ระบบใหม่ช่วยลดความล่าช้าได้อย่างได้ผล",
+          "mark": "effectively"
+        },
+        {
+          "en": "Our staff will respond in a timely manner.",
+          "th": "พนักงานของเราจะตอบกลับอย่างทันท่วงที",
+          "mark": "timely"
+        },
+        {
+          "en": "The proposal requires the director's approval.",
+          "th": "ข้อเสนอนี้ต้องได้รับการอนุมัติจากผู้อำนวยการ",
+          "mark": "approval"
+        }
+      ],
+      "tip": "-ant และ -ent เป็นได้ทั้งคำนามที่เป็นคน (applicant, resident) และคุณศัพท์ (important, confident) จึงต้องดูตำแหน่งประกอบ ส่วนคำที่ลงท้าย -ly ส่วนใหญ่เป็น adverb แต่ friendly, costly, timely, likely เป็นคุณศัพท์ และคำที่ลงท้าย -al ส่วนใหญ่เป็นคุณศัพท์ แต่ approval, arrival, proposal, renewal เป็นคำนาม",
+      "drills": [
+        {
+          "sentence": "Please submit the expense form for ___ by Friday.",
+          "options": [
+            "approval",
+            "approve",
+            "approved",
+            "approvingly"
+          ],
+          "answer": "approval",
+          "why": "หลังบุพบท for ต้องเป็นคำนาม approval ลงท้าย -al แต่เป็นคำนาม ส่วน approve เป็นกริยา approved เป็นกริยาช่อง 3 หรือคุณศัพท์ และ approvingly เป็น adverb"
+        },
+        {
+          "sentence": "The hotel staff greeted us in a very ___ way.",
+          "options": [
+            "friendly",
+            "friend",
+            "friendship",
+            "friendliness"
+          ],
+          "answer": "friendly",
+          "why": "ระหว่าง a very กับคำนาม way ต้องเป็นคุณศัพท์ friendly ลงท้าย -ly แต่เป็นคุณศัพท์ ส่วน friend, friendship และ friendliness เป็นคำนาม"
+        },
+        {
+          "sentence": "Replacing the old roof would be too ___ for the company this year.",
+          "options": [
+            "costly",
+            "cost",
+            "costs",
+            "costing"
+          ],
+          "answer": "costly",
+          "why": "หลัง be too ต้องเป็นคุณศัพท์ costly (แพง) เป็นคุณศัพท์ที่ลงท้าย -ly ส่วน cost และ costs เป็นคำนามหรือกริยา และ costing เป็น V-ing ที่ไม่มีความหมายนี้"
+        },
+        {
+          "sentence": "The ___ of the shipment was delayed by bad weather.",
+          "options": [
+            "arrival",
+            "arrive",
+            "arrived",
+            "arrivals"
+          ],
+          "answer": "arrival",
+          "why": "หลัง The และหน้า of ต้องเป็นคำนาม และกริยา was บอกว่าประธานเป็นเอกพจน์ จึงต้องเป็น arrival ไม่ใช่ arrivals ส่วน arrive และ arrived เป็นกริยา"
+        },
+        {
+          "sentence": "Ms. Lopez is ___ that the project will finish on time.",
+          "options": [
+            "confident",
+            "confidence",
+            "confidently",
+            "confide"
+          ],
+          "answer": "confident",
+          "why": "หลัง is ต้องเป็นคุณศัพท์ confident ลงท้าย -ent และในตำแหน่งนี้เป็นคุณศัพท์ ส่วน confidence เป็นคำนาม confidently เป็น adverb และ confide เป็นกริยา"
+        },
+        {
+          "sentence": "The two companies plan to ___ their partnership next month.",
+          "options": [
+            "strengthen",
+            "strength",
+            "strong",
+            "strongly"
+          ],
+          "answer": "strengthen",
+          "why": "หลัง to ต้องเป็นกริยาช่อง 1 และมีกรรม (their partnership) ตามหลัง strengthen ลงท้าย -en เป็นกริยา ส่วน strength เป็นคำนาม strong เป็นคุณศัพท์ และ strongly เป็น adverb"
+        }
+      ]
+    },
+    {
+      "id": "nouns",
+      "title": "ตำแหน่งที่ต้องเป็นคำนาม",
+      "priority": "high",
+      "intro": "ช่องว่างต้องเป็นคำนามเมื่อหน้าช่องว่างเป็นคำนำหน้านาม (a, the, this, their, Ms. Kim's) หรือคุณศัพท์ และหลังช่องว่างไม่มีคำนามตามมาอีก หรือเมื่อช่องว่างอยู่หลังบุพบท หรืออยู่ตำแหน่งประธานหรือกรรมของประโยค",
+      "rules": [
+        {
+          "word": "a / the / this + ___",
+          "use": "คำนาม (ถ้าหลังช่องว่างไม่มีคำนามอีก)",
+          "examples": "the decision, an application"
+        },
+        {
+          "word": "his / their / its / Ms. Kim's + ___",
+          "use": "คำนามหลังคำแสดงความเป็นเจ้าของ",
+          "examples": "their approval, Ms. Kim's suggestion"
+        },
+        {
+          "word": "คุณศัพท์ + ___",
+          "use": "คำนามหลังคุณศัพท์",
+          "examples": "a careful review, rapid growth"
+        },
+        {
+          "word": "บุพบท + ___",
+          "use": "คำนาม (หรือ V-ing)",
+          "examples": "for approval, in recognition of"
+        },
+        {
+          "word": "___ + กริยาหลัก",
+          "use": "คำนามในตำแหน่งประธาน",
+          "examples": "Attendance is mandatory."
+        },
+        {
+          "word": "กริยา + ___",
+          "use": "คำนามในตำแหน่งกรรม",
+          "examples": "We appreciate your cooperation."
+        }
+      ],
+      "examples": [
+        {
+          "en": "We appreciate your cooperation during the renovation.",
+          "th": "ขอบคุณสำหรับความร่วมมือระหว่างการปรับปรุงอาคาร",
+          "mark": "cooperation"
+        },
+        {
+          "en": "Attendance at the meeting is mandatory.",
+          "th": "การเข้าร่วมประชุมเป็นสิ่งที่บังคับ",
+          "mark": "Attendance"
+        },
+        {
+          "en": "The director praised Ms. Kim's suggestion.",
+          "th": "ผู้อำนวยการชื่นชมข้อเสนอแนะของคุณคิม",
+          "mark": "suggestion"
+        },
+        {
+          "en": "Sales showed rapid growth in the third quarter.",
+          "th": "ยอดขายเติบโตอย่างรวดเร็วในไตรมาสที่สาม",
+          "mark": "growth"
+        }
+      ],
+      "tip": "ถ้าหน้าช่องว่างเป็น a / an / each / every ต้องเป็นคำนามนับได้เอกพจน์ ถ้าเป็น many / several / a number of ต้องเป็นพหูพจน์ ตัวเลือกที่เป็นคำนามสองตัว (applicant / applicants) มักตัดสินกันที่จุดนี้",
+      "drills": [
+        {
+          "sentence": "We appreciate your ___ during the renovation of the lobby.",
+          "options": [
+            "cooperation",
+            "cooperate",
+            "cooperated",
+            "cooperatively"
+          ],
+          "answer": "cooperation",
+          "why": "ตอบ cooperation เพราะหลัง your (คำแสดงความเป็นเจ้าของ) ต้องเป็นคำนาม ส่วน cooperate และ cooperated เป็นกริยา และ cooperatively เป็น adverb"
+        },
+        {
+          "sentence": "___ at the annual safety training is required for all factory staff.",
+          "options": [
+            "Attendance",
+            "Attend",
+            "Attended",
+            "Attendant"
+          ],
+          "answer": "Attendance",
+          "why": "ช่องว่างเป็นประธานของกริยา is required จึงต้องเป็นคำนาม Attendance (การเข้าร่วม) ส่วน Attendant เป็นคำนามที่เป็นคน ซึ่งนับได้และต้องมี a หรือ the และความหมายไม่เข้ากับประโยค Attend และ Attended เป็นกริยา"
+        },
+        {
+          "sentence": "The marketing team made a careful ___ of customer feedback.",
+          "options": [
+            "analysis",
+            "analyze",
+            "analytical",
+            "analytically"
+          ],
+          "answer": "analysis",
+          "why": "หลัง a careful (คำนำหน้านาม + คุณศัพท์) ต้องเป็นคำนาม analysis ลงท้าย -sis เป็นคำนาม ส่วน analyze เป็นกริยา analytical เป็นคุณศัพท์ และ analytically เป็น adverb"
+        },
+        {
+          "sentence": "Mr. Chen received an award in ___ of his twenty years of service.",
+          "options": [
+            "recognition",
+            "recognize",
+            "recognizable",
+            "recognizably"
+          ],
+          "answer": "recognition",
+          "why": "หลังบุพบท in ต้องเป็นคำนาม และสำนวนคือ in recognition of (เพื่อเป็นการยกย่อง) ส่วน recognize เป็นกริยา recognizable เป็นคุณศัพท์ และ recognizably เป็น adverb"
+        },
+        {
+          "sentence": "Several ___ for the accounting position were interviewed last week.",
+          "options": [
+            "applicants",
+            "applicant",
+            "applications",
+            "apply"
+          ],
+          "answer": "applicants",
+          "why": "หลัง Several ต้องเป็นคำนามพหูพจน์ และสิ่งที่ถูกสัมภาษณ์ได้ต้องเป็นคน จึงเป็น applicants ส่วน applicant เป็นเอกพจน์ applications เป็นเอกสารซึ่งสัมภาษณ์ไม่ได้ และ apply เป็นกริยา"
+        },
+        {
+          "sentence": "The company's rapid ___ has created many new jobs in the area.",
+          "options": [
+            "expansion",
+            "expand",
+            "expansive",
+            "expanded"
+          ],
+          "answer": "expansion",
+          "why": "ตอบ expansion เพราะหลัง The company's rapid (ความเป็นเจ้าของ + คุณศัพท์) ต้องเป็นคำนามที่เป็นประธานของ has created ส่วน expand และ expanded เป็นกริยา และ expansive เป็นคุณศัพท์"
+        },
+        {
+          "sentence": "Please read the safety ___ carefully before operating the machine.",
+          "options": [
+            "instructions",
+            "instruct",
+            "instructive",
+            "instructed"
+          ],
+          "answer": "instructions",
+          "why": "the safety ___ เป็นกรรมของ read และต้องเป็นคำนาม (safety instructions = คำแนะนำด้านความปลอดภัย เป็นคำนามประกอบ) ส่วน instruct และ instructed เป็นกริยา และ instructive เป็นคุณศัพท์"
+        }
+      ]
+    },
+    {
+      "id": "adjectives",
+      "title": "ตำแหน่งที่ต้องเป็นคุณศัพท์",
+      "priority": "high",
+      "intro": "ช่องว่างต้องเป็นคุณศัพท์เมื่ออยู่ระหว่างคำนำหน้านามกับคำนาม หรืออยู่หลังกริยาเชื่อม (be, become, remain, seem, stay) หรืออยู่หลังกรรมของ make / keep / find หรืออยู่หลัง adverb บอกระดับ (very, highly, extremely)",
+      "rules": [
+        {
+          "word": "a / the / its + ___ + คำนาม",
+          "use": "คุณศัพท์ขยายคำนาม",
+          "examples": "a significant increase, the annual report"
+        },
+        {
+          "word": "be / become / remain / seem / stay + ___",
+          "use": "คุณศัพท์หลังกริยาเชื่อม",
+          "examples": "is available, remain stable, became popular"
+        },
+        {
+          "word": "make / keep / find + กรรม + ___",
+          "use": "คุณศัพท์บอกสภาพของกรรม",
+          "examples": "keep the office clean, found the plan feasible"
+        },
+        {
+          "word": "very / highly / extremely + ___",
+          "use": "คุณศัพท์หลัง adverb บอกระดับ",
+          "examples": "highly qualified, very convenient"
+        }
+      ],
+      "examples": [
+        {
+          "en": "The company reported a significant increase in sales.",
+          "th": "บริษัทรายงานว่ายอดขายเพิ่มขึ้นอย่างมีนัยสำคัญ",
+          "mark": "significant"
+        },
+        {
+          "en": "The new model is available in three colors.",
+          "th": "รุ่นใหม่มีให้เลือกสามสี",
+          "mark": "available"
+        },
+        {
+          "en": "Prices have remained stable for six months.",
+          "th": "ราคาคงที่มาหกเดือนแล้ว",
+          "mark": "stable"
+        },
+        {
+          "en": "Please keep the meeting room clean.",
+          "th": "กรุณาดูแลห้องประชุมให้สะอาด",
+          "mark": "clean"
+        },
+        {
+          "en": "We are looking for a highly qualified accountant.",
+          "th": "เรากำลังหานักบัญชีที่มีคุณสมบัติสูง",
+          "mark": "highly qualified"
+        }
+      ],
+      "tip": "be + ___ แล้วประโยคจบ ให้เลือกคุณศัพท์ ไม่ใช่ adverb (The plan is successful ไม่ใช่ successfully) แต่ถ้า be + ___ + V3 หรือ + คุณศัพท์อีกตัว ช่องว่างจะเป็น adverb (is conveniently located) ซึ่งอยู่ในหัวข้อถัดไป",
+      "drills": [
+        {
+          "sentence": "The company reported a ___ increase in profits this quarter.",
+          "options": [
+            "significant",
+            "significance",
+            "signify",
+            "significantly"
+          ],
+          "answer": "significant",
+          "why": "ระหว่าง a กับคำนาม increase ต้องเป็นคุณศัพท์ ส่วน significance เป็นคำนาม signify เป็นกริยา และ significantly เป็น adverb ซึ่งขยายคำนามไม่ได้"
+        },
+        {
+          "sentence": "The conference room is ___ for meetings on Friday afternoon.",
+          "options": [
+            "available",
+            "availability",
+            "avail",
+            "availed"
+          ],
+          "answer": "available",
+          "why": "ตอบ available เพราะหลัง is ต้องเป็นคุณศัพท์ (ว่างให้ใช้) ส่วน availability เป็นคำนาม และ avail กับ availed เป็นกริยา"
+        },
+        {
+          "sentence": "Despite rising costs, our prices have remained ___ for six months.",
+          "options": [
+            "stable",
+            "stability",
+            "stabilize",
+            "stably"
+          ],
+          "answer": "stable",
+          "why": "ตอบ stable เพราะ remain เป็นกริยาเชื่อมเหมือน be จึงตามด้วยคุณศัพท์ ส่วน stability เป็นคำนาม stabilize เป็นกริยา และ stably เป็น adverb ซึ่งใช้หลังกริยาเชื่อมไม่ได้"
+        },
+        {
+          "sentence": "Employees are asked to keep their work areas ___ and organized.",
+          "options": [
+            "clean",
+            "cleanly",
+            "cleaning",
+            "cleanliness"
+          ],
+          "answer": "clean",
+          "why": "keep + กรรม (their work areas) + คุณศัพท์ บอกสภาพของกรรม และต้องขนานกับ organized ที่เป็นคุณศัพท์ ส่วน cleanly เป็น adverb cleaning เป็น V-ing และ cleanliness เป็นคำนาม"
+        },
+        {
+          "sentence": "We are seeking a highly ___ engineer to lead the new project.",
+          "options": [
+            "qualified",
+            "qualify",
+            "qualification",
+            "qualifying"
+          ],
+          "answer": "qualified",
+          "why": "ระหว่าง a highly กับคำนาม engineer ต้องเป็นคุณศัพท์ และวิศวกรเป็นผู้ที่มีคุณสมบัติ จึงใช้รูป -ed (highly qualified เป็นคู่คำที่ใช้บ่อยมาก) ส่วน qualifying หมายถึงที่ทำให้มีสิทธิ์ เช่น qualifying round qualify เป็นกริยา และ qualification เป็นคำนาม"
+        },
+        {
+          "sentence": "Customers found the new checkout system very ___ to use.",
+          "options": [
+            "convenient",
+            "convenience",
+            "conveniently",
+            "convene"
+          ],
+          "answer": "convenient",
+          "why": "find + กรรม (the new checkout system) + very + คุณศัพท์ ส่วน convenience เป็นคำนาม conveniently เป็น adverb และ convene เป็นกริยา (เรียกประชุม)"
+        },
+        {
+          "sentence": "The ___ report will be distributed to all shareholders next week.",
+          "options": [
+            "annual",
+            "annually",
+            "annualize",
+            "annuals"
+          ],
+          "answer": "annual",
+          "why": "ระหว่าง The กับคำนาม report ต้องเป็นคุณศัพท์ annual (ประจำปี) ส่วน annually เป็น adverb annualize เป็นกริยา และ annuals เป็นคำนามพหูพจน์ซึ่งไม่เข้ากับตำแหน่งนี้"
+        }
+      ]
+    },
+    {
+      "id": "adverbs",
+      "title": "ตำแหน่งที่ต้องเป็น adverb",
+      "priority": "high",
+      "intro": "ช่องว่างต้องเป็น adverb เมื่อประโยคครบแล้วแม้ไม่มีคำนั้น หรือเมื่ออยู่ระหว่างกริยาช่วยกับกริยาหลัก หรืออยู่หน้าคุณศัพท์ หน้า V3 หรือขึ้นต้นประโยคแล้วตามด้วยจุลภาค",
+      "rules": [
+        {
+          "word": "has / will / can + ___ + กริยา",
+          "use": "adverb แทรกระหว่างกริยาช่วยกับกริยาหลัก",
+          "examples": "has steadily increased, will soon announce"
+        },
+        {
+          "word": "be + ___ + V3",
+          "use": "adverb ขยาย V3",
+          "examples": "is conveniently located, was carefully reviewed"
+        },
+        {
+          "word": "___ + คุณศัพท์",
+          "use": "adverb ขยายคุณศัพท์",
+          "examples": "extremely popular, reasonably priced"
+        },
+        {
+          "word": "ประโยคครบ + ___",
+          "use": "adverb ขยายกริยา",
+          "examples": "The team worked efficiently."
+        },
+        {
+          "word": "___ + , ต้นประโยค",
+          "use": "adverb ขยายทั้งประโยค",
+          "examples": "Unfortunately, the flight was canceled."
+        },
+        {
+          "word": "ประธาน + ___ + กริยา",
+          "use": "adverb หน้ากริยาหลัก",
+          "examples": "She quickly responded."
+        }
+      ],
+      "examples": [
+        {
+          "en": "Sales have steadily increased since January.",
+          "th": "ยอดขายเพิ่มขึ้นอย่างต่อเนื่องตั้งแต่เดือนมกราคม",
+          "mark": "steadily"
+        },
+        {
+          "en": "The hotel is conveniently located near the airport.",
+          "th": "โรงแรมตั้งอยู่ในทำเลที่สะดวกใกล้สนามบิน",
+          "mark": "conveniently"
+        },
+        {
+          "en": "The new laptops are reasonably priced.",
+          "th": "แล็ปท็อปรุ่นใหม่ตั้งราคาไว้อย่างสมเหตุสมผล",
+          "mark": "reasonably"
+        },
+        {
+          "en": "Unfortunately, the flight to Osaka was canceled.",
+          "th": "น่าเสียดายที่เที่ยวบินไปโอซาก้าถูกยกเลิก",
+          "mark": "Unfortunately"
+        }
+      ],
+      "tip": "ลองตัดช่องว่างออกแล้วอ่านประโยค ถ้ายังครบและถูกไวยากรณ์ ช่องว่างนั้นคือ adverb เกือบทุกครั้ง วิธีนี้ใช้เวลาไม่กี่วินาที",
+      "drills": [
+        {
+          "sentence": "Online sales have ___ increased since the new website was launched.",
+          "options": [
+            "steadily",
+            "steady",
+            "steadiness",
+            "steadied"
+          ],
+          "answer": "steadily",
+          "why": "ตอบ steadily เพราะช่องว่างอยู่ระหว่างกริยาช่วย have กับกริยาหลัก increased ต้องเป็น adverb ส่วน steady เป็นคุณศัพท์ steadiness เป็นคำนาม และ steadied เป็นกริยา"
+        },
+        {
+          "sentence": "The hotel is ___ located just five minutes from the airport.",
+          "options": [
+            "conveniently",
+            "convenient",
+            "convenience",
+            "conveniences"
+          ],
+          "answer": "conveniently",
+          "why": "ตอบ conveniently เพราะ is + ___ + located (V3) ช่องว่างขยาย V3 จึงต้องเป็น adverb ถ้าตัดช่องว่างออก ประโยคยังครบ ส่วน convenient เป็นคุณศัพท์ และ convenience กับ conveniences เป็นคำนาม"
+        },
+        {
+          "sentence": "All applications will be ___ reviewed by the hiring committee.",
+          "options": [
+            "carefully",
+            "careful",
+            "care",
+            "cared"
+          ],
+          "answer": "carefully",
+          "why": "ตอบ carefully เพราะ will be + ___ + reviewed (V3) ต้องเป็น adverb ขยาย reviewed ส่วน careful เป็นคุณศัพท์ care เป็นคำนามหรือกริยา และ cared เป็นกริยาช่อง 2 หรือ 3"
+        },
+        {
+          "sentence": "The new tablets are ___ priced at under $300.",
+          "options": [
+            "reasonably",
+            "reasonable",
+            "reason",
+            "reasoned"
+          ],
+          "answer": "reasonably",
+          "why": "are + ___ + priced (V3) ต้องเป็น adverb (reasonably priced = ราคาสมเหตุสมผล เป็นสำนวนที่ออกบ่อย) ส่วน reasonable เป็นคุณศัพท์ reason เป็นคำนาม และ reasoned เป็นกริยาหรือคุณศัพท์ที่ความหมายไม่เข้ากัน"
+        },
+        {
+          "sentence": "___, the keynote speaker's flight was delayed, so the schedule has changed.",
+          "options": [
+            "Unfortunately",
+            "Unfortunate",
+            "Fortune",
+            "Misfortune"
+          ],
+          "answer": "Unfortunately",
+          "why": "ตอบ Unfortunately เพราะขึ้นต้นประโยคแล้วตามด้วยจุลภาค และประโยคหลังครบแล้ว จึงต้องเป็น adverb ที่ขยายทั้งประโยค ส่วน Unfortunate เป็นคุณศัพท์ และ Fortune กับ Misfortune เป็นคำนาม"
+        },
+        {
+          "sentence": "Ms. Patel responded ___ to every customer complaint.",
+          "options": [
+            "promptly",
+            "prompt",
+            "prompted",
+            "promptness"
+          ],
+          "answer": "promptly",
+          "why": "ตอบ promptly เพราะประโยค Ms. Patel responded to every customer complaint ครบแล้ว ช่องว่างขยายกริยา responded จึงต้องเป็น adverb ส่วน prompt เป็นคุณศัพท์หรือกริยา prompted เป็นกริยา และ promptness เป็นคำนาม"
+        },
+        {
+          "sentence": "The product launch was ___ successful, with sales doubling in a month.",
+          "options": [
+            "extremely",
+            "extreme",
+            "extremes",
+            "extremity"
+          ],
+          "answer": "extremely",
+          "why": "ตอบ extremely เพราะช่องว่างอยู่หน้าคุณศัพท์ successful จึงต้องเป็น adverb ที่ขยายคุณศัพท์ ส่วน extreme เป็นคุณศัพท์ และ extremes กับ extremity เป็นคำนาม"
+        }
+      ]
+    },
+    {
+      "id": "people-participles",
+      "title": "ตัวเลือกชนิดเดียวกันสองตัว: คนกับสิ่ง และ -ing กับ -ed",
+      "priority": "medium",
+      "intro": "บางข้อมีตัวเลือกที่เป็นชนิดเดียวกันสองตัว ตำแหน่งอย่างเดียวตัดสินไม่ได้ ต้องดูความหมายอีกขั้น: คำนามนั้นเป็นคนหรือสิ่งของ และคุณศัพท์นั้นเป็นผู้ทำ (-ing) หรือผู้ถูกกระทำหรือผู้รู้สึก (-ed)",
+      "rules": [
+        {
+          "word": "applicant / application",
+          "use": "คน (ผู้สมัคร) / สิ่ง (ใบสมัคร)",
+          "examples": "the applicant was interviewed, the application was approved"
+        },
+        {
+          "word": "supervisor / supervision",
+          "use": "คน (หัวหน้างาน) / การควบคุมดูแล",
+          "examples": "report to your supervisor, under close supervision"
+        },
+        {
+          "word": "consultant / consultation",
+          "use": "คน (ที่ปรึกษา) / การปรึกษา",
+          "examples": "hire a consultant, book a consultation"
+        },
+        {
+          "word": "attendee / attendance",
+          "use": "คน (ผู้เข้าร่วม) / การเข้าร่วม",
+          "examples": "each attendee, attendance is required"
+        },
+        {
+          "word": "-ing",
+          "use": "เป็นผู้ทำ หรือเป็นสิ่งที่ทำให้เกิดความรู้สึก",
+          "examples": "an exciting offer, encouraging results, the remaining tasks"
+        },
+        {
+          "word": "-ed",
+          "use": "ถูกกระทำ หรือเป็นผู้รู้สึก",
+          "examples": "satisfied customers, the attached file, experienced staff"
+        }
+      ],
+      "examples": [
+        {
+          "en": "Each applicant must submit two letters of reference.",
+          "th": "ผู้สมัครแต่ละคนต้องส่งจดหมายรับรองสองฉบับ",
+          "mark": "applicant"
+        },
+        {
+          "en": "Your application has been forwarded to the hiring manager.",
+          "th": "ใบสมัครของคุณถูกส่งต่อไปยังผู้จัดการฝ่ายสรรหาแล้ว",
+          "mark": "application"
+        },
+        {
+          "en": "Please see the attached file for details.",
+          "th": "รายละเอียดอยู่ในไฟล์ที่แนบมา",
+          "mark": "attached"
+        },
+        {
+          "en": "Satisfied customers often recommend us to friends.",
+          "th": "ลูกค้าที่พึงพอใจมักแนะนำเราให้เพื่อน",
+          "mark": "Satisfied"
+        },
+        {
+          "en": "The remaining tasks will be completed next week.",
+          "th": "งานที่เหลือจะเสร็จในสัปดาห์หน้า",
+          "mark": "remaining"
+        }
+      ],
+      "tip": "ถามว่าคำนามที่ถูกขยาย 'ทำ' หรือ 'ถูกทำ': ไฟล์ถูกแนบ จึงเป็น attached file ลูกค้ารู้สึกพอใจ จึงเป็น satisfied customers ผลลัพธ์ทำให้คนรู้สึกดี จึงเป็น encouraging results ส่วนกริยาที่ไม่มีกรรมอย่าง remain ใช้รูป -ing (remaining)",
+      "drills": [
+        {
+          "sentence": "Each ___ must bring two forms of identification to the interview.",
+          "options": [
+            "applicant",
+            "application",
+            "apply",
+            "applicable"
+          ],
+          "answer": "applicant",
+          "why": "หลัง Each ต้องเป็นคำนามเอกพจน์ และผู้ที่นำบัตรมาสัมภาษณ์ได้ต้องเป็นคน จึงเป็น applicant ส่วน application เป็นใบสมัครซึ่งนำของมาไม่ได้ apply เป็นกริยา และ applicable เป็นคุณศัพท์"
+        },
+        {
+          "sentence": "Your ___ for a parking permit has been approved.",
+          "options": [
+            "application",
+            "applicant",
+            "apply",
+            "applicable"
+          ],
+          "answer": "application",
+          "why": "หลัง Your ต้องเป็นคำนาม และสิ่งที่ยื่นขอใบอนุญาตจอดรถแล้วได้รับอนุมัติคือคำขอ จึงเป็น application ส่วน applicant เป็นคน ซึ่งไม่ได้ถูกอนุมัติในความหมายนี้ apply เป็นกริยา และ applicable เป็นคุณศัพท์"
+        },
+        {
+          "sentence": "Please review the ___ document before the meeting.",
+          "options": [
+            "attached",
+            "attaching",
+            "attachment",
+            "attach"
+          ],
+          "answer": "attached",
+          "why": "ตอบ attached เพราะระหว่าง the กับคำนาม document ต้องเป็นคุณศัพท์ และเอกสารถูกแนบมา จึงใช้รูป -ed ส่วน attaching หมายถึงเป็นผู้แนบ attachment เป็นคำนาม และ attach เป็นกริยา"
+        },
+        {
+          "sentence": "___ customers are more likely to recommend our products to others.",
+          "options": [
+            "Satisfied",
+            "Satisfying",
+            "Satisfaction",
+            "Satisfy"
+          ],
+          "answer": "Satisfied",
+          "why": "ตอบ Satisfied เพราะลูกค้าเป็นผู้รู้สึกพอใจ จึงใช้รูป -ed ถ้าใช้ Satisfying customers จะกลายเป็นการทำให้ลูกค้าพอใจ ซึ่งต้องใช้กริยา is ไม่ใช่ are ส่วน Satisfaction เป็นคำนามและ Satisfy เป็นกริยา"
+        },
+        {
+          "sentence": "The results of the customer survey were very ___ to the management team.",
+          "options": [
+            "encouraging",
+            "encouraged",
+            "encouragement",
+            "encourage"
+          ],
+          "answer": "encouraging",
+          "why": "ตอบ encouraging เพราะผลสำรวจเป็นสิ่งที่ทำให้ทีมผู้บริหารรู้สึกมีกำลังใจ จึงใช้รูป -ing ส่วน encouraged ใช้กับคนที่รู้สึก encouragement เป็นคำนาม และ encourage เป็นกริยา"
+        },
+        {
+          "sentence": "Only ___ staff members are allowed to operate the forklift.",
+          "options": [
+            "authorized",
+            "authorizing",
+            "authorization",
+            "authorize"
+          ],
+          "answer": "authorized",
+          "why": "ตอบ authorized เพราะพนักงานเป็นผู้ได้รับอนุญาต จึงใช้รูป -ed ขยายคำนาม staff members ส่วน authorizing หมายถึงเป็นผู้อนุญาต authorization เป็นคำนาม และ authorize เป็นกริยา"
+        },
+        {
+          "sentence": "The ___ items will be shipped as soon as they are back in stock.",
+          "options": [
+            "remaining",
+            "remained",
+            "remain",
+            "remainder"
+          ],
+          "answer": "remaining",
+          "why": "remain เป็นกริยาที่ไม่มีกรรม จึงใช้รูป -ing ขยายคำนามได้ (the remaining items = สินค้าที่เหลืออยู่) ส่วน remained เป็นกริยาช่อง 2 remain เป็นกริยาช่อง 1 และ remainder เป็นคำนาม"
+        },
+        {
+          "sentence": "Mr. Okada is an ___ consultant with over 15 years in the industry.",
+          "options": [
+            "experienced",
+            "experiencing",
+            "experience",
+            "experiential"
+          ],
+          "answer": "experienced",
+          "why": "ระหว่าง an กับคำนาม consultant ต้องเป็นคุณศัพท์ และคนที่มีประสบการณ์ใช้ experienced ส่วน experiencing เป็น V-ing ที่ไม่มีความหมายนี้ experience เป็นคำนามหรือกริยา และ experiential หมายถึงที่ได้จากการลงมือทำ ซึ่งไม่ใช้กับคน"
+        }
+      ]
+    },
+    {
+      "id": "verbs",
+      "title": "ตำแหน่งที่ต้องเป็นกริยา",
+      "priority": "medium",
+      "intro": "ช่องว่างต้องเป็นกริยาเมื่อประโยคยังไม่มีกริยาหลัก หรืออยู่หลัง will / can / must / should / to / please ซึ่งต้องตามด้วยกริยาช่อง 1 เรื่อง tense และ passive อยู่ในบทรูปกริยา",
+      "rules": [
+        {
+          "word": "will / can / must / should + ___",
+          "use": "กริยาช่อง 1",
+          "examples": "will expand, must register"
+        },
+        {
+          "word": "to + ___",
+          "use": "กริยาช่อง 1",
+          "examples": "to simplify the process"
+        },
+        {
+          "word": "Please + ___",
+          "use": "กริยาช่อง 1 (ประโยคคำสั่ง)",
+          "examples": "Please notify us."
+        },
+        {
+          "word": "help / let / make + กรรม + ___",
+          "use": "กริยาช่อง 1",
+          "examples": "help employees improve"
+        },
+        {
+          "word": "ประธาน + ___ + กรรม",
+          "use": "กริยาหลัก (ถ้าประโยคยังไม่มีกริยา)",
+          "examples": "The new rules prohibit smoking."
+        }
+      ],
+      "examples": [
+        {
+          "en": "The company will expand its operations in Asia next year.",
+          "th": "บริษัทจะขยายการดำเนินงานในเอเชียปีหน้า",
+          "mark": "expand"
+        },
+        {
+          "en": "Please notify the front desk if you need assistance.",
+          "th": "กรุณาแจ้งแผนกต้อนรับหากต้องการความช่วยเหลือ",
+          "mark": "notify"
+        },
+        {
+          "en": "We hired a consultant to simplify the process.",
+          "th": "เราจ้างที่ปรึกษาเพื่อทำให้ขั้นตอนง่ายขึ้น",
+          "mark": "simplify"
+        }
+      ],
+      "tip": "หลัง will / can / must / to / please ห้ามมี s, ed หรือ ing ตัวเลือกที่มีรูปเหล่านี้ตัดทิ้งได้ทันที เหลือแค่กริยาช่อง 1 ตัวเดียว",
+      "drills": [
+        {
+          "sentence": "The company will ___ its operations to three new countries next year.",
+          "options": [
+            "expand",
+            "expansion",
+            "expansive",
+            "expanding"
+          ],
+          "answer": "expand",
+          "why": "หลัง will ต้องเป็นกริยาช่อง 1 ส่วน expansion เป็นคำนาม expansive เป็นคุณศัพท์ และ expanding มี ing ซึ่งใช้หลัง will ไม่ได้"
+        },
+        {
+          "sentence": "Please ___ the front desk if you need extra towels.",
+          "options": [
+            "notify",
+            "notification",
+            "notified",
+            "notifying"
+          ],
+          "answer": "notify",
+          "why": "Please ขึ้นต้นประโยคคำสั่ง ต้องตามด้วยกริยาช่อง 1 ส่วน notification เป็นคำนาม และ notified กับ notifying ไม่ใช่กริยาช่อง 1"
+        },
+        {
+          "sentence": "The manager hired a consultant to ___ the ordering process.",
+          "options": [
+            "simplify",
+            "simple",
+            "simplicity",
+            "simplified"
+          ],
+          "answer": "simplify",
+          "why": "หลัง to ต้องเป็นกริยาช่อง 1 และมีกรรม (the ordering process) simplify ลงท้าย -ify เป็นกริยา ส่วน simple เป็นคุณศัพท์ simplicity เป็นคำนาม และ simplified เป็นกริยาช่อง 2 หรือ 3"
+        },
+        {
+          "sentence": "All visitors must ___ at the reception desk before entering.",
+          "options": [
+            "register",
+            "registration",
+            "registered",
+            "registering"
+          ],
+          "answer": "register",
+          "why": "หลัง must ต้องเป็นกริยาช่อง 1 ส่วน registration เป็นคำนาม และ registered กับ registering ใช้หลัง must ไม่ได้"
+        },
+        {
+          "sentence": "The new rules ___ the use of personal phones on the factory floor.",
+          "options": [
+            "prohibit",
+            "prohibition",
+            "prohibitive",
+            "prohibitively"
+          ],
+          "answer": "prohibit",
+          "why": "ประโยคมีประธาน (The new rules) และกรรม (the use of personal phones) แต่ยังไม่มีกริยาหลัก จึงต้องเป็นกริยา และประธานเป็นพหูพจน์จึงใช้ prohibit ไม่เติม s ส่วน prohibition เป็นคำนาม prohibitive เป็นคุณศัพท์ และ prohibitively เป็น adverb"
+        },
+        {
+          "sentence": "The training program helps new employees ___ their communication skills.",
+          "options": [
+            "improve",
+            "improvement",
+            "improved",
+            "improving"
+          ],
+          "answer": "improve",
+          "why": "help + กรรม (new employees) + กริยาช่อง 1 ส่วน improvement เป็นคำนาม และ improved กับ improving ใช้ในโครงสร้าง help + กรรม + ___ ไม่ได้"
+        }
+      ]
+    },
+    {
+      "id": "confusables",
+      "title": "คุณศัพท์คู่ที่หน้าตาคล้ายกัน (สำหรับเป้าคะแนนสูง)",
+      "priority": "medium",
+      "intro": "ข้อยากของ Part 5 ให้ตัวเลือกมีคุณศัพท์สองตัวจากรากเดียวกันแต่ความหมายต่างกัน ตำแหน่งช่วยตัดตัวเลือกที่เป็นคำนามและ adverb ทิ้งได้ แต่คุณศัพท์สองตัวที่เหลือต้องตัดสินด้วยความหมายและคำที่มักมาคู่กัน",
+      "rules": [
+        {
+          "word": "economic / economical",
+          "use": "เกี่ยวกับเศรษฐกิจ / ประหยัด",
+          "examples": "economic growth, economical on fuel"
+        },
+        {
+          "word": "considerable / considerate",
+          "use": "มาก (จำนวน) / เกรงใจผู้อื่น",
+          "examples": "a considerable amount, considerate neighbors"
+        },
+        {
+          "word": "successful / successive",
+          "use": "ประสบความสำเร็จ / ติดต่อกัน",
+          "examples": "a successful launch, three successive quarters"
+        },
+        {
+          "word": "responsible / responsive",
+          "use": "รับผิดชอบ / ตอบสนองไว",
+          "examples": "responsible for sales, responsive to customers"
+        },
+        {
+          "word": "reliable / reliant",
+          "use": "เชื่อถือได้ / ต้องพึ่งพา (reliant on)",
+          "examples": "a reliable supplier, reliant on imports"
+        },
+        {
+          "word": "comprehensive / comprehensible",
+          "use": "ครอบคลุม / เข้าใจได้",
+          "examples": "comprehensive coverage, comprehensible instructions"
+        },
+        {
+          "word": "informed / informative",
+          "use": "มีข้อมูลประกอบ / ให้ข้อมูลดี",
+          "examples": "an informed decision, an informative talk"
+        }
+      ],
+      "examples": [
+        {
+          "en": "The region has enjoyed strong economic growth.",
+          "th": "ภูมิภาคนี้มีการเติบโตทางเศรษฐกิจที่แข็งแกร่ง",
+          "mark": "economic"
+        },
+        {
+          "en": "Smaller vans are more economical on fuel.",
+          "th": "รถตู้ขนาดเล็กประหยัดน้ำมันกว่า",
+          "mark": "economical"
+        },
+        {
+          "en": "The support team is very responsive to customer requests.",
+          "th": "ทีมสนับสนุนตอบสนองคำขอของลูกค้าอย่างรวดเร็ว",
+          "mark": "responsive"
+        },
+        {
+          "en": "Please make an informed decision after reading the report.",
+          "th": "กรุณาตัดสินใจโดยมีข้อมูลประกอบหลังอ่านรายงาน",
+          "mark": "informed"
+        }
+      ],
+      "tip": "ถ้าเจอข้อแบบนี้แล้วไม่แน่ใจความหมาย ให้เลือกคำที่มักมาคู่กับคำนามหลังช่องว่าง (economic growth, considerable amount, informed decision) แล้วไปข้อต่อไป อย่าใช้เวลาเกิน 20 วินาที",
+      "drills": [
+        {
+          "sentence": "The government expects ___ growth to slow next year.",
+          "options": [
+            "economic",
+            "economical",
+            "economically",
+            "economize"
+          ],
+          "answer": "economic",
+          "why": "การเติบโตทางเศรษฐกิจคือ economic growth ส่วน economical แปลว่าประหยัด ซึ่งไม่เข้ากับ growth economically เป็น adverb ซึ่งขยายคำนามไม่ได้ และ economize เป็นกริยา"
+        },
+        {
+          "sentence": "The company spent a ___ amount of money on the new software.",
+          "options": [
+            "considerable",
+            "considerate",
+            "considering",
+            "consideration"
+          ],
+          "answer": "considerable",
+          "why": "a considerable amount แปลว่าจำนวนมาก ส่วน considerate แปลว่าเกรงใจ ใช้กับคน considering เป็นคำเชื่อมหรือ V-ing และ consideration เป็นคำนาม"
+        },
+        {
+          "sentence": "Many small farms are heavily ___ on government support.",
+          "options": [
+            "reliant",
+            "reliable",
+            "reliance",
+            "reliably"
+          ],
+          "answer": "reliant",
+          "why": "be reliant on แปลว่าต้องพึ่งพา ส่วน reliable แปลว่าเชื่อถือได้ และไม่ใช้กับ on reliance เป็นคำนาม และ reliably เป็น adverb ซึ่งใช้หลัง be heavily ในตำแหน่งนี้ไม่ได้"
+        },
+        {
+          "sentence": "Our support team is highly ___ to customer requests, replying within an hour.",
+          "options": [
+            "responsive",
+            "responsible",
+            "response",
+            "responsively"
+          ],
+          "answer": "responsive",
+          "why": "responsive to แปลว่าตอบสนองไว เข้ากับการตอบกลับภายในหนึ่งชั่วโมง ส่วน responsible แปลว่ารับผิดชอบ (ใช้กับ for) response เป็นคำนาม และ responsively เป็น adverb"
+        },
+        {
+          "sentence": "The new handbook offers ___ coverage of all company policies.",
+          "options": [
+            "comprehensive",
+            "comprehensible",
+            "comprehension",
+            "comprehensively"
+          ],
+          "answer": "comprehensive",
+          "why": "comprehensive coverage แปลว่าครอบคลุมทั้งหมด ส่วน comprehensible แปลว่าเข้าใจได้ ซึ่งไม่ใช้กับ coverage comprehension เป็นคำนาม และ comprehensively เป็น adverb"
+        },
+        {
+          "sentence": "We chose the smaller van because it is more ___ on fuel.",
+          "options": [
+            "economical",
+            "economic",
+            "economy",
+            "economics"
+          ],
+          "answer": "economical",
+          "why": "economical on fuel แปลว่าประหยัดน้ำมัน ส่วน economic แปลว่าเกี่ยวกับเศรษฐกิจ economy เป็นคำนาม (เศรษฐกิจ) และ economics เป็นคำนาม (วิชาเศรษฐศาสตร์)"
+        },
+        {
+          "sentence": "Please read all the reports so that you can make an ___ decision.",
+          "options": [
+            "informed",
+            "informative",
+            "information",
+            "inform"
+          ],
+          "answer": "informed",
+          "why": "an informed decision แปลว่าการตัดสินใจที่มีข้อมูลประกอบ ส่วน informative แปลว่าให้ข้อมูลดี ใช้กับสิ่งที่ให้ข้อมูล เช่น an informative talk information เป็นคำนาม และ inform เป็นกริยา"
+        }
+      ]
+    }
+  ]
+}

@@ -3,6 +3,8 @@
 !package.json
 !package-lock.json
 !tsconfig*.json
+# Grammar lessons are content, not keys.
+!backend/data/grammar/*.json
 .env
 backend/bin/
 node_modules/
