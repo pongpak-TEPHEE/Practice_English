@@ -10,6 +10,7 @@ export interface Progress {
   wordId: number;
   dueDate: string;
   lastReviewed: string;
+  reviewCount: number;
   favorite: boolean;
   passCount: number;
   failCount: number;
@@ -55,6 +56,7 @@ export interface Tiers {
 export interface Settings {
   newPerDay: number;
   roundsPerDay: number;
+  reviewPerDay: number;
   level: Level;
   accent: Accent;
   tiers: Tiers;
@@ -86,3 +88,39 @@ export const STATUS_LABEL: Record<Status, string> = {
 };
 
 export const TIER_ORDER: Exclude<Status, "new">[] = ["learning", "familiar", "known", "mastered"];
+
+export interface DayWord {
+  wordId: number;
+  word: string;
+  level: Level;
+  passes: number;
+  fails: number;
+}
+
+export interface Day {
+  date: string;
+  learned: DayWord[];
+  reviewed: DayWord[];
+}
+
+export interface DayGoal {
+  date: string;
+  new: number;
+  reviewed: number;
+  met: boolean;
+}
+
+export interface Achievements {
+  newGoal: number;
+  reviewGoal: number;
+  today: DayGoal;
+  streak: number;
+  bestStreak: number;
+  daysMet: number;
+  totalLearned: number;
+  recent: DayGoal[];
+}
+
+export function thaiDate(iso: string, opts: Intl.DateTimeFormatOptions = { weekday: "long", day: "numeric", month: "long" }) {
+  return new Date(`${iso}T00:00:00`).toLocaleDateString("th-TH", opts);
+}

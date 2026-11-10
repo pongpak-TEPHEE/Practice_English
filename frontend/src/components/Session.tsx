@@ -95,7 +95,7 @@ export function Session({ title, mode, words, accent, onExit }: Props) {
             {mode === "learn" && failed > 0 ? " คำที่ไม่ผ่านถูกวนกลับมาจนผ่านครบทุกคำแล้ว" : ""}
           </p>
           <button type="button" className="primary" onClick={onExit}>
-            กลับหน้าวันนี้
+            กลับ
           </button>
         </div>
       )}
@@ -110,6 +110,7 @@ function emptyProgress(wordId: number) {
     wordId,
     dueDate: "",
     lastReviewed: "",
+    reviewCount: 0,
     favorite: false,
     passCount: 0,
     failCount: 0,

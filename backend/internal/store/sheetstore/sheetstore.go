@@ -7,6 +7,7 @@
 //	          favorite | pass_count | fail_count | pass_days | last_pass_date | recent | missed |
 //	          learned_date | round_date | rounds_today
 //	settings: key | value
+//	log:      date | time | word_id | mode | result   (one row per answer)
 package sheetstore
 
 import (
@@ -31,6 +32,7 @@ const (
 	wordsTab    = "words"
 	progressTab = "progress"
 	settingsTab = "settings"
+	logTab      = "log"
 
 	wordsCols    = "A2:H"
 	progressCols = "R" // last column of the progress tab
@@ -42,6 +44,7 @@ var (
 		"favorite", "pass_count", "fail_count", "pass_days", "last_pass_date", "recent", "missed",
 		"learned_date", "round_date", "rounds_today"}
 	settingsHeader = []any{"key", "value"}
+	logHeader      = []any{"date", "time", "word_id", "mode", "result"}
 )
 
 type Store struct {
@@ -176,6 +179,35 @@ func (s *Store) SaveSettings(ctx context.Context, kv map[string]string) error {
 	return err
 }
 
+func (s *Store) LoadLog(ctx context.Context) ([]vocab.LogEntry, error) {
+	rows, err := s.readRows(ctx, logTab+"!A2:E")
+	if err != nil {
+		return nil, err
+	}
+	out := make([]vocab.LogEntry, 0, len(rows))
+	for i, row := range rows {
+		if cell(row, 0) == "" {
+			continue
+		}
+		id, err := strconv.Atoi(cell(row, 2))
+		if err != nil {
+			return nil, fmt.Errorf("%s row %d: invalid word_id %q", logTab, i+2, cell(row, 2))
+		}
+		out = append(out, vocab.LogEntry{
+			Date: cell(row, 0), Time: cell(row, 1), WordID: id,
+			Mode: vocab.Mode(cell(row, 3)), Result: vocab.Result(cell(row, 4)),
+		})
+	}
+	return out, nil
+}
+
+func (s *Store) AppendLog(ctx context.Context, e vocab.LogEntry) error {
+	values := &sheets.ValueRange{Values: [][]any{{e.Date, e.Time, e.WordID, string(e.Mode), string(e.Result)}}}
+	_, err := s.api.Spreadsheets.Values.Append(s.spreadsheetID, logTab+"!A:E", values).
+		ValueInputOption("RAW").InsertDataOption("INSERT_ROWS").Context(ctx).Do()
+	return err
+}
+
 // Setup creates the tabs and their header rows if missing.
 func (s *Store) Setup(ctx context.Context) error {
 	ss, err := s.api.Spreadsheets.Get(s.spreadsheetID).Fields("sheets.properties.title").Context(ctx).Do()
@@ -187,7 +219,7 @@ func (s *Store) Setup(ctx context.Context) error {
 		have[sh.Properties.Title] = true
 	}
 	var add []*sheets.Request
-	for _, tab := range []string{wordsTab, progressTab, settingsTab} {
+	for _, tab := range []string{wordsTab, progressTab, settingsTab, logTab} {
 		if !have[tab] {
 			add = append(add, &sheets.Request{AddSheet: &sheets.AddSheetRequest{
 				Properties: &sheets.SheetProperties{Title: tab},
@@ -207,6 +239,7 @@ func (s *Store) Setup(ctx context.Context) error {
 			{Range: wordsTab + "!A1:H1", Values: [][]any{wordsHeader}},
 			{Range: progressTab + "!A1:" + progressCols + "1", Values: [][]any{progressHeader}},
 			{Range: settingsTab + "!A1:B1", Values: [][]any{settingsHeader}},
+			{Range: logTab + "!A1:E1", Values: [][]any{logHeader}},
 		},
 	}).Context(ctx).Do()
 	if err != nil {

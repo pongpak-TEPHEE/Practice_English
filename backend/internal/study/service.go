@@ -17,7 +17,11 @@ import (
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/vocab"
 )
 
-var ErrWordNotFound = errors.New("word not found")
+var (
+	ErrWordNotFound = errors.New("word not found")
+	// ErrLogNotSaved means the answer counted but its history row could not be written.
+	ErrLogNotSaved = errors.New("answer saved but history not recorded")
+)
 
 type Store interface {
 	LoadWords(ctx context.Context) ([]vocab.Word, error)
@@ -25,6 +29,8 @@ type Store interface {
 	SaveProgress(ctx context.Context, p vocab.Progress) error
 	LoadSettings(ctx context.Context) (map[string]string, error)
 	SaveSettings(ctx context.Context, kv map[string]string) error
+	LoadLog(ctx context.Context) ([]vocab.LogEntry, error)
+	AppendLog(ctx context.Context, e vocab.LogEntry) error
 }
 
 // WordView is a word together with the learner's progress on it.
@@ -46,6 +52,7 @@ type Service struct {
 	wordByID map[int]vocab.Word
 	progress map[int]vocab.Progress
 	settings Settings
+	log      []vocab.LogEntry
 }
 
 func NewService(ctx context.Context, store Store, loc *time.Location) (*Service, error) {
@@ -71,6 +78,11 @@ func (s *Service) Reload(ctx context.Context) error {
 		return fmt.Errorf("load settings: %w", err)
 	}
 
+	log, err := s.store.LoadLog(ctx)
+	if err != nil {
+		return fmt.Errorf("load log: %w", err)
+	}
+
 	byID := make(map[int]vocab.Word, len(words))
 	for _, w := range words {
 		byID[w.ID] = w
@@ -81,7 +93,7 @@ func (s *Service) Reload(ctx context.Context) error {
 	}
 
 	s.mu.Lock()
-	s.words, s.wordByID, s.progress, s.settings = words, byID, pm, settingsFromMap(kv)
+	s.words, s.wordByID, s.progress, s.settings, s.log = words, byID, pm, settingsFromMap(kv), log
 	s.mu.Unlock()
 	return nil
 }
@@ -295,9 +307,24 @@ func (s *Service) Today(extra int) Today {
 // Answer records pass/fail for a word and returns its updated state.
 // The cache only changes once the store has accepted the write.
 func (s *Service) Answer(ctx context.Context, wordID int, r vocab.Result, mode vocab.Mode) (WordView, error) {
-	return s.update(ctx, wordID, func(p vocab.Progress) vocab.Progress {
+	v, err := s.update(ctx, wordID, func(p vocab.Progress) vocab.Progress {
 		return vocab.Answer(p, r, mode, s.today())
 	})
+	if err != nil {
+		return v, err
+	}
+	now := s.now().In(s.loc)
+	e := vocab.LogEntry{Date: vocab.FormatDate(now), Time: now.Format("15:04:05"), WordID: wordID, Mode: mode, Result: r}
+	s.writeMu.Lock()
+	defer s.writeMu.Unlock()
+	// Progress is already saved; a lost log row only affects history, so it isn't fatal.
+	if err := s.store.AppendLog(ctx, e); err != nil {
+		return v, fmt.Errorf("%w: %w", ErrLogNotSaved, err)
+	}
+	s.mu.Lock()
+	s.log = append(s.log, e)
+	s.mu.Unlock()
+	return v, nil
 }
 
 func (s *Service) SetFavorite(ctx context.Context, wordID int, fav bool) (WordView, error) {

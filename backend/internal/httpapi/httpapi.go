@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"slices"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/study"
@@ -40,6 +41,8 @@ func NewHandler(svc *study.Service, opts Options) http.Handler {
 	api.HandleFunc("PUT /api/words/{id}/favorite", h.setFavorite)
 	api.HandleFunc("POST /api/answer", h.answer)
 	api.HandleFunc("GET /api/stats", h.stats)
+	api.HandleFunc("GET /api/history", h.history)
+	api.HandleFunc("GET /api/achievements", h.achievements)
 	api.HandleFunc("GET /api/settings", h.getSettings)
 	api.HandleFunc("PUT /api/settings", h.putSettings)
 	api.HandleFunc("POST /api/admin/reload", h.reload)
@@ -133,6 +136,10 @@ func (h *handler) answer(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	v, err := h.svc.Answer(r.Context(), req.WordID, res, mode)
+	if errors.Is(err, study.ErrLogNotSaved) {
+		h.opts.Logger.Warn("answer log", "err", err)
+		err = nil
+	}
 	if err != nil {
 		h.fail(w, err)
 		return
@@ -142,6 +149,28 @@ func (h *handler) answer(w http.ResponseWriter, r *http.Request) {
 
 func (h *handler) stats(w http.ResponseWriter, _ *http.Request) {
 	writeJSON(w, http.StatusOK, h.svc.Stats())
+}
+
+func (h *handler) history(w http.ResponseWriter, r *http.Request) {
+	days := 30
+	if s := r.URL.Query().Get("days"); s != "" {
+		n, err := strconv.Atoi(s)
+		if err != nil || n < 1 || n > 365 {
+			writeError(w, http.StatusBadRequest, "days must be a number from 1 to 365")
+			return
+		}
+		days = n
+	}
+	level := strings.ToUpper(r.URL.Query().Get("level"))
+	if level != "" && !slices.Contains(vocab.Levels, level) {
+		writeError(w, http.StatusBadRequest, "level must be A1, A2, B1 or B2")
+		return
+	}
+	writeJSON(w, http.StatusOK, h.svc.History(days, level))
+}
+
+func (h *handler) achievements(w http.ResponseWriter, _ *http.Request) {
+	writeJSON(w, http.StatusOK, h.svc.Achievements())
 }
 
 func (h *handler) getSettings(w http.ResponseWriter, _ *http.Request) {

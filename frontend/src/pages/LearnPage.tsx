@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { api } from "../api";
 import type { SessionSpec } from "../components/Session";
-import { LEVELS } from "../types";
-import type { Level, Today } from "../types";
+import { thaiDate } from "../types";
+import type { Today } from "../types";
 
 interface Props {
   onStart: (s: SessionSpec) => void;
@@ -11,7 +11,7 @@ interface Props {
 
 const EXTRA_WORDS = 5;
 
-export function TodayPage({ onStart, onError }: Props) {
+export function LearnPage({ onStart, onError }: Props) {
   const [today, setToday] = useState<Today | null>(null);
   const [busy, setBusy] = useState(false);
 
@@ -25,19 +25,6 @@ export function TodayPage({ onStart, onError }: Props) {
   const remaining = Math.max(0, today.newGoal - today.learnedToday);
   const learnDone = remaining === 0 || today.newQueue.length === 0;
   const roundsLeft = today.learnedToday > 0 && today.roundsDone < today.roundsGoal;
-
-  const changeLevel = async (level: Level) => {
-    if (level === today.level) return;
-    setBusy(true);
-    try {
-      await api.saveSettings({ level });
-      await load();
-    } catch (e) {
-      onError(e as Error);
-    } finally {
-      setBusy(false);
-    }
-  };
 
   const learnMore = async () => {
     setBusy(true);
@@ -80,15 +67,13 @@ export function TodayPage({ onStart, onError }: Props) {
     primary = { label: `ท่องเพิ่มอีก ${EXTRA_WORDS} คำ`, run: learnMore };
   }
 
-  const dateLabel = new Date(`${today.date}T00:00:00`).toLocaleDateString("th-TH", {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-  });
+  const dateLabel = thaiDate(today.date);
 
   return (
     <div className="page">
-      <p className="date">{dateLabel}</p>
+      <p className="date">
+        {dateLabel} · ระดับ {today.level}
+      </p>
 
       <section className="goal" aria-label="เป้าหมายวันนี้">
         <Goal label="คำใหม่" done={today.learnedToday} goal={today.newGoal} />
@@ -107,24 +92,6 @@ export function TodayPage({ onStart, onError }: Props) {
         </button>
       )}
 
-      <section className="level-pick">
-        <h3>ระดับของคำใหม่</h3>
-        <div className="segmented" role="radiogroup" aria-label="ระดับของคำใหม่">
-          {LEVELS.map((l) => (
-            <button
-              key={l}
-              type="button"
-              role="radio"
-              aria-checked={today.level === l}
-              className={today.level === l ? "is-on" : ""}
-              disabled={busy}
-              onClick={() => changeLevel(l)}
-            >
-              {l}
-            </button>
-          ))}
-        </div>
-      </section>
     </div>
   );
 }

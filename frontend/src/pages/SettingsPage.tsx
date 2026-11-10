@@ -41,7 +41,7 @@ export function SettingsPage({ onSaved, onError, onSignOut }: Props) {
     <div className="page settings">
       <section>
         <h3>เป้าหมายรายวัน</h3>
-        <Stepper label="คำใหม่ต่อวัน" value={s.newPerDay} min={1} max={100} onChange={(v) => update({ newPerDay: v })} />
+        <p className="help">ตั้งเป้าคำใหม่และคำทวนต่อวันได้ที่หน้าความสำเร็จ</p>
         <Stepper label="รอบทวนคำของวันนี้" value={s.roundsPerDay} min={0} max={20} onChange={(v) => update({ roundsPerDay: v })} />
       </section>
 
@@ -102,21 +102,22 @@ interface StepperProps {
   min: number;
   max: number;
   suffix?: string;
+  step?: number;
   onChange: (v: number) => void;
 }
 
-function Stepper({ label, value, min, max, suffix = "", onChange }: StepperProps) {
+export function Stepper({ label, value, min, max, suffix = "", step = 1, onChange }: StepperProps) {
   return (
     <div className="stepper">
       <span className="stepper-label">{label}</span>
       <div className="stepper-control">
-        <button type="button" aria-label={`ลด${label}`} disabled={value <= min} onClick={() => onChange(value - 1)}>
+        <button type="button" aria-label={`ลด${label}`} disabled={value <= min} onClick={() => onChange(Math.max(min, value - step))}>
           ลด
         </button>
         <span className="stepper-value" aria-live="polite">
           {value} {suffix}
         </span>
-        <button type="button" aria-label={`เพิ่ม${label}`} disabled={value >= max} onClick={() => onChange(value + 1)}>
+        <button type="button" aria-label={`เพิ่ม${label}`} disabled={value >= max} onClick={() => onChange(Math.min(max, value + step))}>
           เพิ่ม
         </button>
       </div>

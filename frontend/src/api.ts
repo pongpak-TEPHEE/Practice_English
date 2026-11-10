@@ -1,4 +1,4 @@
-import type { Mode, Result, Settings, Stats, Today, Word } from "./types";
+import type { Achievements, Day, Mode, Result, Settings, Stats, Today, Word } from "./types";
 
 // Empty in development (Vite proxies /api); set VITE_API_URL to the Render URL for production.
 const BASE = import.meta.env.VITE_API_URL ?? "";
@@ -62,6 +62,9 @@ export const api = {
     request<Word>("POST", "/api/answer", { wordId, result, mode }),
   favorite: (wordId: number, favorite: boolean) =>
     request<Word>("PUT", `/api/words/${wordId}/favorite`, { favorite }),
+  history: (level?: string, days = 30) =>
+    request<Day[]>("GET", `/api/history?days=${days}${level ? `&level=${level}` : ""}`),
+  achievements: () => request<Achievements>("GET", "/api/achievements"),
   stats: () => request<Stats>("GET", "/api/stats"),
   settings: () => request<Settings>("GET", "/api/settings"),
   saveSettings: (s: Partial<Settings>) => request<Settings>("PUT", "/api/settings", s),

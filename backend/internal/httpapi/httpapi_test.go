@@ -143,6 +143,26 @@ func TestDailyFlow(t *testing.T) {
 		t.Errorf("stats = %+v", st)
 	}
 
+	var hist []study.Day
+	call(t, srv, "GET", "/api/history", "", &hist)
+	if len(hist) != 1 || len(hist[0].Learned) != 2 || len(hist[0].Reviewed) != 2 {
+		t.Fatalf("history = %+v", hist)
+	}
+	if l := hist[0].Learned[0]; l.WordID != a || l.Passes != 1 || l.Fails != 1 {
+		t.Errorf("history learned[0] = %+v", l)
+	}
+	call(t, srv, "GET", "/api/history?level=B2", "", &hist)
+	if len(hist) != 0 {
+		t.Errorf("history B2 = %+v", hist)
+	}
+
+	call(t, srv, "PUT", "/api/settings", `{"reviewPerDay":2}`, nil)
+	var ach study.Achievements
+	call(t, srv, "GET", "/api/achievements", "", &ach)
+	if ach.Today.New != 2 || ach.Today.Reviewed != 2 || !ach.Today.Met || ach.Streak != 1 || len(ach.Recent) != 14 {
+		t.Errorf("achievements = %+v", ach)
+	}
+
 	for body, want := range map[string]int{
 		`{"wordId":1,"result":"good"}`:               400,
 		`{"wordId":1,"result":"pass","mode":"cram"}`: 400,

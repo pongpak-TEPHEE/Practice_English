@@ -13,6 +13,7 @@ import (
 type Settings struct {
 	NewPerDay    int         `json:"newPerDay"`    // new words to learn each day
 	RoundsPerDay int         `json:"roundsPerDay"` // review rounds for today's words
+	ReviewPerDay int         `json:"reviewPerDay"` // words to review each day (achievement goal)
 	Level        string      `json:"level"`        // level new words come from
 	Accent       string      `json:"accent"`       // "us" or "uk"
 	Tiers        vocab.Tiers `json:"tiers"`        // pass days for each mastery tier
@@ -21,6 +22,7 @@ type Settings struct {
 var DefaultSettings = Settings{
 	NewPerDay:    10,
 	RoundsPerDay: 3,
+	ReviewPerDay: 20,
 	Level:        "A1",
 	Accent:       "us",
 	Tiers:        vocab.DefaultTiers,
@@ -32,6 +34,8 @@ func (s Settings) Validate() error {
 		return fmt.Errorf("newPerDay must be 1–100")
 	case s.RoundsPerDay < 0 || s.RoundsPerDay > 20:
 		return fmt.Errorf("roundsPerDay must be 0–20")
+	case s.ReviewPerDay < 0 || s.ReviewPerDay > 500:
+		return fmt.Errorf("reviewPerDay must be 0–500")
 	case !slices.Contains(vocab.Levels, s.Level):
 		return fmt.Errorf("level must be one of %s", strings.Join(vocab.Levels, ", "))
 	case s.Accent != "us" && s.Accent != "uk":
@@ -46,6 +50,7 @@ func (s Settings) toMap() map[string]string {
 	return map[string]string{
 		"new_per_day":    strconv.Itoa(s.NewPerDay),
 		"rounds_per_day": strconv.Itoa(s.RoundsPerDay),
+		"review_per_day": strconv.Itoa(s.ReviewPerDay),
 		"level":          s.Level,
 		"accent":         s.Accent,
 		"tier_familiar":  strconv.Itoa(s.Tiers.Familiar),
@@ -64,6 +69,7 @@ func settingsFromMap(m map[string]string) Settings {
 	}
 	num("new_per_day", &s.NewPerDay)
 	num("rounds_per_day", &s.RoundsPerDay)
+	num("review_per_day", &s.ReviewPerDay)
 	num("tier_familiar", &s.Tiers.Familiar)
 	num("tier_known", &s.Tiers.Known)
 	num("tier_mastered", &s.Tiers.Mastered)

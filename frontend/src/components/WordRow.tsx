@@ -1,7 +1,7 @@
 import { STATUS_LABEL } from "../types";
 import type { Word } from "../types";
 
-export function WordRow({ word }: { word: Word }) {
+export function WordRow({ word, showRounds = false }: { word: Word; showRounds?: boolean }) {
   const p = word.progress;
   return (
     <li className="word-row">
@@ -16,6 +16,7 @@ export function WordRow({ word }: { word: Word }) {
       </div>
       <div className="word-row-side">
         <span className={`tier-tag tier-${word.status}`}>{STATUS_LABEL[word.status]}</span>
+        {showRounds && p && <span className="word-row-meta">ทวน {p.reviewCount} รอบ</span>}
         {p && p.passDays > 0 && <span className="word-row-meta">ผ่าน {p.passDays} วัน</span>}
         {p?.favorite && <span className="word-row-meta fav">คำโปรด</span>}
       </div>

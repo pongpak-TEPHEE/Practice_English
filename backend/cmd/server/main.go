@@ -78,7 +78,15 @@ func run(log *slog.Logger) error {
 
 func buildStore(ctx context.Context, cfg config.Config) (study.Store, error) {
 	if cfg.Store == "sheets" {
-		return sheetstore.New(ctx, cfg.Credentials, cfg.SheetID)
+		st, err := sheetstore.New(ctx, cfg.Credentials, cfg.SheetID)
+		if err != nil {
+			return nil, err
+		}
+		// Creates any missing tab (e.g. "log" on sheets made before it existed).
+		if err := st.Setup(ctx); err != nil {
+			return nil, err
+		}
+		return st, nil
 	}
 	words := vocab.SampleWords()
 	if cfg.WordsCSV != "" {

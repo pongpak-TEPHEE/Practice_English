@@ -17,6 +17,7 @@ type Store struct {
 	words    []vocab.Word
 	progress map[int]vocab.Progress
 	settings map[string]string
+	log      []vocab.LogEntry
 }
 
 func New(words []vocab.Word) *Store {
@@ -54,5 +55,18 @@ func (s *Store) SaveSettings(_ context.Context, kv map[string]string) error {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 	s.settings = maps.Clone(kv)
+	return nil
+}
+
+func (s *Store) LoadLog(context.Context) ([]vocab.LogEntry, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	return slices.Clone(s.log), nil
+}
+
+func (s *Store) AppendLog(_ context.Context, e vocab.LogEntry) error {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	s.log = append(s.log, e)
 	return nil
 }
