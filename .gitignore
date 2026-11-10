@@ -1,0 +1,10 @@
+# Google service-account keys: never commit
+*.json
+!package.json
+!package-lock.json
+!tsconfig*.json
+.env
+backend/bin/
+node_modules/
+dist/
+.DS_Store

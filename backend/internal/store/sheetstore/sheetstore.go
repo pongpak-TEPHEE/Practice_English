@@ -1,0 +1,325 @@
+// Package sheetstore keeps words, progress and settings in a Google Spreadsheet.
+//
+// Layout (row 1 is a header in every tab):
+//
+//	words:    id | word | pos | level | meaning_th | example | audio_uk | audio_us
+//	progress: word_id | ease | interval | repetitions | due_date | last_reviewed | review_count | lapses |
+//	          favorite | pass_count | fail_count | pass_days | last_pass_date | recent | missed |
+//	          learned_date | round_date | rounds_today
+//	settings: key | value
+package sheetstore
+
+import (
+	"context"
+	"errors"
+	"fmt"
+	"maps"
+	"regexp"
+	"slices"
+	"strconv"
+	"strings"
+	"sync"
+
+	"golang.org/x/oauth2/google"
+	"google.golang.org/api/option"
+	"google.golang.org/api/sheets/v4"
+
+	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/vocab"
+)
+
+const (
+	wordsTab    = "words"
+	progressTab = "progress"
+	settingsTab = "settings"
+
+	wordsCols    = "A2:H"
+	progressCols = "R" // last column of the progress tab
+)
+
+var (
+	wordsHeader    = []any{"id", "word", "pos", "level", "meaning_th", "example", "audio_uk", "audio_us"}
+	progressHeader = []any{"word_id", "ease", "interval", "repetitions", "due_date", "last_reviewed", "review_count", "lapses",
+		"favorite", "pass_count", "fail_count", "pass_days", "last_pass_date", "recent", "missed",
+		"learned_date", "round_date", "rounds_today"}
+	settingsHeader = []any{"key", "value"}
+)
+
+type Store struct {
+	api           *sheets.Service
+	spreadsheetID string
+
+	mu           sync.Mutex
+	progressRows map[int]int // word id -> 1-based sheet row
+}
+
+// New connects with a service-account key (the JSON file downloaded from Google Cloud).
+// The spreadsheet must be shared with the service account's email as Editor.
+func New(ctx context.Context, credentialsJSON []byte, spreadsheetID string) (*Store, error) {
+	conf, err := google.JWTConfigFromJSON(credentialsJSON, sheets.SpreadsheetsScope)
+	if err != nil {
+		return nil, fmt.Errorf("parse service account credentials: %w", err)
+	}
+	// The client refreshes tokens with this context, so it must outlive the request.
+	api, err := sheets.NewService(ctx, option.WithHTTPClient(conf.Client(context.Background())))
+	if err != nil {
+		return nil, fmt.Errorf("create sheets client: %w", err)
+	}
+	return &Store{api: api, spreadsheetID: spreadsheetID, progressRows: map[int]int{}}, nil
+}
+
+func (s *Store) LoadWords(ctx context.Context) ([]vocab.Word, error) {
+	rows, err := s.readRows(ctx, wordsTab+"!"+wordsCols)
+	if err != nil {
+		return nil, err
+	}
+	words := make([]vocab.Word, 0, len(rows))
+	for i, row := range rows {
+		if cell(row, 1) == "" {
+			continue
+		}
+		id, err := strconv.Atoi(cell(row, 0))
+		if err != nil {
+			return nil, fmt.Errorf("%s row %d: invalid id %q", wordsTab, i+2, cell(row, 0))
+		}
+		words = append(words, vocab.Word{
+			ID:        id,
+			Word:      cell(row, 1),
+			POS:       cell(row, 2),
+			Level:     strings.ToUpper(cell(row, 3)),
+			MeaningTH: cell(row, 4),
+			Example:   cell(row, 5),
+			AudioUK:   cell(row, 6),
+			AudioUS:   cell(row, 7),
+		})
+	}
+	return words, nil
+}
+
+func (s *Store) LoadProgress(ctx context.Context) ([]vocab.Progress, error) {
+	rows, err := s.readRows(ctx, progressTab+"!A2:"+progressCols)
+	if err != nil {
+		return nil, err
+	}
+	out := make([]vocab.Progress, 0, len(rows))
+	rowOf := make(map[int]int, len(rows))
+	for i, row := range rows {
+		if cell(row, 0) == "" {
+			continue
+		}
+		p, err := parseProgress(row)
+		if err != nil {
+			return nil, fmt.Errorf("%s row %d: %w", progressTab, i+2, err)
+		}
+		out = append(out, p)
+		rowOf[p.WordID] = i + 2
+	}
+	s.mu.Lock()
+	s.progressRows = rowOf
+	s.mu.Unlock()
+	return out, nil
+}
+
+// SaveProgress overwrites the word's existing row, or appends a new one.
+func (s *Store) SaveProgress(ctx context.Context, p vocab.Progress) error {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	values := &sheets.ValueRange{Values: [][]any{progressRow(p)}}
+	if row, ok := s.progressRows[p.WordID]; ok {
+		rng := fmt.Sprintf("%s!A%d:%s%d", progressTab, row, progressCols, row)
+		_, err := s.api.Spreadsheets.Values.Update(s.spreadsheetID, rng, values).
+			ValueInputOption("RAW").Context(ctx).Do()
+		return err
+	}
+
+	resp, err := s.api.Spreadsheets.Values.Append(s.spreadsheetID, progressTab+"!A:"+progressCols, values).
+		ValueInputOption("RAW").InsertDataOption("INSERT_ROWS").Context(ctx).Do()
+	if err != nil {
+		return err
+	}
+	row, err := firstRow(resp.Updates.UpdatedRange)
+	if err != nil {
+		return err
+	}
+	s.progressRows[p.WordID] = row
+	return nil
+}
+
+func (s *Store) LoadSettings(ctx context.Context) (map[string]string, error) {
+	rows, err := s.readRows(ctx, settingsTab+"!A2:B")
+	if err != nil {
+		return nil, err
+	}
+	kv := map[string]string{}
+	for _, row := range rows {
+		if k := cell(row, 0); k != "" {
+			kv[k] = cell(row, 1)
+		}
+	}
+	return kv, nil
+}
+
+// SaveSettings replaces the settings tab with kv, sorted by key.
+func (s *Store) SaveSettings(ctx context.Context, kv map[string]string) error {
+	rows := [][]any{}
+	for _, k := range slices.Sorted(maps.Keys(kv)) {
+		rows = append(rows, []any{k, kv[k]})
+	}
+	_, err := s.api.Spreadsheets.Values.BatchClear(s.spreadsheetID, &sheets.BatchClearValuesRequest{
+		Ranges: []string{settingsTab + "!A2:B"},
+	}).Context(ctx).Do()
+	if err != nil {
+		return fmt.Errorf("clear settings: %w", err)
+	}
+	_, err = s.api.Spreadsheets.Values.Update(s.spreadsheetID, settingsTab+"!A2:B", &sheets.ValueRange{Values: rows}).
+		ValueInputOption("RAW").Context(ctx).Do()
+	return err
+}
+
+// Setup creates the tabs and their header rows if missing.
+func (s *Store) Setup(ctx context.Context) error {
+	ss, err := s.api.Spreadsheets.Get(s.spreadsheetID).Fields("sheets.properties.title").Context(ctx).Do()
+	if err != nil {
+		return fmt.Errorf("open spreadsheet: %w", err)
+	}
+	have := map[string]bool{}
+	for _, sh := range ss.Sheets {
+		have[sh.Properties.Title] = true
+	}
+	var add []*sheets.Request
+	for _, tab := range []string{wordsTab, progressTab, settingsTab} {
+		if !have[tab] {
+			add = append(add, &sheets.Request{AddSheet: &sheets.AddSheetRequest{
+				Properties: &sheets.SheetProperties{Title: tab},
+			}})
+		}
+	}
+	if len(add) > 0 {
+		_, err := s.api.Spreadsheets.BatchUpdate(s.spreadsheetID, &sheets.BatchUpdateSpreadsheetRequest{Requests: add}).
+			Context(ctx).Do()
+		if err != nil {
+			return fmt.Errorf("create tabs: %w", err)
+		}
+	}
+	_, err = s.api.Spreadsheets.Values.BatchUpdate(s.spreadsheetID, &sheets.BatchUpdateValuesRequest{
+		ValueInputOption: "RAW",
+		Data: []*sheets.ValueRange{
+			{Range: wordsTab + "!A1:H1", Values: [][]any{wordsHeader}},
+			{Range: progressTab + "!A1:" + progressCols + "1", Values: [][]any{progressHeader}},
+			{Range: settingsTab + "!A1:B1", Values: [][]any{settingsHeader}},
+		},
+	}).Context(ctx).Do()
+	if err != nil {
+		return fmt.Errorf("write headers: %w", err)
+	}
+	return nil
+}
+
+// ReplaceWords clears the words tab and writes the given list.
+func (s *Store) ReplaceWords(ctx context.Context, words []vocab.Word) error {
+	_, err := s.api.Spreadsheets.Values.Clear(s.spreadsheetID, wordsTab+"!"+wordsCols, &sheets.ClearValuesRequest{}).
+		Context(ctx).Do()
+	if err != nil {
+		return fmt.Errorf("clear words: %w", err)
+	}
+	rows := make([][]any, len(words))
+	for i, w := range words {
+		rows[i] = []any{w.ID, w.Word, w.POS, w.Level, w.MeaningTH, w.Example, w.AudioUK, w.AudioUS}
+	}
+	// Append (not Update) so the sheet grows past its default 1000 rows.
+	_, err = s.api.Spreadsheets.Values.Append(s.spreadsheetID, wordsTab+"!A1:H", &sheets.ValueRange{Values: rows}).
+		ValueInputOption("RAW").InsertDataOption("INSERT_ROWS").Context(ctx).Do()
+	if err != nil {
+		return fmt.Errorf("write words: %w", err)
+	}
+	return nil
+}
+
+// ClearProgress deletes every progress row, keeping the header.
+func (s *Store) ClearProgress(ctx context.Context) error {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	_, err := s.api.Spreadsheets.Values.Clear(s.spreadsheetID, progressTab+"!A2:"+progressCols, &sheets.ClearValuesRequest{}).
+		Context(ctx).Do()
+	if err != nil {
+		return fmt.Errorf("clear progress: %w", err)
+	}
+	s.progressRows = map[int]int{}
+	return nil
+}
+
+func (s *Store) readRows(ctx context.Context, rng string) ([][]any, error) {
+	resp, err := s.api.Spreadsheets.Values.Get(s.spreadsheetID, rng).Context(ctx).Do()
+	if err != nil {
+		return nil, fmt.Errorf("read %s: %w", rng, err)
+	}
+	return resp.Values, nil
+}
+
+func cell(row []any, i int) string {
+	if i >= len(row) {
+		return ""
+	}
+	return strings.TrimSpace(fmt.Sprint(row[i]))
+}
+
+func parseProgress(row []any) (vocab.Progress, error) {
+	var errs []error
+	atoi := func(i int) int {
+		s := cell(row, i)
+		if s == "" {
+			return 0
+		}
+		n, err := strconv.Atoi(s)
+		if err != nil {
+			errs = append(errs, fmt.Errorf("column %s: %q is not a number", progressHeader[i], s))
+		}
+		return n
+	}
+	boolean := func(i int) bool { return strings.EqualFold(cell(row, i), "true") }
+
+	p := vocab.Progress{
+		WordID:       atoi(0),
+		Interval:     atoi(2),
+		Repetitions:  atoi(3),
+		DueDate:      cell(row, 4),
+		LastReviewed: cell(row, 5),
+		ReviewCount:  atoi(6),
+		Lapses:       atoi(7),
+		Favorite:     boolean(8),
+		PassCount:    atoi(9),
+		FailCount:    atoi(10),
+		PassDays:     atoi(11),
+		LastPassDate: cell(row, 12),
+		Recent:       cell(row, 13),
+		Missed:       boolean(14),
+		LearnedDate:  cell(row, 15),
+		RoundDate:    cell(row, 16),
+		RoundsToday:  atoi(17),
+	}
+	if s := cell(row, 1); s != "" {
+		ease, err := strconv.ParseFloat(s, 64)
+		if err != nil {
+			errs = append(errs, fmt.Errorf("column ease: %q is not a number", s))
+		}
+		p.Ease = ease
+	}
+	return p, errors.Join(errs...)
+}
+
+func progressRow(p vocab.Progress) []any {
+	return []any{p.WordID, p.Ease, p.Interval, p.Repetitions, p.DueDate, p.LastReviewed, p.ReviewCount, p.Lapses,
+		p.Favorite, p.PassCount, p.FailCount, p.PassDays, p.LastPassDate, p.Recent, p.Missed,
+		p.LearnedDate, p.RoundDate, p.RoundsToday}
+}
+
+var rangeRow = regexp.MustCompile(`![A-Z]+(\d+)`)
+
+// firstRow extracts the first row number from an A1 range like "progress!A5:R5".
+func firstRow(a1 string) (int, error) {
+	m := rangeRow.FindStringSubmatch(a1)
+	if m == nil {
+		return 0, fmt.Errorf("unexpected range %q from append", a1)
+	}
+	return strconv.Atoi(m[1])
+}

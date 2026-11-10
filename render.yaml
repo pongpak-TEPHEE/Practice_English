@@ -1,0 +1,24 @@
+# Render Blueprint: Dashboard → New → Blueprint → pick this repo.
+services:
+  - type: web
+    name: toeic-vocab-api
+    runtime: go
+    plan: free
+    region: singapore
+    rootDir: backend
+    buildCommand: go build -trimpath -o bin/server ./cmd/server
+    startCommand: ./bin/server
+    healthCheckPath: /healthz
+    envVars:
+      - key: STORE
+        value: sheets
+      - key: APP_TIMEZONE
+        value: Asia/Bangkok
+      - key: API_TOKEN
+        generateValue: true
+      - key: GOOGLE_SHEET_ID
+        sync: false
+      - key: GOOGLE_CREDENTIALS_JSON
+        sync: false
+      - key: ALLOWED_ORIGINS
+        sync: false
