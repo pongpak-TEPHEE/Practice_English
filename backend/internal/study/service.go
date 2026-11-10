@@ -23,6 +23,8 @@ var (
 	ErrWordNotFound   = errors.New("word not found")
 	ErrLessonNotFound = errors.New("lesson not found")
 	ErrSetNotFound    = errors.New("reading set not found")
+	// ErrInvalid wraps a request the service refuses to save.
+	ErrInvalid = errors.New("invalid")
 	// ErrLogNotSaved means the answer counted but its history row could not be written.
 	ErrLogNotSaved = errors.New("answer saved but history not recorded")
 )
@@ -39,6 +41,8 @@ type Store interface {
 	AppendLog(ctx context.Context, es ...vocab.LogEntry) error
 	LoadGrammar(ctx context.Context) (grammar.Tables, error)
 	LoadReading(ctx context.Context) (reading.Tables, error)
+	LoadMockResults(ctx context.Context) ([]reading.MockResult, error)
+	AppendMockResult(ctx context.Context, r reading.MockResult) error
 }
 
 // WordView is a word together with the learner's progress on it.
@@ -67,6 +71,7 @@ type Service struct {
 
 	reading         reading.Content
 	readingProblems []string
+	mocks           []reading.MockResult
 }
 
 func NewService(ctx context.Context, store Store, loc *time.Location) (*Service, error) {
@@ -106,6 +111,10 @@ func (s *Service) Reload(ctx context.Context) error {
 		return fmt.Errorf("load reading: %w", err)
 	}
 	readingContent, readingProblems := reading.Assemble(readingTables)
+	mocks, err := s.store.LoadMockResults(ctx)
+	if err != nil {
+		return fmt.Errorf("load mock results: %w", err)
+	}
 
 	byID := make(map[int]vocab.Word, len(words))
 	for _, w := range words {
@@ -119,7 +128,7 @@ func (s *Service) Reload(ctx context.Context) error {
 	s.mu.Lock()
 	s.words, s.wordByID, s.progress, s.settings, s.log = words, byID, pm, settingsFromMap(kv), log
 	s.lessons, s.grammarProblems = lessons, problems
-	s.reading, s.readingProblems = readingContent, readingProblems
+	s.reading, s.readingProblems, s.mocks = readingContent, readingProblems, mocks
 	s.mu.Unlock()
 	return nil
 }
@@ -200,6 +209,50 @@ func (s *Service) ReadingSet(id string) (reading.Set, error) {
 		}
 	}
 	return reading.Set{}, ErrSetNotFound
+}
+
+// ReadingPart returns every set of a part with its content, in sheet order (for mock exams).
+func (s *Service) ReadingPart(part int) []reading.Set {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	out := []reading.Set{}
+	for _, set := range s.reading.Sets {
+		if set.Part == part {
+			out = append(out, set)
+		}
+	}
+	return out
+}
+
+// MockResults returns the results of one part's mock exams, newest first.
+func (s *Service) MockResults(part int) []reading.MockResult {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	out := []reading.MockResult{}
+	for i := len(s.mocks) - 1; i >= 0; i-- {
+		if s.mocks[i].Part == part {
+			out = append(out, s.mocks[i])
+		}
+	}
+	return out
+}
+
+// AddMockResult stamps a result with the local date and time and saves it.
+func (s *Service) AddMockResult(ctx context.Context, r reading.MockResult) (reading.MockResult, error) {
+	now := s.now().In(s.loc)
+	r.Date, r.Time = vocab.FormatDate(now), now.Format("15:04")
+	if err := r.Validate(); err != nil {
+		return r, fmt.Errorf("%w: %w", ErrInvalid, err)
+	}
+	s.writeMu.Lock()
+	defer s.writeMu.Unlock()
+	if err := s.store.AppendMockResult(ctx, r); err != nil {
+		return r, fmt.Errorf("save mock result: %w", err)
+	}
+	s.mu.Lock()
+	s.mocks = append(s.mocks, r)
+	s.mu.Unlock()
+	return r, nil
 }
 
 // ReadingProblems lists reading rows that were left out at the last load. Never nil.

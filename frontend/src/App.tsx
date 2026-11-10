@@ -9,6 +9,7 @@ import { LearnPage } from "./pages/LearnPage";
 import { VocabPage } from "./pages/VocabPage";
 import { GrammarPage } from "./pages/GrammarPage";
 import { LessonPage } from "./pages/LessonPage";
+import { MockPage } from "./pages/MockPage";
 import { ReadingPage } from "./pages/ReadingPage";
 import { ReadingSetPage } from "./pages/ReadingSetPage";
 import { ReviewPage } from "./pages/ReviewPage";
@@ -37,6 +38,7 @@ const PAGE_IDS = [
   "lesson",
   "reading",
   "readingSet",
+  "mock",
   "vocab",
   "learn",
   "review",
@@ -52,6 +54,7 @@ const TAB_OF: Record<PageId, string> = {
   lesson: "grammar",
   reading: "reading",
   readingSet: "reading",
+  mock: "reading",
   vocab: "vocab",
   learn: "vocab",
   review: "vocab",
@@ -198,6 +201,7 @@ export function App() {
         {page === "lesson" && <LessonPage id={lessonId} accent={accent} onError={handleError} />}
         {page === "reading" && <ReadingPage onError={handleError} />}
         {page === "readingSet" && <ReadingSetPage id={lessonId} onError={handleError} />}
+        {page === "mock" && <MockPage onError={handleError} />}
         {page === "vocab" && <VocabPage key={level} level={level} onLevel={changeLevel} onError={handleError} />}
         {page === "learn" && <LearnPage key={level} onStart={start} onError={handleError} />}
         {page === "review" && <ReviewPage level={level} onStart={start} onError={handleError} />}

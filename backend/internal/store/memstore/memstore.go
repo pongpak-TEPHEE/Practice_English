@@ -22,6 +22,7 @@ type Store struct {
 	log      []vocab.LogEntry
 	grammar  grammar.Tables
 	reading  reading.Tables
+	mocks    []reading.MockResult
 }
 
 func New(words []vocab.Word) *Store {
@@ -101,4 +102,17 @@ func (s *Store) LoadReading(context.Context) (reading.Tables, error) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 	return maps.Clone(s.reading), nil
+}
+
+func (s *Store) LoadMockResults(context.Context) ([]reading.MockResult, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	return slices.Clone(s.mocks), nil
+}
+
+func (s *Store) AppendMockResult(_ context.Context, r reading.MockResult) error {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	s.mocks = append(s.mocks, r)
+	return nil
 }

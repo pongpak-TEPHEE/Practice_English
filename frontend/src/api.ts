@@ -1,5 +1,5 @@
 import type { Lesson, LessonSummary } from "./grammar/types";
-import type { ReadingOverview, ReadingSet } from "./reading/types";
+import type { MockResult, ReadingOverview, ReadingSet } from "./reading/types";
 import type { Achievements, Day, Mode, Result, Settings, Stats, Today, Word } from "./types";
 
 // Empty in development (Vite proxies /api); set VITE_API_URL to the Render URL for production.
@@ -72,6 +72,9 @@ export const api = {
   grammarLessons: () => request<LessonSummary[]>("GET", "/api/grammar"),
   grammarLesson: (id: string) => request<Lesson>("GET", `/api/grammar/${encodeURIComponent(id)}`),
   reading: () => request<ReadingOverview>("GET", "/api/reading"),
+  readingSets: (part: number) => request<ReadingSet[]>("GET", `/api/reading/sets?part=${part}`),
+  mockResults: (part: number) => request<MockResult[]>("GET", `/api/mock-results?part=${part}`),
+  saveMockResult: (r: MockResult) => request<MockResult>("POST", "/api/mock-results", r),
   readingSet: (id: string) => request<ReadingSet>("GET", `/api/reading/${encodeURIComponent(id)}`),
   // Re-reads the Google Sheet after it was edited by hand.
   reload: () => request<ReloadReport>("POST", "/api/admin/reload"),

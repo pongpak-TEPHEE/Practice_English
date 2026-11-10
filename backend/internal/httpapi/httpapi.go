@@ -12,6 +12,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/reading"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/study"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/vocab"
 )
@@ -47,7 +48,10 @@ func NewHandler(svc *study.Service, opts Options) http.Handler {
 	api.HandleFunc("GET /api/grammar", h.grammarList)
 	api.HandleFunc("GET /api/grammar/{id}", h.grammarLesson)
 	api.HandleFunc("GET /api/reading", h.readingOverview)
+	api.HandleFunc("GET /api/reading/sets", h.readingSets)
 	api.HandleFunc("GET /api/reading/{id}", h.readingSet)
+	api.HandleFunc("GET /api/mock-results", h.mockResults)
+	api.HandleFunc("POST /api/mock-results", h.addMockResult)
 	api.HandleFunc("GET /api/settings", h.getSettings)
 	api.HandleFunc("PUT /api/settings", h.putSettings)
 	api.HandleFunc("POST /api/admin/reload", h.reload)
@@ -268,6 +272,45 @@ func (h *handler) readingSet(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	writeJSON(w, http.StatusOK, set)
+}
+
+func partParam(w http.ResponseWriter, r *http.Request) (int, bool) {
+	part, err := strconv.Atoi(r.URL.Query().Get("part"))
+	if err != nil || (part != 6 && part != 7) {
+		writeError(w, http.StatusBadRequest, "part must be 6 or 7")
+		return 0, false
+	}
+	return part, true
+}
+
+// readingSets returns every set of a part with its content, for a mock exam.
+func (h *handler) readingSets(w http.ResponseWriter, r *http.Request) {
+	if part, ok := partParam(w, r); ok {
+		writeJSON(w, http.StatusOK, h.svc.ReadingPart(part))
+	}
+}
+
+func (h *handler) mockResults(w http.ResponseWriter, r *http.Request) {
+	if part, ok := partParam(w, r); ok {
+		writeJSON(w, http.StatusOK, h.svc.MockResults(part))
+	}
+}
+
+func (h *handler) addMockResult(w http.ResponseWriter, r *http.Request) {
+	var res reading.MockResult
+	if !decode(w, r, &res) {
+		return
+	}
+	saved, err := h.svc.AddMockResult(r.Context(), res)
+	if errors.Is(err, study.ErrInvalid) {
+		writeError(w, http.StatusBadRequest, err.Error())
+		return
+	}
+	if err != nil {
+		h.fail(w, err)
+		return
+	}
+	writeJSON(w, http.StatusCreated, saved)
 }
 
 // reload re-reads the sheet after it was edited by hand and says what was loaded.

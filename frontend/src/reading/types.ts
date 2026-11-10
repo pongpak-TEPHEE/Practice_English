@@ -82,3 +82,21 @@ export const TYPE_LABEL: Record<string, string> = {
 export function targetSeconds(part: number, questions: number): number {
   return part === 6 ? 120 : questions * 60;
 }
+
+export interface Score {
+  correct: number;
+  total: number;
+}
+
+// One timed mock exam; date and time are set by the server.
+export interface MockResult {
+  date: string;
+  time: string;
+  part: number;
+  correct: number;
+  total: number;
+  seconds: number;
+  limit: number;
+  byType: Record<string, Score>;
+  byFormat: Record<string, Score>;
+}

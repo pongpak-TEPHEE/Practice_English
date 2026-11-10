@@ -37,6 +37,7 @@ const (
 	progressTab = "progress"
 	settingsTab = "settings"
 	logTab      = "log"
+	mockTab     = "mock_results"
 
 	wordsCols    = "A2:H"
 	progressCols = "R" // last column of the progress tab
@@ -251,6 +252,39 @@ func (s *Store) AppendLog(ctx context.Context, es ...vocab.LogEntry) error {
 	return err
 }
 
+// LoadMockResults reads every mock exam result; rows that can't be read are skipped.
+func (s *Store) LoadMockResults(ctx context.Context) ([]reading.MockResult, error) {
+	rows, err := s.readRows(ctx, mockTab+"!A2:I")
+	if err != nil {
+		return nil, err
+	}
+	out := []reading.MockResult{}
+	for _, row := range rows {
+		cells := make([]string, len(row))
+		for i := range row {
+			cells[i] = cell(row, i)
+		}
+		if r, err := reading.ParseMockRow(cells); err == nil {
+			out = append(out, r)
+		}
+	}
+	return out, nil
+}
+
+func (s *Store) AppendMockResult(ctx context.Context, r reading.MockResult) error {
+	_, err := s.api.Spreadsheets.Values.Append(s.spreadsheetID, mockTab+"!A:I", &sheets.ValueRange{Values: [][]any{reading.MockRow(r)}}).
+		ValueInputOption("RAW").InsertDataOption("INSERT_ROWS").Context(ctx).Do()
+	return err
+}
+
+func toAny(ss []string) []any {
+	out := make([]any, len(ss))
+	for i, v := range ss {
+		out[i] = v
+	}
+	return out
+}
+
 // Setup creates the tabs and their header rows if missing.
 func (s *Store) Setup(ctx context.Context) error {
 	ss, err := s.api.Spreadsheets.Get(s.spreadsheetID).Fields("sheets.properties.title").Context(ctx).Do()
@@ -262,7 +296,7 @@ func (s *Store) Setup(ctx context.Context) error {
 		have[sh.Properties.Title] = true
 	}
 	var add []*sheets.Request
-	tabs := []string{wordsTab, progressTab, settingsTab, logTab}
+	tabs := []string{wordsTab, progressTab, settingsTab, logTab, mockTab}
 	for _, t := range contentTabs() {
 		tabs = append(tabs, t.name)
 	}
@@ -287,6 +321,7 @@ func (s *Store) Setup(ctx context.Context) error {
 			{Range: progressTab + "!A1:" + progressCols + "1", Values: [][]any{progressHeader}},
 			{Range: settingsTab + "!A1:B1", Values: [][]any{settingsHeader}},
 			{Range: logTab + "!A1:E1", Values: [][]any{logHeader}},
+			{Range: mockTab + "!A1:I1", Values: [][]any{toAny(reading.MockHeader)}},
 		}, contentHeaders()...),
 	}).Context(ctx).Do()
 	if err != nil {

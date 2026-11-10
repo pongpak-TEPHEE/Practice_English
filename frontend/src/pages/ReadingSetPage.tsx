@@ -1,7 +1,8 @@
-import { Fragment, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { api, ApiError } from "../api";
-import { KIND_LABEL, TYPE_LABEL, targetSeconds } from "../reading/types";
-import type { Passage, Question, ReadingSet } from "../reading/types";
+import { PassageView } from "../components/PassageView";
+import { TYPE_LABEL, targetSeconds } from "../reading/types";
+import type { Question, ReadingSet } from "../reading/types";
 import { shuffle } from "../shuffle";
 
 const LETTERS = ["A", "B", "C", "D"];
@@ -116,49 +117,6 @@ function Practice({ set }: { set: ReadingSet }) {
         </div>
       </div>
     </div>
-  );
-}
-
-function PassageView({
-  passage,
-  part,
-  picked,
-  questions,
-}: {
-  passage: Passage;
-  part: number;
-  picked: (string | null)[];
-  questions: Question[];
-}) {
-  return (
-    <article className={`passage passage-${passage.kind}`}>
-      <p className="passage-kind">{KIND_LABEL[passage.kind] ?? passage.kind}</p>
-      {passage.heading && <p className="passage-heading">{passage.heading}</p>}
-      <div className="passage-body" lang="en">
-        {passage.body.split(/(\{\{\d+\}\}|\[\d\])/).map((piece, i) => {
-          const blank = /^\{\{(\d+)\}\}$/.exec(piece);
-          if (blank && part === 6) {
-            const n = Number(blank[1]);
-            const answer = picked[n - 1];
-            const state = answer === null ? "" : answer === questions[n - 1]?.answer ? "is-pass" : "is-fail";
-            return (
-              <span key={i} className={`gap ${state}`}>
-                <span className="gap-number">{n}</span>
-                {answer ?? " ".repeat(8)}
-              </span>
-            );
-          }
-          if (/^\[\d\]$/.test(piece)) {
-            return (
-              <span key={i} className="position">
-                {piece}
-              </span>
-            );
-          }
-          return <Fragment key={i}>{piece}</Fragment>;
-        })}
-      </div>
-    </article>
   );
 }
 

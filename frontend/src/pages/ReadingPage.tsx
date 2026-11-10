@@ -41,6 +41,15 @@ export function ReadingPage({ onError }: { onError: (e: Error) => void }) {
         <p className="loading">กำลังโหลด</p>
       ) : (
         <>
+          {part === 7 && (
+            <a href="#/mock" className="mock-entry">
+              <span className="activity-title">ข้อสอบจำลอง Part 7</span>
+              <span className="activity-note">
+                ทำ {sets.reduce((n, s) => n + s.questions, 0)} ข้อต่อกันใน 55 นาทีเหมือนวันสอบ ไม่มีเฉลยระหว่างทำ
+                แล้วดูผลแยกตามรูปแบบเอกสารและประเภทคำถาม
+              </span>
+            </a>
+          )}
           {guide && <Guide guide={guide} />}
           <section>
             <h3>ชุดฝึก</h3>

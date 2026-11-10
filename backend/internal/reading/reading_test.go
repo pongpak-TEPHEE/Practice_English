@@ -2,6 +2,7 @@ package reading
 
 import (
 	"encoding/json"
+	"fmt"
 	"strings"
 	"testing"
 )
@@ -65,5 +66,28 @@ func TestAssembleReportsProblems(t *testing.T) {
 		if !strings.Contains(all, want) {
 			t.Errorf("problems should mention %s:\n%s", want, all)
 		}
+	}
+}
+
+func TestMockRowRoundTrip(t *testing.T) {
+	r := MockResult{Date: "2026-11-10", Time: "15:04", Part: 7, Correct: 3, Total: 4, Seconds: 200, Limit: 240,
+		ByType:   map[string]Score{"detail": {2, 3}, "not": {1, 1}},
+		ByFormat: map[string]Score{"single": {3, 4}}}
+	row := MockRow(r)
+	cells := make([]string, len(row))
+	for i, v := range row {
+		cells[i] = fmt.Sprint(v)
+	}
+	got, err := ParseMockRow(cells)
+	if err != nil {
+		t.Fatal(err)
+	}
+	a, _ := json.Marshal(r)
+	b, _ := json.Marshal(got)
+	if string(a) != string(b) {
+		t.Errorf("got %s, want %s", b, a)
+	}
+	if err := r.Validate(); err != nil {
+		t.Errorf("valid result rejected: %v", err)
 	}
 }

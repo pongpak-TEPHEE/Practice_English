@@ -287,6 +287,39 @@ func TestReading(t *testing.T) {
 	}
 }
 
+func TestMockResults(t *testing.T) {
+	srv := newServer(t)
+	var sets []reading.Set
+	if code := call(t, srv, "GET", "/api/reading/sets?part=7", "", &sets); code != 200 || len(sets) != 1 || len(sets[0].Questions) != 1 {
+		t.Fatalf("part 7 sets: %d %+v", code, sets)
+	}
+	if code := call(t, srv, "GET", "/api/reading/sets?part=5", "", nil); code != 400 {
+		t.Errorf("part 5: status %d, want 400", code)
+	}
+
+	good := `{"part":7,"correct":40,"total":54,"seconds":3000,"limit":3300,` +
+		`"byType":{"detail":{"correct":25,"total":30},"cross":{"correct":15,"total":24}},` +
+		`"byFormat":{"single":{"correct":22,"total":29},"multi":{"correct":18,"total":25}}}`
+	var saved reading.MockResult
+	if code := call(t, srv, "POST", "/api/mock-results", good, &saved); code != 201 || saved.Date == "" || saved.Correct != 40 {
+		t.Fatalf("save: %d %+v", code, saved)
+	}
+	for name, body := range map[string]string{
+		"correct > total": `{"part":7,"correct":60,"total":54,"seconds":10,"limit":3300,"byType":{},"byFormat":{}}`,
+		"breakdown off":   `{"part":7,"correct":1,"total":2,"seconds":10,"limit":3300,"byType":{"detail":{"correct":1,"total":1}},"byFormat":{"single":{"correct":1,"total":2}}}`,
+		"wrong part":      `{"part":3,"correct":1,"total":1,"seconds":10,"limit":3300,"byType":{"detail":{"correct":1,"total":1}},"byFormat":{"single":{"correct":1,"total":1}}}`,
+	} {
+		if code := call(t, srv, "POST", "/api/mock-results", body, nil); code != 400 {
+			t.Errorf("%s: status %d, want 400", name, code)
+		}
+	}
+	var results []reading.MockResult
+	call(t, srv, "GET", "/api/mock-results?part=7", "", &results)
+	if len(results) != 1 || results[0].ByFormat["multi"].Total != 25 {
+		t.Errorf("results = %+v", results)
+	}
+}
+
 func itoa(n int) string {
 	b, _ := json.Marshal(n)
 	return string(b)
