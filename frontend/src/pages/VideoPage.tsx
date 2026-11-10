@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { api, ApiError } from "../api";
-import { MODE_LABEL, bare, clock, difficultyLabel, key, percent, words } from "../video/types";
+import { MODE_LABEL, bare, clock, difficultyLabel, key, percent, typedParts, words } from "../video/types";
 import type { Mode, Video, VideoResult } from "../video/types";
 import { PLAYING, loadYouTube, playerErrorMessage } from "../video/youtube";
 import type { YTPlayer } from "../video/youtube";
@@ -327,7 +327,7 @@ function Practice({
 
   const onInput = (value: string) => {
     const target = keys[curRef.current];
-    const parts = value.replace(/^\s+/, "").split(/\s+/);
+    const parts = typedParts(value);
     const w = work.current;
     for (let j = 0; j < Math.min(parts.length - 1, target.length); j++) {
       if (w.firstTry[j] === undefined) w.firstTry[j] = !w.revealed && !w.hinted.has(j) && key(parts[j]) === target[j];
@@ -340,7 +340,7 @@ function Practice({
   // Fill in the first word that is missing or wrong.
   const hint = () => {
     const i = curRef.current;
-    const parts = input.trim().split(/\s+/).filter(Boolean);
+    const parts = typedParts(input.trim()).filter(Boolean);
     let j = 0;
     while (j < keys[i].length && j < parts.length && key(parts[j]) === keys[i][j]) j++;
     if (j >= keys[i].length) return;
@@ -588,7 +588,7 @@ function Slots({
   input: string;
   showText: boolean;
 }) {
-  const parts = input.replace(/^\s+/, "").split(/\s+/);
+  const parts = typedParts(input);
   const current = parts.length - 1;
   return (
     <p className="slots" lang="en" aria-hidden="true">

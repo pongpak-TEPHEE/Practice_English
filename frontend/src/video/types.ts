@@ -58,7 +58,20 @@ export function difficultyLabel(d: string): string {
 export function words(text: string): string[] {
   let main = text.replace(/\([^)]*\)|\[[^\]]*\]/g, " ").trim();
   if (key(main) === "") main = text.replace(/[()[\]]/g, " ");
-  return main.split(/\s+/).filter((w) => key(w) !== "");
+  return main
+    .split(/\s+/)
+    .flatMap((w) => w.split(HYPHEN))
+    .filter((w) => key(w) !== "");
+}
+
+// Hyphenated words are typed as separate words ("part-time" -> "part-", "time"),
+// so "part-time" and "part time" both match. A dash ("--") is not split.
+const HYPHEN = /(?<=-)(?=[^-])/;
+
+// What has been typed, split the same way as the subtitle. The last part is
+// the word still being typed; the ones before it are finished.
+export function typedParts(value: string): string[] {
+  return value.replace(/^\s+/, "").split(/\s+|(?<=-)(?=[^-\s])/);
 }
 
 // How typed words are compared: lower case, letters and digits only, so

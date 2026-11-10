@@ -100,7 +100,8 @@ func ParseID(s string) (string, bool) {
 	return id, idPattern.MatchString(id)
 }
 
-// Words splits a subtitle line into the words to type. Parts in brackets are
+// Words splits a subtitle line into the words to type, with hyphenated words
+// split at the hyphen. Parts in brackets are
 // labels or backing vocals, e.g. "(Ariana)" or "(side to side)", and are left
 // out unless the whole line is in brackets.
 func Words(text string) []string {
@@ -109,12 +110,29 @@ func Words(text string) []string {
 		main = strings.NewReplacer("(", " ", ")", " ", "[", " ", "]", " ").Replace(text)
 	}
 	var out []string
-	for _, w := range strings.Fields(main) {
-		if Key(w) != "" {
-			out = append(out, w)
+	for _, field := range strings.Fields(main) {
+		for _, w := range splitHyphens(field) {
+			if Key(w) != "" {
+				out = append(out, w)
+			}
 		}
 	}
 	return out
+}
+
+// splitHyphens splits after each hyphen that starts a new part, so
+// "part-time" is typed as two words, "part" and "time", and matches either
+// spelling. A dash ("--") is not split.
+func splitHyphens(w string) []string {
+	var parts []string
+	start := 0
+	for i := 0; i+1 < len(w); i++ {
+		if w[i] == '-' && w[i+1] != '-' {
+			parts = append(parts, w[start:i+1])
+			start = i + 1
+		}
+	}
+	return append(parts, w[start:])
 }
 
 var bracketed = regexp.MustCompile(`\([^)]*\)|\[[^\]]*\]`)

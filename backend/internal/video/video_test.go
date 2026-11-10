@@ -34,7 +34,8 @@ func TestWords(t *testing.T) {
 		"And boy, got me walkin' side to side (side to side)": {"And", "boy,", "got", "me", "walkin'", "side", "to", "side"},
 		"('bout nothin')":                       {"'bout", "nothin'"},
 		"Can't hear them no, cause i...":        {"Can't", "hear", "them", "no,", "cause", "i..."},
-		"All these bitches, flows - my mini-me": {"All", "these", "bitches,", "flows", "my", "mini-me"},
+		"All these bitches, flows - my mini-me": {"All", "these", "bitches,", "flows", "my", "mini-", "me"},
+		"a part-time job -- level-five":         {"a", "part-", "time", "job", "level-", "five"},
 		"  ":                                    nil,
 	}
 	for in, want := range cases {
