@@ -1981,3 +1981,20 @@ kbd {
     grid-template-columns: 1fr 1fr;
   }
 }
+
+/* ---------- TOEIC level ---------- */
+
+.level-note {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.credit {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+.credit a {
+  color: inherit;
+}

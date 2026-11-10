@@ -13,7 +13,7 @@ import (
 type Config struct {
 	Port           string
 	Store          string // "memory" or "sheets"
-	WordsCSV       string // memory store only: optional word list to load
+	WordsCSV       string // memory store only: optional comma-separated word list files to load
 	SheetID        string
 	Credentials    []byte
 	APIToken       string

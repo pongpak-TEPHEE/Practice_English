@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"os"
 	"strconv"
 	"strings"
 	"time"
@@ -56,8 +57,9 @@ const DateLayout = "2006-01-02"
 
 func FormatDate(t time.Time) string { return t.Format(DateLayout) }
 
-// Levels are the CEFR levels used by the Oxford 3000, easiest first.
-var Levels = []string{"A1", "A2", "B1", "B2"}
+// Levels are the CEFR levels of the Oxford 3000, easiest first, followed by
+// TOEIC: words from the TOEIC Service List that the Oxford 3000 does not have.
+var Levels = []string{"A1", "A2", "B1", "B2", "TOEIC"}
 
 // LevelRank orders levels for "learn easier words first"; unknown levels sort last.
 func LevelRank(level string) int {
@@ -129,6 +131,43 @@ func ReadCSV(r io.Reader) ([]Word, error) {
 		words = append(words, w)
 	}
 	return words, nil
+}
+
+// ReadCSVFiles reads several word lists into one, rejecting an id used twice
+// across files (progress is keyed by id, so ids must be unique).
+func ReadCSVFiles(paths ...string) ([]Word, error) {
+	var all []Word
+	owner := map[int]string{}
+	for _, path := range paths {
+		f, err := os.Open(path)
+		if err != nil {
+			return nil, err
+		}
+		words, err := ReadCSV(f)
+		f.Close()
+		if err != nil {
+			return nil, fmt.Errorf("%s: %w", path, err)
+		}
+		for _, w := range words {
+			if prev, ok := owner[w.ID]; ok {
+				return nil, fmt.Errorf("id %d is used in both %s and %s", w.ID, prev, path)
+			}
+			owner[w.ID] = path
+		}
+		all = append(all, words...)
+	}
+	return all, nil
+}
+
+// SplitPaths turns a comma-separated list of file paths into a slice.
+func SplitPaths(list string) []string {
+	var out []string
+	for _, p := range strings.Split(list, ",") {
+		if p = strings.TrimSpace(p); p != "" {
+			out = append(out, p)
+		}
+	}
+	return out
 }
 
 // SampleWords lets the server run locally before the real list is loaded.

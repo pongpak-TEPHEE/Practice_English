@@ -1,5 +1,7 @@
-export type Level = "A1" | "A2" | "B1" | "B2";
-export const LEVELS: Level[] = ["A1", "A2", "B1", "B2"];
+// A1–B2 are the Oxford 3000's CEFR levels; TOEIC is business vocabulary from the
+// TOEIC Service List that the Oxford 3000 does not include.
+export type Level = "A1" | "A2" | "B1" | "B2" | "TOEIC";
+export const LEVELS: Level[] = ["A1", "A2", "B1", "B2", "TOEIC"];
 
 export type Status = "new" | "learning" | "familiar" | "known" | "mastered";
 export type Result = "pass" | "fail";

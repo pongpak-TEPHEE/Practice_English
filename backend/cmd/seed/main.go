@@ -1,7 +1,8 @@
 // Command seed prepares the Google Sheet: it creates the words/progress tabs and
 // loads a word list from CSV into the words tab.
 //
-//	GOOGLE_SHEET_ID=... GOOGLE_CREDENTIALS_FILE=key.json go run ./cmd/seed -csv data/oxford3000.csv
+//	GOOGLE_SHEET_ID=... GOOGLE_CREDENTIALS_FILE=key.json go run ./cmd/seed \
+//	    -csv data/oxford3000.csv,data/toeic_service_list.csv
 package main
 
 import (
@@ -17,7 +18,7 @@ import (
 )
 
 func main() {
-	csvPath := flag.String("csv", "", "word list CSV (header: id,word,pos,level,meaning_th,example)")
+	csvPath := flag.String("csv", "", "comma-separated word list CSVs (header: id,word,pos,level,meaning_th,example)")
 	force := flag.Bool("force", false, "replace the words tab even if it already has words")
 	resetProgress := flag.Bool("reset-progress", false, "delete all learning progress (start over)")
 	flag.Parse()
@@ -55,12 +56,7 @@ func run(csvPath string, force, resetProgress bool) error {
 		return nil
 	}
 
-	f, err := os.Open(csvPath)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-	words, err := vocab.ReadCSV(f)
+	words, err := vocab.ReadCSVFiles(vocab.SplitPaths(csvPath)...)
 	if err != nil {
 		return err
 	}

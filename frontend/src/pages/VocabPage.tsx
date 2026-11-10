@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { api } from "../api";
+import { ToeicCredit } from "../components/ToeicCredit";
 import { LEVELS } from "../types";
 import type { Achievements, Level, Stats } from "../types";
 
@@ -58,7 +59,7 @@ export function VocabPage({ level, onLevel, onError }: Props) {
       </a>
       <header className="home-head">
         <h1>ท่องศัพท์</h1>
-        <p className="date">Oxford 3000 สำหรับเตรียมสอบ TOEIC</p>
+        <p className="date">Oxford 3000 ระดับ A1–B2 และคำศัพท์ธุรกิจที่เจอบ่อยในข้อสอบ TOEIC</p>
       </header>
 
       <section className="home-level">
@@ -79,6 +80,11 @@ export function VocabPage({ level, onLevel, onError }: Props) {
               </button>
             ))}
           </div>
+          {level === "TOEIC" && (
+            <p className="level-note">
+              คำที่เจอบ่อยในข้อสอบ TOEIC แต่ไม่อยู่ใน Oxford 3000 เช่น invoice, itinerary, warranty
+            </p>
+          )}
         </div>
         {lv && (
           <div className="level-progress">
@@ -100,6 +106,7 @@ export function VocabPage({ level, onLevel, onError }: Props) {
           </a>
         ))}
       </nav>
+      {level === "TOEIC" && <ToeicCredit />}
     </div>
   );
 }

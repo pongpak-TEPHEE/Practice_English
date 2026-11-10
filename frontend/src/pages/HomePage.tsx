@@ -28,7 +28,7 @@ export function HomePage({ onError }: { onError: (e: Error) => void }) {
             <a href="#/vocab" className="activity">
               <span className="activity-title">ท่องศัพท์</span>
               <span className="activity-note">
-                บัตรคำศัพท์ Oxford 3000 ระดับ A1–B2
+                บัตรคำศัพท์ Oxford 3000 ระดับ A1–B2 และคำศัพท์ธุรกิจ TOEIC
                 {ach && (
                   <>
                     <br />

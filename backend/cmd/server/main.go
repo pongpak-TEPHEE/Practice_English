@@ -90,12 +90,8 @@ func buildStore(ctx context.Context, cfg config.Config) (study.Store, error) {
 	}
 	words := vocab.SampleWords()
 	if cfg.WordsCSV != "" {
-		f, err := os.Open(cfg.WordsCSV)
-		if err != nil {
-			return nil, fmt.Errorf("WORDS_CSV: %w", err)
-		}
-		defer f.Close()
-		if words, err = vocab.ReadCSV(f); err != nil {
+		var err error
+		if words, err = vocab.ReadCSVFiles(vocab.SplitPaths(cfg.WordsCSV)...); err != nil {
 			return nil, fmt.Errorf("WORDS_CSV: %w", err)
 		}
 	}

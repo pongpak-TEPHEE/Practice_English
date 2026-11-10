@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { api } from "../api";
+import { ToeicCredit } from "../components/ToeicCredit";
 import { WordRow } from "../components/WordRow";
 import { LEVELS, STATUS_LABEL, TIER_ORDER } from "../types";
 import type { Level, Stats, Word } from "../types";
@@ -55,6 +56,7 @@ export function WordsPage({ onError }: { onError: (e: Error) => void }) {
                   </span>
                 ))}
               </p>
+              <ToeicCredit />
             </section>
           )}
 
