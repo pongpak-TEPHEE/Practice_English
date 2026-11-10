@@ -58,22 +58,24 @@ export function HomePage({ level, onLevel, onError }: Props) {
         <p className="date">Oxford 3000 สำหรับเตรียมสอบ TOEIC</p>
       </header>
 
-      <section>
-        <h3>ระดับของคำศัพท์</h3>
-        <div className="segmented" role="radiogroup" aria-label="ระดับของคำศัพท์">
-          {LEVELS.map((l) => (
-            <button
-              key={l}
-              type="button"
-              role="radio"
-              aria-checked={level === l}
-              className={level === l ? "is-on" : ""}
-              disabled={busy}
-              onClick={() => pick(l)}
-            >
-              {l}
-            </button>
-          ))}
+      <section className="home-level">
+        <div>
+          <h3>ระดับของคำศัพท์</h3>
+          <div className="segmented" role="radiogroup" aria-label="ระดับของคำศัพท์">
+            {LEVELS.map((l) => (
+              <button
+                key={l}
+                type="button"
+                role="radio"
+                aria-checked={level === l}
+                className={level === l ? "is-on" : ""}
+                disabled={busy}
+                onClick={() => pick(l)}
+              >
+                {l}
+              </button>
+            ))}
+          </div>
         </div>
         {lv && (
           <div className="level-progress">

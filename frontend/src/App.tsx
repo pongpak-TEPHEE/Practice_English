@@ -17,10 +17,22 @@ const TABS = [
   { id: "words", label: "คำศัพท์" },
   { id: "settings", label: "ตั้งค่า" },
 ] as const;
+const STUDY = [
+  { id: "learn", label: "ท่องศัพท์ใหม่" },
+  { id: "review", label: "ทวนศัพท์เก่า" },
+  { id: "history", label: "ประวัติ" },
+  { id: "goals", label: "ความสำเร็จ" },
+] as const;
 const PAGE_IDS = ["home", "learn", "review", "history", "goals", "words", "settings"] as const;
 type PageId = (typeof PAGE_IDS)[number];
 const TAB_OF: Record<PageId, string> = {
-  home: "home", learn: "home", review: "home", history: "home", goals: "home", words: "words", settings: "settings",
+  home: "home",
+  learn: "home",
+  review: "home",
+  history: "home",
+  goals: "home",
+  words: "words",
+  settings: "settings",
 };
 
 function pageFromHash(): PageId {
@@ -44,7 +56,8 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    if (signedIn) api
+    if (signedIn)
+      api
         .settings()
         .then((s) => {
           setAccent(s.accent);
@@ -95,8 +108,33 @@ export function App() {
     }
   };
 
+  const tab = TAB_OF[page];
+  const link = (id: PageId) => ({
+    href: `#/${id}`,
+    className: page === id ? "is-on" : "",
+    "aria-current": page === id ? ("page" as const) : undefined,
+  });
+
   return (
     <div className="shell">
+      <aside className="sidebar">
+        <p className="brand">คลังคำ TOEIC</p>
+        <nav aria-label="เมนูหลัก">
+          <a {...link("home")}>
+            ท่องศัพท์ <span className="nav-level">{level}</span>
+          </a>
+          <div className="nav-sub">
+            {STUDY.map((p) => (
+              <a key={p.id} {...link(p.id)}>
+                {p.label}
+              </a>
+            ))}
+          </div>
+          <a {...link("words")}>คำศัพท์ทั้งหมด</a>
+          <a {...link("settings")}>ตั้งค่า</a>
+        </nav>
+      </aside>
+
       <main key={`${page}-${visit}`}>
         {error && (
           <p className="notice" role="alert" onClick={() => setError("")}>
@@ -114,16 +152,20 @@ export function App() {
             onSaved={(s) => {
               setAccent(s.accent);
               setLevel(s.level);
-            }} onError={handleError} onSignOut={() => setSignedIn(false)} />
+            }}
+            onError={handleError}
+            onSignOut={() => setSignedIn(false)}
+          />
         )}
       </main>
+
       <nav className="tabbar" aria-label="เมนูหลัก">
         {TABS.map((p) => (
           <a
             key={p.id}
             href={`#/${p.id}`}
-            className={TAB_OF[page] === p.id ? "is-on" : ""}
-            aria-current={TAB_OF[page] === p.id ? "page" : undefined}
+            className={tab === p.id ? "is-on" : ""}
+            aria-current={tab === p.id ? "page" : undefined}
           >
             {p.label}
           </a>

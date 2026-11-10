@@ -70,9 +70,13 @@ p {
 /* ---------- shell and navigation ---------- */
 
 .shell main {
-  max-width: 460px;
+  max-width: 560px;
   margin: 0 auto;
   padding: 20px 16px calc(var(--tabbar-h) + 32px + env(safe-area-inset-bottom));
+}
+
+.sidebar {
+  display: none;
 }
 
 .tabbar {
@@ -311,6 +315,13 @@ p {
   padding-top: 12px;
 }
 
+.card-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .card {
   position: relative;
   min-height: min(56dvh, 420px);
@@ -420,11 +431,19 @@ p {
   position: absolute;
   inset: 0;
   border-radius: var(--radius-card);
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   font-size: 2.6rem;
   font-weight: 600;
   pointer-events: none;
+}
+
+.verdict-hint {
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .verdict-pass {
@@ -485,10 +504,51 @@ p {
   background: var(--pass);
 }
 
-.keys-hint {
+.hint {
   text-align: center;
   font-size: 0.85rem;
   color: var(--ink-soft);
+}
+
+.undo {
+  align-self: center;
+}
+
+.keys {
+  white-space: nowrap;
+}
+
+kbd {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  border: 1px solid var(--line);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  padding: 0 6px;
+  background: var(--card);
+  color: var(--ink);
+}
+
+/* Touch devices get the swipe hint, mouse users the keyboard one. */
+.pointer-only {
+  display: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .pointer-only {
+    display: block;
+  }
+  .touch-only {
+    display: none;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .session-end {
@@ -502,6 +562,58 @@ p {
 .session-end h2 {
   font-family: var(--serif);
   font-size: 2.2rem;
+}
+
+.session-end-note {
+  color: var(--ink-soft);
+}
+
+/* ---------- dialog ---------- */
+
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: color-mix(in srgb, var(--ink) 40%, transparent);
+}
+
+.dialog {
+  width: 100%;
+  max-width: 420px;
+  background: var(--card);
+  border-radius: var(--radius-card);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 24px 60px -30px rgba(59, 51, 70, 0.6);
+}
+
+.dialog h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.dialog p {
+  color: var(--ink-soft);
+}
+
+.dialog-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.danger {
+  border-color: var(--fail);
+}
+
+.danger:hover {
+  background: color-mix(in srgb, var(--fail) 30%, white);
 }
 
 /* ---------- lists and tiers ---------- */
@@ -781,12 +893,6 @@ p {
   }
 }
 
-@media (min-width: 700px) {
-  .shell main {
-    padding-top: 40px;
-  }
-}
-
 /* ---------- home and sub-pages ---------- */
 
 .home-head h1,
@@ -1006,4 +1112,279 @@ p {
   border-color: transparent;
   color: var(--paper);
   font-weight: 600;
+}
+
+/* ---------- wider screens ---------- */
+
+@media (min-width: 700px) {
+  .shell main {
+    max-width: 900px;
+    padding: 36px 32px calc(var(--tabbar-h) + 40px);
+  }
+
+  .menu-item {
+    min-height: 150px;
+  }
+
+  .word-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    column-gap: 36px;
+  }
+
+  .days {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px 36px;
+  }
+
+  .session {
+    max-width: 680px;
+    padding-top: 20px;
+  }
+
+  .dialog-actions {
+    flex-direction: row-reverse;
+  }
+  .dialog-actions button {
+    flex: 1;
+  }
+}
+
+/* Desktop: a sidebar replaces the tab bar and pages spread into columns. */
+@media (min-width: 1000px) {
+  .shell {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    min-height: 100dvh;
+  }
+
+  .tabbar,
+  .back {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    position: sticky;
+    top: 0;
+    height: 100dvh;
+    padding: 36px 20px;
+    border-right: 1px solid var(--line);
+  }
+
+  .brand {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.45rem;
+    line-height: 1.15;
+    padding: 0 12px;
+  }
+
+  .sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .sidebar a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 42px;
+    padding: 8px 12px;
+    border-radius: 12px;
+    color: var(--ink-soft);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .sidebar a:hover {
+    background: color-mix(in srgb, var(--line) 35%, white);
+  }
+
+  .sidebar a.is-on {
+    background: var(--progress);
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .nav-level {
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0 8px;
+  }
+
+  .nav-sub {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 2px 0 10px 12px;
+    padding-left: 10px;
+    border-left: 2px solid var(--line);
+  }
+
+  .nav-sub a {
+    min-height: 38px;
+    font-size: 0.95rem;
+  }
+
+  .shell main {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 44px 56px 64px;
+  }
+
+  .page {
+    gap: 24px;
+  }
+
+  .page-title {
+    margin-top: 0;
+    font-size: 2.2rem;
+  }
+
+  .home-head h1 {
+    font-size: 3.2rem;
+  }
+
+  .home-level {
+    display: grid;
+    grid-template-columns: minmax(0, 440px) minmax(0, 1fr);
+    gap: 48px;
+    align-items: end;
+  }
+
+  .home-level .level-progress {
+    margin: 0 0 6px;
+  }
+
+  .menu {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .menu-item {
+    min-height: 210px;
+    padding: 24px 22px;
+  }
+
+  .menu-title {
+    font-size: 1.3rem;
+  }
+
+  .menu-note {
+    font-size: 0.95rem;
+  }
+
+  .split {
+    display: grid;
+    grid-template-columns: 340px minmax(0, 1fr);
+    gap: 56px;
+    align-items: start;
+  }
+
+  .split-side {
+    position: sticky;
+    top: 44px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .split-main .word-list {
+    border-top: 1px solid var(--line);
+  }
+
+  .page > .segmented.tabs {
+    max-width: 520px;
+  }
+
+  .learn-grid,
+  .goals-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 56px;
+    align-items: start;
+  }
+
+  .actions,
+  .goals-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .goal-done {
+    font-size: 4.4rem;
+  }
+
+  .settings {
+    max-width: 620px;
+  }
+
+  /* Practice: the card takes the room, controls sit beside it. */
+  .session {
+    max-width: 1180px;
+    padding: 28px 56px 36px;
+    gap: 14px;
+  }
+
+  .card-area {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 48px;
+    align-items: stretch;
+    padding-top: 20px;
+  }
+
+  .card {
+    min-height: min(68dvh, 640px);
+  }
+
+  .card-face {
+    padding: 44px 48px;
+  }
+
+  .headword {
+    font-size: clamp(3.4rem, 6vw, 5.4rem);
+  }
+
+  .meaning {
+    font-size: 2.4rem;
+  }
+
+  .card-panel {
+    gap: 14px;
+    padding-top: 8px;
+  }
+
+  .card-tools {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .answer-row {
+    grid-template-columns: 1fr;
+  }
+
+  .answer {
+    min-height: 72px;
+    font-size: 1.2rem;
+  }
+
+  .answer-row .answer-pass {
+    order: -1;
+  }
+
+  .session-end {
+    max-width: 520px;
+    margin: 0 auto;
+    width: 100%;
+  }
 }

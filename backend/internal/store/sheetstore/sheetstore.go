@@ -122,29 +122,62 @@ func (s *Store) LoadProgress(ctx context.Context) ([]vocab.Progress, error) {
 	return out, nil
 }
 
-// SaveProgress overwrites the word's existing row, or appends a new one.
-func (s *Store) SaveProgress(ctx context.Context, p vocab.Progress) error {
+// SaveProgress overwrites each word's existing row and appends rows for new words,
+// using at most two API calls however many words there are.
+// New rows go first and their row numbers are remembered as soon as they exist, so
+// retrying after a failed update overwrites them instead of appending duplicates.
+func (s *Store) SaveProgress(ctx context.Context, ps ...vocab.Progress) error {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 
-	values := &sheets.ValueRange{Values: [][]any{progressRow(p)}}
-	if row, ok := s.progressRows[p.WordID]; ok {
-		rng := fmt.Sprintf("%s!A%d:%s%d", progressTab, row, progressCols, row)
-		_, err := s.api.Spreadsheets.Values.Update(s.spreadsheetID, rng, values).
-			ValueInputOption("RAW").Context(ctx).Do()
-		return err
+	latest := map[int]int{} // word id -> index of its last value in ps
+	for i, p := range ps {
+		latest[p.WordID] = i
+	}
+	var updates []*sheets.ValueRange
+	var fresh []vocab.Progress
+	for i, p := range ps {
+		if latest[p.WordID] != i {
+			continue
+		}
+		if row, ok := s.progressRows[p.WordID]; ok {
+			updates = append(updates, &sheets.ValueRange{
+				Range:  fmt.Sprintf("%s!A%d:%s%d", progressTab, row, progressCols, row),
+				Values: [][]any{progressRow(p)},
+			})
+		} else {
+			fresh = append(fresh, p)
+		}
 	}
 
-	resp, err := s.api.Spreadsheets.Values.Append(s.spreadsheetID, progressTab+"!A:"+progressCols, values).
-		ValueInputOption("RAW").InsertDataOption("INSERT_ROWS").Context(ctx).Do()
-	if err != nil {
-		return err
+	if len(fresh) > 0 {
+		rows := make([][]any, len(fresh))
+		for i, p := range fresh {
+			rows[i] = progressRow(p)
+		}
+		resp, err := s.api.Spreadsheets.Values.Append(s.spreadsheetID, progressTab+"!A:"+progressCols, &sheets.ValueRange{Values: rows}).
+			ValueInputOption("RAW").InsertDataOption("INSERT_ROWS").Context(ctx).Do()
+		if err != nil {
+			return err
+		}
+		first, err := firstRow(resp.Updates.UpdatedRange)
+		if err != nil {
+			return err
+		}
+		for i, p := range fresh {
+			s.progressRows[p.WordID] = first + i
+		}
 	}
-	row, err := firstRow(resp.Updates.UpdatedRange)
-	if err != nil {
-		return err
+
+	if len(updates) > 0 {
+		_, err := s.api.Spreadsheets.Values.BatchUpdate(s.spreadsheetID, &sheets.BatchUpdateValuesRequest{
+			ValueInputOption: "RAW",
+			Data:             updates,
+		}).Context(ctx).Do()
+		if err != nil {
+			return err
+		}
 	}
-	s.progressRows[p.WordID] = row
 	return nil
 }
 
@@ -201,9 +234,15 @@ func (s *Store) LoadLog(ctx context.Context) ([]vocab.LogEntry, error) {
 	return out, nil
 }
 
-func (s *Store) AppendLog(ctx context.Context, e vocab.LogEntry) error {
-	values := &sheets.ValueRange{Values: [][]any{{e.Date, e.Time, e.WordID, string(e.Mode), string(e.Result)}}}
-	_, err := s.api.Spreadsheets.Values.Append(s.spreadsheetID, logTab+"!A:E", values).
+func (s *Store) AppendLog(ctx context.Context, es ...vocab.LogEntry) error {
+	if len(es) == 0 {
+		return nil
+	}
+	rows := make([][]any, len(es))
+	for i, e := range es {
+		rows[i] = []any{e.Date, e.Time, e.WordID, string(e.Mode), string(e.Result)}
+	}
+	_, err := s.api.Spreadsheets.Values.Append(s.spreadsheetID, logTab+"!A:E", &sheets.ValueRange{Values: rows}).
 		ValueInputOption("RAW").InsertDataOption("INSERT_ROWS").Context(ctx).Do()
 	return err
 }

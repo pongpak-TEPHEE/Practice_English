@@ -60,8 +60,7 @@ export function LearnPage({ onStart, onError }: Props) {
   } else if (roundsLeft) {
     primary = {
       label: `ทวนรอบที่ ${today.roundsDone + 1}`,
-      run: () =>
-        onStart({ title: `ทวนรอบที่ ${today.roundsDone + 1}`, mode: "review", words: today.roundQueue }),
+      run: () => onStart({ title: `ทวนรอบที่ ${today.roundsDone + 1}`, mode: "review", words: today.roundQueue }),
     };
   } else {
     primary = { label: `ท่องเพิ่มอีก ${EXTRA_WORDS} คำ`, run: learnMore };
@@ -71,27 +70,34 @@ export function LearnPage({ onStart, onError }: Props) {
 
   return (
     <div className="page">
+      <a href="#/home" className="back">
+        กลับ
+      </a>
+      <h2 className="page-title">ท่องศัพท์ใหม่</h2>
       <p className="date">
         {dateLabel} · ระดับ {today.level}
       </p>
 
-      <section className="goal" aria-label="เป้าหมายวันนี้">
-        <Goal label="คำใหม่" done={today.learnedToday} goal={today.newGoal} />
-        <Goal label="รอบทวน" done={today.roundsDone} goal={today.roundsGoal} />
-      </section>
+      <div className="learn-grid">
+        <section className="goal" aria-label="เป้าหมายวันนี้">
+          <Goal label="คำใหม่" done={today.learnedToday} goal={today.newGoal} />
+          <Goal label="รอบทวน" done={today.roundsDone} goal={today.roundsGoal} />
+        </section>
 
-      {learnDone && !roundsLeft && <p className="cheer">ครบเป้าหมายของวันนี้แล้ว</p>}
+        <div className="actions">
+          {learnDone && !roundsLeft && <p className="cheer">ครบเป้าหมายของวันนี้แล้ว</p>}
 
-      <button type="button" className="primary wide" disabled={busy} onClick={primary.run}>
-        {primary.label}
-      </button>
+          <button type="button" className="primary wide" disabled={busy} onClick={primary.run}>
+            {primary.label}
+          </button>
 
-      {today.dueCount > 0 && (
-        <button type="button" className="secondary wide" disabled={busy} onClick={reviewDue}>
-          ทวนคำที่ถึงรอบ {today.dueCount} คำ
-        </button>
-      )}
-
+          {today.dueCount > 0 && (
+            <button type="button" className="secondary wide" disabled={busy} onClick={reviewDue}>
+              ทวนคำที่ถึงรอบ {today.dueCount} คำ
+            </button>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

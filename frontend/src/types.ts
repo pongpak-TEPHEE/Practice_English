@@ -121,6 +121,9 @@ export interface Achievements {
   recent: DayGoal[];
 }
 
-export function thaiDate(iso: string, opts: Intl.DateTimeFormatOptions = { weekday: "long", day: "numeric", month: "long" }) {
+export function thaiDate(
+  iso: string,
+  opts: Intl.DateTimeFormatOptions = { weekday: "long", day: "numeric", month: "long" },
+) {
   return new Date(`${iso}T00:00:00`).toLocaleDateString("th-TH", opts);
 }

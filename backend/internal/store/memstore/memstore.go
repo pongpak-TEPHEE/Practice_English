@@ -38,10 +38,12 @@ func (s *Store) LoadProgress(context.Context) ([]vocab.Progress, error) {
 	return out, nil
 }
 
-func (s *Store) SaveProgress(_ context.Context, p vocab.Progress) error {
+func (s *Store) SaveProgress(_ context.Context, ps ...vocab.Progress) error {
 	s.mu.Lock()
 	defer s.mu.Unlock()
-	s.progress[p.WordID] = p
+	for _, p := range ps {
+		s.progress[p.WordID] = p
+	}
 	return nil
 }
 
@@ -64,9 +66,9 @@ func (s *Store) LoadLog(context.Context) ([]vocab.LogEntry, error) {
 	return slices.Clone(s.log), nil
 }
 
-func (s *Store) AppendLog(_ context.Context, e vocab.LogEntry) error {
+func (s *Store) AppendLog(_ context.Context, es ...vocab.LogEntry) error {
 	s.mu.Lock()
 	defer s.mu.Unlock()
-	s.log = append(s.log, e)
+	s.log = append(s.log, es...)
 	return nil
 }

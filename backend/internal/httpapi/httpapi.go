@@ -40,6 +40,7 @@ func NewHandler(svc *study.Service, opts Options) http.Handler {
 	api.HandleFunc("GET /api/words/{id}", h.getWord)
 	api.HandleFunc("PUT /api/words/{id}/favorite", h.setFavorite)
 	api.HandleFunc("POST /api/answer", h.answer)
+	api.HandleFunc("POST /api/answers", h.answers)
 	api.HandleFunc("GET /api/stats", h.stats)
 	api.HandleFunc("GET /api/history", h.history)
 	api.HandleFunc("GET /api/achievements", h.achievements)
@@ -147,6 +148,50 @@ func (h *handler) answer(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, v)
 }
 
+// maxBatch bounds one session's answers; learn mode repeats failed words, so allow plenty.
+const maxBatch = 500
+
+func (h *handler) answers(w http.ResponseWriter, r *http.Request) {
+	var req struct {
+		Mode    string `json:"mode"` // learn | review (default)
+		Answers []struct {
+			WordID int    `json:"wordId"`
+			Result string `json:"result"`
+		} `json:"answers"`
+	}
+	if !decode(w, r, &req) {
+		return
+	}
+	mode, err := vocab.ParseMode(req.Mode)
+	if err != nil {
+		writeError(w, http.StatusBadRequest, err.Error())
+		return
+	}
+	if len(req.Answers) == 0 || len(req.Answers) > maxBatch {
+		writeError(w, http.StatusBadRequest, "answers must have 1 to 500 items")
+		return
+	}
+	items := make([]study.AnswerItem, len(req.Answers))
+	for i, a := range req.Answers {
+		res, err := vocab.ParseResult(a.Result)
+		if err != nil {
+			writeError(w, http.StatusBadRequest, "answers["+strconv.Itoa(i)+"]: "+err.Error())
+			return
+		}
+		items[i] = study.AnswerItem{WordID: a.WordID, Result: res}
+	}
+	views, err := h.svc.AnswerBatch(r.Context(), mode, items)
+	if errors.Is(err, study.ErrLogNotSaved) {
+		h.opts.Logger.Warn("answer log", "err", err)
+		err = nil
+	}
+	if err != nil {
+		h.fail(w, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, views)
+}
+
 func (h *handler) stats(w http.ResponseWriter, _ *http.Request) {
 	writeJSON(w, http.StatusOK, h.svc.Stats())
 }
@@ -222,7 +267,7 @@ func pathID(w http.ResponseWriter, r *http.Request) (int, bool) {
 }
 
 func decode(w http.ResponseWriter, r *http.Request, dst any) bool {
-	dec := json.NewDecoder(http.MaxBytesReader(w, r.Body, 4<<10))
+	dec := json.NewDecoder(http.MaxBytesReader(w, r.Body, 64<<10))
 	dec.DisallowUnknownFields()
 	if err := dec.Decode(dst); err != nil {
 		writeError(w, http.StatusBadRequest, "invalid JSON body: "+err.Error())

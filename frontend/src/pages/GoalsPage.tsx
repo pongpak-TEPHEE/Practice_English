@@ -41,63 +41,69 @@ export function GoalsPage({ onError }: Props) {
       </a>
       <h2 className="page-title">ความสำเร็จ</h2>
 
-      <section className="goal" aria-label="ความคืบหน้าวันนี้">
-        <Meter label="คำใหม่วันนี้" done={ach.today.new} goal={ach.newGoal} />
-        <Meter label="คำทวนวันนี้" done={ach.today.reviewed} goal={ach.reviewGoal} />
-      </section>
-      {ach.today.met && <p className="cheer">ครบเป้าหมายของวันนี้แล้ว</p>}
+      <div className="goals-grid">
+        <div className="goals-col">
+          <section className="goal" aria-label="ความคืบหน้าวันนี้">
+            <Meter label="คำใหม่วันนี้" done={ach.today.new} goal={ach.newGoal} />
+            <Meter label="คำทวนวันนี้" done={ach.today.reviewed} goal={ach.reviewGoal} />
+          </section>
+          {ach.today.met && <p className="cheer">ครบเป้าหมายของวันนี้แล้ว</p>}
 
-      <section className="streaks">
-        <Figure value={ach.streak} label="วันติดต่อกัน" />
-        <Figure value={ach.bestStreak} label="สถิติสูงสุด" />
-        <Figure value={ach.totalLearned} label="คำที่ท่องผ่าน" />
-      </section>
+          <section className="streaks">
+            <Figure value={ach.streak} label="วันติดต่อกัน" />
+            <Figure value={ach.bestStreak} label="สถิติสูงสุด" />
+            <Figure value={ach.totalLearned} label="คำที่ท่องผ่าน" />
+          </section>
+        </div>
 
-      <section>
-        <h3>14 วันล่าสุด</h3>
-        <ol className="calendar">
-          {ach.recent.map((d) => (
-            <li
-              key={d.date}
-              className={d.met ? "is-met" : d.new + d.reviewed > 0 ? "is-some" : ""}
-              title={`${thaiDate(d.date, { day: "numeric", month: "short" })}: ใหม่ ${d.new} ทวน ${d.reviewed}`}
-            >
-              <span>{Number(d.date.slice(8))}</span>
-            </li>
-          ))}
-        </ol>
-        <p className="legend">
-          <span className="legend-item cal-met">ครบเป้า</span>
-          <span className="legend-item cal-some">ได้เรียนบ้าง</span>
-        </p>
-      </section>
+        <div className="goals-col">
+          <section>
+            <h3>14 วันล่าสุด</h3>
+            <ol className="calendar">
+              {ach.recent.map((d) => (
+                <li
+                  key={d.date}
+                  className={d.met ? "is-met" : d.new + d.reviewed > 0 ? "is-some" : ""}
+                  title={`${thaiDate(d.date, { day: "numeric", month: "short" })}: ใหม่ ${d.new} ทวน ${d.reviewed}`}
+                >
+                  <span>{Number(d.date.slice(8))}</span>
+                </li>
+              ))}
+            </ol>
+            <p className="legend">
+              <span className="legend-item cal-met">ครบเป้า</span>
+              <span className="legend-item cal-some">ได้เรียนบ้าง</span>
+            </p>
+          </section>
 
-      <section className="settings">
-        <h3>ตั้งเป้าหมายรายวัน</h3>
-        <Stepper
-          label="คำใหม่ต่อวัน"
-          value={settings.newPerDay}
-          min={1}
-          max={100}
-          suffix="คำ"
-          onChange={(v) => setSettings({ ...settings, newPerDay: v })}
-        />
-        <Stepper
-          label="ทวนคำต่อวัน"
-          value={settings.reviewPerDay}
-          min={0}
-          max={500}
-          step={5}
-          suffix="คำ"
-          onChange={(v) => setSettings({ ...settings, reviewPerDay: v })}
-        />
-      </section>
-      <button type="button" className="primary wide" disabled={!dirty} onClick={save}>
-        บันทึกเป้าหมาย
-      </button>
-      <p className="save-status" role="status">
-        {status}
-      </p>
+          <section className="settings">
+            <h3>ตั้งเป้าหมายรายวัน</h3>
+            <Stepper
+              label="คำใหม่ต่อวัน"
+              value={settings.newPerDay}
+              min={1}
+              max={100}
+              suffix="คำ"
+              onChange={(v) => setSettings({ ...settings, newPerDay: v })}
+            />
+            <Stepper
+              label="ทวนคำต่อวัน"
+              value={settings.reviewPerDay}
+              min={0}
+              max={500}
+              step={5}
+              suffix="คำ"
+              onChange={(v) => setSettings({ ...settings, reviewPerDay: v })}
+            />
+          </section>
+          <button type="button" className="primary wide" disabled={!dirty} onClick={save}>
+            บันทึกเป้าหมาย
+          </button>
+          <p className="save-status" role="status">
+            {status}
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

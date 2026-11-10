@@ -60,8 +60,10 @@ export const api = {
   },
   answer: (wordId: number, result: Result, mode: Mode) =>
     request<Word>("POST", "/api/answer", { wordId, result, mode }),
-  favorite: (wordId: number, favorite: boolean) =>
-    request<Word>("PUT", `/api/words/${wordId}/favorite`, { favorite }),
+  // Saves a whole practice session at once; nothing is counted until this succeeds.
+  answers: (mode: Mode, answers: { wordId: number; result: Result }[]) =>
+    request<Word[]>("POST", "/api/answers", { mode, answers }),
+  favorite: (wordId: number, favorite: boolean) => request<Word>("PUT", `/api/words/${wordId}/favorite`, { favorite }),
   history: (level?: string, days = 30) =>
     request<Day[]>("GET", `/api/history?days=${days}${level ? `&level=${level}` : ""}`),
   achievements: () => request<Achievements>("GET", "/api/achievements"),

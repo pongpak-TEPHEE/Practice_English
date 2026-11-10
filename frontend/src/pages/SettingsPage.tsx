@@ -39,10 +39,17 @@ export function SettingsPage({ onSaved, onError, onSignOut }: Props) {
 
   return (
     <div className="page settings">
+      <h2 className="page-title">ตั้งค่า</h2>
       <section>
         <h3>เป้าหมายรายวัน</h3>
         <p className="help">ตั้งเป้าคำใหม่และคำทวนต่อวันได้ที่หน้าความสำเร็จ</p>
-        <Stepper label="รอบทวนคำของวันนี้" value={s.roundsPerDay} min={0} max={20} onChange={(v) => update({ roundsPerDay: v })} />
+        <Stepper
+          label="รอบทวนคำของวันนี้"
+          value={s.roundsPerDay}
+          min={0}
+          max={20}
+          onChange={(v) => update({ roundsPerDay: v })}
+        />
       </section>
 
       <section>
@@ -66,9 +73,30 @@ export function SettingsPage({ onSaved, onError, onSignOut }: Props) {
       <section>
         <h3>ระดับความเชี่ยวชาญ</h3>
         <p className="help">นับจำนวนวันที่ตอบผ่าน วันละไม่เกิน 1 ครั้ง</p>
-        <Stepper label="พอจำได้" value={s.tiers.familiar} min={1} max={98} suffix="วัน" onChange={(v) => update({ tiers: { ...s.tiers, familiar: v } })} />
-        <Stepper label="รู้คำ" value={s.tiers.known} min={2} max={99} suffix="วัน" onChange={(v) => update({ tiers: { ...s.tiers, known: v } })} />
-        <Stepper label="เชี่ยวชาญ" value={s.tiers.mastered} min={3} max={100} suffix="วัน" onChange={(v) => update({ tiers: { ...s.tiers, mastered: v } })} />
+        <Stepper
+          label="พอจำได้"
+          value={s.tiers.familiar}
+          min={1}
+          max={98}
+          suffix="วัน"
+          onChange={(v) => update({ tiers: { ...s.tiers, familiar: v } })}
+        />
+        <Stepper
+          label="รู้คำ"
+          value={s.tiers.known}
+          min={2}
+          max={99}
+          suffix="วัน"
+          onChange={(v) => update({ tiers: { ...s.tiers, known: v } })}
+        />
+        <Stepper
+          label="เชี่ยวชาญ"
+          value={s.tiers.mastered}
+          min={3}
+          max={100}
+          suffix="วัน"
+          onChange={(v) => update({ tiers: { ...s.tiers, mastered: v } })}
+        />
         {!tiersOk && <p className="notice">แต่ละระดับต้องใช้จำนวนวันมากกว่าระดับก่อนหน้า</p>}
       </section>
 
@@ -111,13 +139,23 @@ export function Stepper({ label, value, min, max, suffix = "", step = 1, onChang
     <div className="stepper">
       <span className="stepper-label">{label}</span>
       <div className="stepper-control">
-        <button type="button" aria-label={`ลด${label}`} disabled={value <= min} onClick={() => onChange(Math.max(min, value - step))}>
+        <button
+          type="button"
+          aria-label={`ลด${label}`}
+          disabled={value <= min}
+          onClick={() => onChange(Math.max(min, value - step))}
+        >
           ลด
         </button>
         <span className="stepper-value" aria-live="polite">
           {value} {suffix}
         </span>
-        <button type="button" aria-label={`เพิ่ม${label}`} disabled={value >= max} onClick={() => onChange(Math.min(max, value + step))}>
+        <button
+          type="button"
+          aria-label={`เพิ่ม${label}`}
+          disabled={value >= max}
+          onClick={() => onChange(Math.min(max, value + step))}
+        >
           เพิ่ม
         </button>
       </div>

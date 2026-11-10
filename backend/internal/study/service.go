@@ -26,11 +26,13 @@ var (
 type Store interface {
 	LoadWords(ctx context.Context) ([]vocab.Word, error)
 	LoadProgress(ctx context.Context) ([]vocab.Progress, error)
-	SaveProgress(ctx context.Context, p vocab.Progress) error
+	// SaveProgress writes each word's row, overwriting an existing one. It must be
+	// safe to retry with the same values after a failure.
+	SaveProgress(ctx context.Context, ps ...vocab.Progress) error
 	LoadSettings(ctx context.Context) (map[string]string, error)
 	SaveSettings(ctx context.Context, kv map[string]string) error
 	LoadLog(ctx context.Context) ([]vocab.LogEntry, error)
-	AppendLog(ctx context.Context, e vocab.LogEntry) error
+	AppendLog(ctx context.Context, es ...vocab.LogEntry) error
 }
 
 // WordView is a word together with the learner's progress on it.
@@ -304,27 +306,80 @@ func (s *Service) Today(extra int) Today {
 
 // ---- answers ----
 
+// AnswerItem is one pass/fail answer within a practice session.
+type AnswerItem struct {
+	WordID int          `json:"wordId"`
+	Result vocab.Result `json:"result"`
+}
+
 // Answer records pass/fail for a word and returns its updated state.
-// The cache only changes once the store has accepted the write.
 func (s *Service) Answer(ctx context.Context, wordID int, r vocab.Result, mode vocab.Mode) (WordView, error) {
-	v, err := s.update(ctx, wordID, func(p vocab.Progress) vocab.Progress {
-		return vocab.Answer(p, r, mode, s.today())
-	})
-	if err != nil {
-		return v, err
+	views, err := s.AnswerBatch(ctx, mode, []AnswerItem{{WordID: wordID, Result: r}})
+	if len(views) == 0 {
+		return WordView{}, err
 	}
-	now := s.now().In(s.loc)
-	e := vocab.LogEntry{Date: vocab.FormatDate(now), Time: now.Format("15:04:05"), WordID: wordID, Mode: mode, Result: r}
+	return views[0], err
+}
+
+// AnswerBatch applies a whole session's answers in order and saves them together,
+// so a session is either counted in full or not at all. It returns each answered
+// word once, in first-answered order. Nothing changes if any word is unknown.
+func (s *Service) AnswerBatch(ctx context.Context, mode vocab.Mode, items []AnswerItem) ([]WordView, error) {
 	s.writeMu.Lock()
 	defer s.writeMu.Unlock()
+
+	today := s.today()
+	now := s.now().In(s.loc)
+	changed := map[int]vocab.Progress{}
+	var order []int
+	logs := make([]vocab.LogEntry, 0, len(items))
+
+	s.mu.RLock()
+	for _, it := range items {
+		if _, ok := s.wordByID[it.WordID]; !ok {
+			s.mu.RUnlock()
+			return nil, fmt.Errorf("%w: id %d", ErrWordNotFound, it.WordID)
+		}
+		p, seen := changed[it.WordID]
+		if !seen {
+			if p, seen = s.progress[it.WordID]; !seen {
+				p = vocab.NewProgress(it.WordID)
+			}
+			order = append(order, it.WordID)
+		}
+		changed[it.WordID] = vocab.Answer(p, it.Result, mode, today)
+		logs = append(logs, vocab.LogEntry{
+			Date: vocab.FormatDate(now), Time: now.Format("15:04:05"),
+			WordID: it.WordID, Mode: mode, Result: it.Result,
+		})
+	}
+	s.mu.RUnlock()
+
+	ps := make([]vocab.Progress, len(order))
+	for i, id := range order {
+		ps[i] = changed[id]
+	}
+	// The cache only changes once the store has accepted the progress rows.
+	if err := s.store.SaveProgress(ctx, ps...); err != nil {
+		return nil, fmt.Errorf("save progress: %w", err)
+	}
+
+	s.mu.Lock()
+	views := make([]WordView, len(order))
+	for i, id := range order {
+		s.progress[id] = changed[id]
+		views[i] = s.view(s.wordByID[id])
+	}
+	s.mu.Unlock()
+
 	// Progress is already saved; a lost log row only affects history, so it isn't fatal.
-	if err := s.store.AppendLog(ctx, e); err != nil {
-		return v, fmt.Errorf("%w: %w", ErrLogNotSaved, err)
+	if err := s.store.AppendLog(ctx, logs...); err != nil {
+		return views, fmt.Errorf("%w: %w", ErrLogNotSaved, err)
 	}
 	s.mu.Lock()
-	s.log = append(s.log, e)
+	s.log = append(s.log, logs...)
 	s.mu.Unlock()
-	return v, nil
+	return views, nil
 }
 
 func (s *Service) SetFavorite(ctx context.Context, wordID int, fav bool) (WordView, error) {

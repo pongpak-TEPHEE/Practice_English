@@ -50,86 +50,95 @@ export function ReviewPage({ level, onStart, onError }: Props) {
       </a>
       <h2 className="page-title">ทวนศัพท์เก่า · {level}</h2>
 
-      <div className="segmented tabs" role="tablist">
-        {DECKS.map((d) => (
-          <button
-            key={d.id}
-            type="button"
-            role="tab"
-            aria-selected={deck === d.id}
-            className={deck === d.id ? "is-on" : ""}
-            onClick={() => {
-              setDeck(d.id);
-              setRounds("");
-            }}
-          >
-            {d.label}
-          </button>
-        ))}
-      </div>
-
-      {words && words.length > 0 && (
-        <section>
-          <h3>เลือกคำที่ทวนมาแล้วกี่รอบ</h3>
-          <div className="tier-filter" role="group" aria-label="จำนวนรอบที่ทวน">
-            <button type="button" className={rounds === "" ? "is-on" : ""} onClick={() => setRounds("")}>
-              ทั้งหมด {words.length}
-            </button>
-            {ROUNDS.map((r) => {
-              const n = words.filter((w) => count(w) >= r.min && count(w) <= r.max).length;
-              return (
-                <button
-                  key={r.id}
-                  type="button"
-                  className={rounds === r.id ? "is-on" : ""}
-                  disabled={n === 0}
-                  onClick={() => setRounds(r.id)}
-                >
-                  {r.label} {n}
-                </button>
-              );
-            })}
-          </div>
-        </section>
-      )}
-
-      {words === null ? (
-        <p className="loading">กำลังโหลด</p>
-      ) : shown.length === 0 ? (
-        <p className="empty">{info.empty}</p>
-      ) : (
-        <>
-          <section>
-            <h3>จำนวนคำในรอบนี้</h3>
-            <div className="segmented small" role="radiogroup" aria-label="จำนวนคำในรอบนี้">
-              {SIZES.map((n) => (
-                <button
-                  key={n}
-                  type="button"
-                  role="radio"
-                  aria-checked={size === n}
-                  className={size === n ? "is-on" : ""}
-                  onClick={() => setSize(n)}
-                >
-                  {n} คำ
-                </button>
-              ))}
-            </div>
-          </section>
-          <button
-            type="button"
-            className="primary wide"
-            onClick={() => onStart({ title: `ทวน ${level}`, mode: "review", words: practice })}
-          >
-            ทวน {practice.length} คำที่ใกล้ลืมที่สุด
-          </button>
-          <ul className="word-list">
-            {shown.map((w) => (
-              <WordRow key={w.id} word={w} showRounds />
+      <div className="split">
+        <div className="split-side">
+          <div className="segmented tabs" role="tablist">
+            {DECKS.map((d) => (
+              <button
+                key={d.id}
+                type="button"
+                role="tab"
+                aria-selected={deck === d.id}
+                className={deck === d.id ? "is-on" : ""}
+                onClick={() => {
+                  setDeck(d.id);
+                  setRounds("");
+                }}
+              >
+                {d.label}
+              </button>
             ))}
-          </ul>
-        </>
-      )}
+          </div>
+
+          {words && words.length > 0 && (
+            <section>
+              <h3>เลือกคำที่ทวนมาแล้วกี่รอบ</h3>
+              <div className="tier-filter" role="group" aria-label="จำนวนรอบที่ทวน">
+                <button type="button" className={rounds === "" ? "is-on" : ""} onClick={() => setRounds("")}>
+                  ทั้งหมด {words.length}
+                </button>
+                {ROUNDS.map((r) => {
+                  const n = words.filter((w) => count(w) >= r.min && count(w) <= r.max).length;
+                  return (
+                    <button
+                      key={r.id}
+                      type="button"
+                      className={rounds === r.id ? "is-on" : ""}
+                      disabled={n === 0}
+                      onClick={() => setRounds(r.id)}
+                    >
+                      {r.label} {n}
+                    </button>
+                  );
+                })}
+              </div>
+            </section>
+          )}
+
+          {words && shown.length > 0 && (
+            <>
+              <section>
+                <h3>จำนวนคำในรอบนี้</h3>
+                <div className="segmented small" role="radiogroup" aria-label="จำนวนคำในรอบนี้">
+                  {SIZES.map((n) => (
+                    <button
+                      key={n}
+                      type="button"
+                      role="radio"
+                      aria-checked={size === n}
+                      className={size === n ? "is-on" : ""}
+                      onClick={() => setSize(n)}
+                    >
+                      {n} คำ
+                    </button>
+                  ))}
+                </div>
+              </section>
+              <button
+                type="button"
+                className="primary wide"
+                onClick={() => onStart({ title: `ทวน ${level}`, mode: "review", words: practice })}
+              >
+                ทวน {practice.length} คำที่ใกล้ลืมที่สุด
+              </button>
+            </>
+          )}
+        </div>
+
+        <div className="split-main">
+          {words === null ? (
+            <p className="loading">กำลังโหลด</p>
+          ) : shown.length === 0 ? (
+            <p className="empty">{info.empty}</p>
+          ) : (
+            <ul className="word-list">
+              {shown.map((w) => (
+                <WordRow key={w.id} word={w} showRounds />
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

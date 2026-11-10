@@ -124,7 +124,11 @@ function DayGroup({ label, words }: { label: string; words: DayWord[] }) {
       </p>
       <p className="day-words">
         {words.map((w) => (
-          <span key={w.wordId} className={`chip ${w.fails > 0 && w.passes === 0 ? "chip-fail" : "chip-pass"}`} lang="en">
+          <span
+            key={w.wordId}
+            className={`chip ${w.fails > 0 && w.passes === 0 ? "chip-fail" : "chip-pass"}`}
+            lang="en"
+          >
             {w.word}
           </span>
         ))}

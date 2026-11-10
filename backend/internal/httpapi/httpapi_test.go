@@ -175,6 +175,43 @@ func TestDailyFlow(t *testing.T) {
 	}
 }
 
+func TestAnswerBatch(t *testing.T) {
+	srv := newServer(t)
+
+	// Validation happens before anything is saved.
+	for body, want := range map[string]int{
+		`{"mode":"learn","answers":[]}`: 400,
+		`{"mode":"learn","answers":[{"wordId":1,"result":"pass"},{"wordId":2,"result":"meh"}]}`:    400,
+		`{"mode":"learn","answers":[{"wordId":1,"result":"pass"},{"wordId":999,"result":"pass"}]}`: 404,
+	} {
+		if code := call(t, srv, "POST", "/api/answers", body, nil); code != want {
+			t.Errorf("POST %s: status %d, want %d", body, code, want)
+		}
+	}
+	var words []study.WordView
+	call(t, srv, "GET", "/api/words?deck=learned", "", &words)
+	if len(words) != 0 {
+		t.Fatalf("rejected batches saved progress: %+v", words)
+	}
+
+	var views []study.WordView
+	body := `{"mode":"learn","answers":[{"wordId":1,"result":"fail"},{"wordId":2,"result":"pass"},{"wordId":1,"result":"pass"}]}`
+	if code := call(t, srv, "POST", "/api/answers", body, &views); code != 200 {
+		t.Fatalf("batch: status %d", code)
+	}
+	if len(views) != 2 || views[0].ID != 1 || views[1].ID != 2 {
+		t.Fatalf("views = %+v", views)
+	}
+	if p := views[0].Progress; p.PassCount != 1 || p.FailCount != 1 || p.Recent != "FP" || p.LearnedDate == "" {
+		t.Errorf("word 1 progress = %+v", p)
+	}
+	var hist []study.Day
+	call(t, srv, "GET", "/api/history", "", &hist)
+	if len(hist) != 1 || len(hist[0].Learned) != 2 || hist[0].Learned[0].Fails != 1 || hist[0].Learned[0].Passes != 1 {
+		t.Errorf("history = %+v", hist)
+	}
+}
+
 func itoa(n int) string {
 	b, _ := json.Marshal(n)
 	return string(b)
