@@ -53,6 +53,14 @@ export function HomePage({ onError }: { onError: (e: Error) => void }) {
                 จับเวลาเทียบกับข้อสอบจริง
               </span>
             </a>
+            <a href="#/video" className="activity activity-video">
+              <span className="activity-title">ฝึกฟังจากวิดีโอ</span>
+              <span className="activity-note">
+                ดูวิดีโอ YouTube แล้วพิมพ์สิ่งที่ได้ยินทีละบรรทัด
+                <br />
+                ฟังแล้วพิมพ์ พิมพ์ตามซับ หรือดูพร้อมซับไทย
+              </span>
+            </a>
           </nav>
         </section>
 

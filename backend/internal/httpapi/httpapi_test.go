@@ -15,6 +15,7 @@ import (
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/reading"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/store/memstore"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/study"
+	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/video"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/vocab"
 )
 
@@ -35,6 +36,12 @@ func newServer(t *testing.T) *httptest.Server {
 		reading.TabSets:      {{"r1", "7", "Notice"}},
 		reading.TabPassages:  {{"r1", "notice", "Notice", "The office closes at noon on Friday."}},
 		reading.TabQuestions: {{"r1", "detail", "When does the office close?", "At noon", "At 5 P.M.", "On Monday", "Never", "At noon", "เพราะ"}},
+	})
+	store.SetVideos(video.Tables{
+		video.TabVideos: {video.VideosHeader, {"dT2owtxkU8k", "Song", "Music", "Medium"}, {"bad", "Bad row"}},
+		video.TabTranscripts: {video.TranscriptsHeader,
+			{"dT2owtxkU8k", "1", "34.07", "37.43", "I wanna follow where she goes", "ฉันอยากตามเธอไป"},
+			{"dT2owtxkU8k", "2", "37.47", "41.43", "I think about her (yeah)", "ฉันคิดถึงเธอ"}},
 	})
 	svc, err := study.NewService(context.Background(), store, time.UTC)
 	if err != nil {
@@ -317,6 +324,55 @@ func TestMockResults(t *testing.T) {
 	call(t, srv, "GET", "/api/mock-results?part=7", "", &results)
 	if len(results) != 1 || results[0].ByFormat["multi"].Total != 25 {
 		t.Errorf("results = %+v", results)
+	}
+}
+
+func TestVideos(t *testing.T) {
+	srv := newServer(t)
+	var list []video.Summary
+	if code := call(t, srv, "GET", "/api/videos", "", &list); code != 200 || len(list) != 1 || list[0].Lines != 2 || list[0].Words != 10 {
+		t.Fatalf("list: %d %+v", code, list)
+	}
+	var v video.Video
+	if code := call(t, srv, "GET", "/api/videos/dT2owtxkU8k", "", &v); code != 200 || len(v.Lines) != 2 || v.Lines[1].Th != "ฉันคิดถึงเธอ" {
+		t.Fatalf("video: %d %+v", code, v)
+	}
+	if code := call(t, srv, "GET", "/api/videos/AAAAAAAAAAA", "", nil); code != 404 {
+		t.Errorf("unknown video: status %d, want 404", code)
+	}
+
+	var empty []video.Result
+	if code := call(t, srv, "GET", "/api/video-results", "", &empty); code != 200 || empty == nil || len(empty) != 0 {
+		t.Errorf("results before saving: %d %v", code, empty)
+	}
+	good := `{"videoId":"dT2owtxkU8k","mode":"dictation","linesDone":2,"linesTotal":2,"wordsCorrect":8,"wordsTotal":10,` +
+		`"replays":3,"seconds":95,"missed":["wanna","follow"]}`
+	var saved video.Result
+	if code := call(t, srv, "POST", "/api/video-results", good, &saved); code != 201 || saved.Date == "" || saved.Time == "" {
+		t.Fatalf("save: %d %+v", code, saved)
+	}
+	for name, body := range map[string]string{
+		"unknown video": `{"videoId":"AAAAAAAAAAA","mode":"type","linesDone":1,"linesTotal":1,"wordsCorrect":1,"wordsTotal":1,"seconds":5}`,
+		"bad mode":      `{"videoId":"dT2owtxkU8k","mode":"watch","linesDone":1,"linesTotal":2,"wordsCorrect":1,"wordsTotal":1,"seconds":5}`,
+		"too many done": `{"videoId":"dT2owtxkU8k","mode":"type","linesDone":3,"linesTotal":2,"wordsCorrect":1,"wordsTotal":1,"seconds":5}`,
+	} {
+		if code := call(t, srv, "POST", "/api/video-results", body, nil); code != 400 {
+			t.Errorf("%s: status %d, want 400", name, code)
+		}
+	}
+	var results []video.Result
+	call(t, srv, "GET", "/api/video-results", "", &results)
+	if len(results) != 1 || results[0].Missed[1] != "follow" || results[0].Replays != 3 {
+		t.Errorf("results = %+v", results)
+	}
+
+	var report struct {
+		Videos        int      `json:"videos"`
+		VideoProblems []string `json:"videoProblems"`
+	}
+	call(t, srv, "POST", "/api/admin/reload", "", &report)
+	if report.Videos != 1 || len(report.VideoProblems) != 1 || !strings.Contains(report.VideoProblems[0], "Videos แถว 3") {
+		t.Errorf("reload report = %+v", report)
 	}
 }
 

@@ -14,6 +14,8 @@ import { ReadingPage } from "./pages/ReadingPage";
 import { ReadingSetPage } from "./pages/ReadingSetPage";
 import { ReviewPage } from "./pages/ReviewPage";
 import { SettingsPage } from "./pages/SettingsPage";
+import { VideoListPage } from "./pages/VideoListPage";
+import { VideoPage } from "./pages/VideoPage";
 import { WordsPage } from "./pages/WordsPage";
 import type { Accent, Level } from "./types";
 
@@ -23,6 +25,7 @@ const TABS = [
   { id: "vocab", label: "ท่องศัพท์" },
   { id: "grammar", label: "ไวยากรณ์" },
   { id: "reading", label: "การอ่าน" },
+  { id: "video", label: "ฝึกฟัง" },
   { id: "words", label: "คำศัพท์" },
   { id: "settings", label: "ตั้งค่า" },
 ] as const;
@@ -39,6 +42,8 @@ const PAGE_IDS = [
   "reading",
   "readingSet",
   "mock",
+  "video",
+  "videoPlay",
   "vocab",
   "learn",
   "review",
@@ -55,6 +60,8 @@ const TAB_OF: Record<PageId, string> = {
   reading: "reading",
   readingSet: "reading",
   mock: "reading",
+  video: "video",
+  videoPlay: "video",
   vocab: "vocab",
   learn: "vocab",
   review: "vocab",
@@ -64,9 +71,9 @@ const TAB_OF: Record<PageId, string> = {
   settings: "settings",
 };
 
-// "#/grammar/<lesson>" and "#/reading/<set>" open one item; everything else is "#/<page>".
+// "#/grammar/<lesson>", "#/reading/<set>" and "#/video/<id>" open one item; everything else is "#/<page>".
 function itemFromHash(): { section: string; id: string } {
-  const m = /^#\/(grammar|reading)\/([\w-]+)/.exec(window.location.hash);
+  const m = /^#\/(grammar|reading|video)\/([\w-]+)/.exec(window.location.hash);
   return m ? { section: m[1], id: m[2] } : { section: "", id: "" };
 }
 
@@ -79,6 +86,7 @@ function pageFromHash(): PageId {
   const item = itemFromHash();
   if (item.section === "grammar") return "lesson";
   if (item.section === "reading") return "readingSet";
+  if (item.section === "video") return "videoPlay";
   const id = window.location.hash.replace("#/", "");
   return (PAGE_IDS as readonly string[]).includes(id) ? (id as PageId) : "home";
 }
@@ -185,6 +193,9 @@ export function App() {
           <a {...link("reading")} className={tab === "reading" ? "is-on" : ""}>
             การอ่าน Part 6–7
           </a>
+          <a {...link("video")} className={tab === "video" ? "is-on" : ""}>
+            ฝึกฟังจากวิดีโอ
+          </a>
           <a {...link("words")}>คำศัพท์ทั้งหมด</a>
           <a {...link("settings")}>ตั้งค่า</a>
         </nav>
@@ -202,6 +213,8 @@ export function App() {
         {page === "reading" && <ReadingPage onError={handleError} />}
         {page === "readingSet" && <ReadingSetPage id={lessonId} onError={handleError} />}
         {page === "mock" && <MockPage onError={handleError} />}
+        {page === "video" && <VideoListPage onError={handleError} />}
+        {page === "videoPlay" && <VideoPage id={lessonId} onError={handleError} />}
         {page === "vocab" && <VocabPage key={level} level={level} onLevel={changeLevel} onError={handleError} />}
         {page === "learn" && <LearnPage key={level} onStart={start} onError={handleError} />}
         {page === "review" && <ReviewPage level={level} onStart={start} onError={handleError} />}

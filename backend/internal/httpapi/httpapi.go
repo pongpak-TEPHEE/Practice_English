@@ -14,6 +14,7 @@ import (
 
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/reading"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/study"
+	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/video"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/vocab"
 )
 
@@ -52,6 +53,10 @@ func NewHandler(svc *study.Service, opts Options) http.Handler {
 	api.HandleFunc("GET /api/reading/{id}", h.readingSet)
 	api.HandleFunc("GET /api/mock-results", h.mockResults)
 	api.HandleFunc("POST /api/mock-results", h.addMockResult)
+	api.HandleFunc("GET /api/videos", h.videoList)
+	api.HandleFunc("GET /api/videos/{id}", h.videoOne)
+	api.HandleFunc("GET /api/video-results", h.videoResults)
+	api.HandleFunc("POST /api/video-results", h.addVideoResult)
 	api.HandleFunc("GET /api/settings", h.getSettings)
 	api.HandleFunc("PUT /api/settings", h.putSettings)
 	api.HandleFunc("POST /api/admin/reload", h.reload)
@@ -313,6 +318,40 @@ func (h *handler) addMockResult(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusCreated, saved)
 }
 
+func (h *handler) videoList(w http.ResponseWriter, _ *http.Request) {
+	writeJSON(w, http.StatusOK, h.svc.Videos())
+}
+
+func (h *handler) videoOne(w http.ResponseWriter, r *http.Request) {
+	v, err := h.svc.Video(r.PathValue("id"))
+	if err != nil {
+		h.fail(w, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, v)
+}
+
+func (h *handler) videoResults(w http.ResponseWriter, _ *http.Request) {
+	writeJSON(w, http.StatusOK, h.svc.VideoResults())
+}
+
+func (h *handler) addVideoResult(w http.ResponseWriter, r *http.Request) {
+	var res video.Result
+	if !decode(w, r, &res) {
+		return
+	}
+	saved, err := h.svc.AddVideoResult(r.Context(), res)
+	if errors.Is(err, study.ErrInvalid) {
+		writeError(w, http.StatusBadRequest, err.Error())
+		return
+	}
+	if err != nil {
+		h.fail(w, err)
+		return
+	}
+	writeJSON(w, http.StatusCreated, saved)
+}
+
 // reload re-reads the sheet after it was edited by hand and says what was loaded.
 func (h *handler) reload(w http.ResponseWriter, r *http.Request) {
 	if err := h.svc.Reload(r.Context()); err != nil {
@@ -325,11 +364,14 @@ func (h *handler) reload(w http.ResponseWriter, r *http.Request) {
 		"grammarProblems": h.svc.GrammarProblems(),
 		"readingSets":     len(h.svc.Reading().Sets),
 		"readingProblems": h.svc.ReadingProblems(),
+		"videos":          len(h.svc.Videos()),
+		"videoProblems":   h.svc.VideoProblems(),
 	})
 }
 
 func (h *handler) fail(w http.ResponseWriter, err error) {
-	if errors.Is(err, study.ErrWordNotFound) || errors.Is(err, study.ErrLessonNotFound) || errors.Is(err, study.ErrSetNotFound) {
+	if errors.Is(err, study.ErrWordNotFound) || errors.Is(err, study.ErrLessonNotFound) || errors.Is(err, study.ErrSetNotFound) ||
+		errors.Is(err, study.ErrVideoNotFound) {
 		writeError(w, http.StatusNotFound, err.Error())
 		return
 	}

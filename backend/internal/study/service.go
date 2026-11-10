@@ -16,6 +16,7 @@ import (
 
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/grammar"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/reading"
+	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/video"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/vocab"
 )
 
@@ -23,6 +24,7 @@ var (
 	ErrWordNotFound   = errors.New("word not found")
 	ErrLessonNotFound = errors.New("lesson not found")
 	ErrSetNotFound    = errors.New("reading set not found")
+	ErrVideoNotFound  = errors.New("video not found")
 	// ErrInvalid wraps a request the service refuses to save.
 	ErrInvalid = errors.New("invalid")
 	// ErrLogNotSaved means the answer counted but its history row could not be written.
@@ -43,6 +45,9 @@ type Store interface {
 	LoadReading(ctx context.Context) (reading.Tables, error)
 	LoadMockResults(ctx context.Context) ([]reading.MockResult, error)
 	AppendMockResult(ctx context.Context, r reading.MockResult) error
+	LoadVideos(ctx context.Context) (video.Tables, error)
+	LoadVideoResults(ctx context.Context) ([]video.Result, error)
+	AppendVideoResult(ctx context.Context, r video.Result) error
 }
 
 // WordView is a word together with the learner's progress on it.
@@ -72,6 +77,10 @@ type Service struct {
 	reading         reading.Content
 	readingProblems []string
 	mocks           []reading.MockResult
+
+	videos        []video.Video
+	videoProblems []string
+	videoResults  []video.Result
 }
 
 func NewService(ctx context.Context, store Store, loc *time.Location) (*Service, error) {
@@ -115,6 +124,15 @@ func (s *Service) Reload(ctx context.Context) error {
 	if err != nil {
 		return fmt.Errorf("load mock results: %w", err)
 	}
+	videoTables, err := s.store.LoadVideos(ctx)
+	if err != nil {
+		return fmt.Errorf("load videos: %w", err)
+	}
+	videos, videoProblems := video.Assemble(videoTables)
+	videoResults, err := s.store.LoadVideoResults(ctx)
+	if err != nil {
+		return fmt.Errorf("load video results: %w", err)
+	}
 
 	byID := make(map[int]vocab.Word, len(words))
 	for _, w := range words {
@@ -129,6 +147,7 @@ func (s *Service) Reload(ctx context.Context) error {
 	s.words, s.wordByID, s.progress, s.settings, s.log = words, byID, pm, settingsFromMap(kv), log
 	s.lessons, s.grammarProblems = lessons, problems
 	s.reading, s.readingProblems, s.mocks = readingContent, readingProblems, mocks
+	s.videos, s.videoProblems, s.videoResults = videos, videoProblems, videoResults
 	s.mu.Unlock()
 	return nil
 }
@@ -260,6 +279,72 @@ func (s *Service) ReadingProblems() []string {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 	return append([]string{}, s.readingProblems...)
+}
+
+// ---- videos ----
+
+// Videos lists every video that has subtitles, in sheet order.
+func (s *Service) Videos() []video.Summary {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	out := make([]video.Summary, len(s.videos))
+	for i, v := range s.videos {
+		out[i] = v.Summary()
+	}
+	return out
+}
+
+func (s *Service) Video(id string) (video.Video, error) {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	for _, v := range s.videos {
+		if v.ID == id {
+			return v, nil
+		}
+	}
+	return video.Video{}, ErrVideoNotFound
+}
+
+// VideoProblems lists video rows that were left out at the last load. Never nil.
+func (s *Service) VideoProblems() []string {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	return append([]string{}, s.videoProblems...)
+}
+
+// VideoResults returns every video practice result, newest first.
+func (s *Service) VideoResults() []video.Result {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	out := slices.Clone(s.videoResults)
+	slices.Reverse(out)
+	if out == nil {
+		out = []video.Result{}
+	}
+	return out
+}
+
+func (s *Service) AddVideoResult(ctx context.Context, r video.Result) (video.Result, error) {
+	now := s.now().In(s.loc)
+	r.Date, r.Time = vocab.FormatDate(now), now.Format("15:04")
+	if r.Missed == nil {
+		r.Missed = []string{}
+	}
+	if err := r.Validate(); err != nil {
+		return r, fmt.Errorf("%w: %w", ErrInvalid, err)
+	}
+	if _, err := s.Video(r.VideoID); err != nil {
+		return r, fmt.Errorf("%w: no video %s", ErrInvalid, r.VideoID)
+	}
+	s.writeMu.Lock()
+	defer s.writeMu.Unlock()
+	if err := s.store.AppendVideoResult(ctx, r); err != nil {
+		return r, fmt.Errorf("save video result: %w", err)
+	}
+	s.mu.Lock()
+	s.videoResults = append(s.videoResults, r)
+	s.mu.Unlock()
+	return r, nil
 }
 
 // ---- settings ----

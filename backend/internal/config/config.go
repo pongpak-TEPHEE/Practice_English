@@ -16,6 +16,7 @@ type Config struct {
 	WordsCSV       string // memory store only: optional comma-separated word list files to load
 	GrammarDir     string // memory store only: optional folder of grammar lesson JSON files
 	ReadingDir     string // memory store only: optional folder of reading set JSON files
+	VideosFile     string // memory store only: optional JSON file of videos, for testing without the sheet
 	SheetID        string
 	Credentials    []byte
 	APIToken       string
@@ -30,6 +31,7 @@ func Load() (Config, error) {
 		WordsCSV:   os.Getenv("WORDS_CSV"),
 		GrammarDir: os.Getenv("GRAMMAR_DIR"),
 		ReadingDir: os.Getenv("READING_DIR"),
+		VideosFile: os.Getenv("VIDEOS_FILE"),
 		SheetID:    os.Getenv("GOOGLE_SHEET_ID"),
 		APIToken:   os.Getenv("API_TOKEN"),
 	}

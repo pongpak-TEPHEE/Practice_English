@@ -3,6 +3,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"log/slog"
@@ -19,6 +20,7 @@ import (
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/store/memstore"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/store/sheetstore"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/study"
+	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/video"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/vocab"
 )
 
@@ -66,8 +68,11 @@ func run(log *slog.Logger) error {
 	for _, p := range svc.ReadingProblems() {
 		log.Warn("reading row skipped", "problem", p)
 	}
+	for _, p := range svc.VideoProblems() {
+		log.Warn("video row skipped", "problem", p)
+	}
 	log.Info("listening", "addr", srv.Addr, "store", cfg.Store, "words", st.Total, "dueToday", st.DueToday,
-		"grammarLessons", len(svc.GrammarLessons()), "readingSets", len(svc.Reading().Sets))
+		"grammarLessons", len(svc.GrammarLessons()), "readingSets", len(svc.Reading().Sets), "videos", len(svc.Videos()))
 
 	errCh := make(chan error, 1)
 	go func() { errCh <- srv.ListenAndServe() }()
@@ -118,6 +123,17 @@ func buildStore(ctx context.Context, cfg config.Config) (study.Store, error) {
 			return nil, fmt.Errorf("READING_DIR: %w", err)
 		}
 		mem.SetReading(reading.Flatten(content))
+	}
+	if cfg.VideosFile != "" {
+		data, err := os.ReadFile(cfg.VideosFile)
+		if err != nil {
+			return nil, fmt.Errorf("VIDEOS_FILE: %w", err)
+		}
+		var videos []video.Video
+		if err := json.Unmarshal(data, &videos); err != nil {
+			return nil, fmt.Errorf("VIDEOS_FILE: %w", err)
+		}
+		mem.SetVideos(video.Flatten(videos))
 	}
 	return mem, nil
 }

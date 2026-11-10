@@ -98,3 +98,26 @@ ETS material. Like grammar, these files only seed the sheet:
   shuffled on screen.
 - A set without passages or questions, or a question whose answer is not among
   its options, is skipped and listed on the settings page.
+
+## Listening videos — edited only in the sheet
+
+Videos and their subtitles live only in the Google Sheet; there is no seed file
+here, because subtitles of songs and shows belong to their owners. Columns are
+found by their name in row 1, so their order does not matter and extra columns
+are ignored.
+
+| Tab | Columns |
+|---|---|
+| `Videos` | video_id (the 11-character id or a YouTube link), title, category, difficulty |
+| `Transcripts` | video_id, order_index, start_sec, end_sec, text_en, text_th |
+| `video_results` | written by the app: date, time, video_id, mode, lines_done, lines_total, words_correct, words_total, replays, seconds, missed |
+
+- Lines are played in `order_index` order and the video pauses at `end_sec` until the line is typed.
+- Words in brackets, e.g. `(Ariana)` or `(side to side)`, are shown but not typed,
+  unless the whole line is in brackets. Case and punctuation are ignored when checking.
+- A line whose times are not numbers, ends before it starts, or starts before
+  the line above it is skipped and listed on the settings page. A video with no
+  usable lines is not shown.
+- `difficulty` is shown as ง่าย / ปานกลาง / ยาก for Easy / Medium / Hard, or as written.
+- For testing without the sheet, the memory store reads `VIDEOS_FILE`, a JSON list
+  in the shape returned by `GET /api/videos/{id}`.

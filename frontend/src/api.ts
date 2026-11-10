@@ -1,5 +1,6 @@
 import type { Lesson, LessonSummary } from "./grammar/types";
 import type { MockResult, ReadingOverview, ReadingSet } from "./reading/types";
+import type { Video, VideoResult, VideoSummary } from "./video/types";
 import type { Achievements, Day, Mode, Result, Settings, Stats, Today, Word } from "./types";
 
 // Empty in development (Vite proxies /api); set VITE_API_URL to the Render URL for production.
@@ -76,6 +77,10 @@ export const api = {
   mockResults: (part: number) => request<MockResult[]>("GET", `/api/mock-results?part=${part}`),
   saveMockResult: (r: MockResult) => request<MockResult>("POST", "/api/mock-results", r),
   readingSet: (id: string) => request<ReadingSet>("GET", `/api/reading/${encodeURIComponent(id)}`),
+  videos: () => request<VideoSummary[]>("GET", "/api/videos"),
+  video: (id: string) => request<Video>("GET", `/api/videos/${encodeURIComponent(id)}`),
+  videoResults: () => request<VideoResult[]>("GET", "/api/video-results"),
+  saveVideoResult: (r: VideoResult) => request<VideoResult>("POST", "/api/video-results", r),
   // Re-reads the Google Sheet after it was edited by hand.
   reload: () => request<ReloadReport>("POST", "/api/admin/reload"),
   stats: () => request<Stats>("GET", "/api/stats"),
@@ -89,4 +94,6 @@ export interface ReloadReport {
   grammarProblems: string[];
   readingSets: number;
   readingProblems: string[];
+  videos: number;
+  videoProblems: string[];
 }

@@ -10,6 +10,7 @@
 //	log:      date | time | word_id | mode | result   (one row per answer)
 //	grammar_*: grammar lessons, see package grammar for the five tabs' columns
 //	reading_*: Reading Part 6 and 7 sets, see package reading
+//	Videos, Transcripts: listening videos edited by hand, video_results: practice scores; see package video
 package sheetstore
 
 import (
@@ -29,6 +30,7 @@ import (
 
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/grammar"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/reading"
+	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/video"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/vocab"
 )
 
@@ -277,6 +279,55 @@ func (s *Store) AppendMockResult(ctx context.Context, r reading.MockResult) erro
 	return err
 }
 
+// LoadVideos reads the two video tabs whole, header row included, because the
+// columns are found by name. Numbers are read unformatted so a cell shown with
+// fewer decimals still gives the exact time.
+func (s *Store) LoadVideos(ctx context.Context) (video.Tables, error) {
+	ranges := []string{video.TabVideos + "!A1:Z", video.TabTranscripts + "!A1:Z"}
+	resp, err := s.api.Spreadsheets.Values.BatchGet(s.spreadsheetID).Ranges(ranges...).
+		ValueRenderOption("UNFORMATTED_VALUE").Context(ctx).Do()
+	if err != nil {
+		return nil, fmt.Errorf("read %s: %w", strings.Join(ranges, ", "), err)
+	}
+	out := video.Tables{}
+	for i, vr := range resp.ValueRanges {
+		rows := make([][]string, len(vr.Values))
+		for r, row := range vr.Values {
+			rows[r] = make([]string, len(row))
+			for c := range row {
+				rows[r][c] = cell(row, c)
+			}
+		}
+		out[[]string{video.TabVideos, video.TabTranscripts}[i]] = rows
+	}
+	return out, nil
+}
+
+// LoadVideoResults reads every video practice result; rows that can't be read are skipped.
+func (s *Store) LoadVideoResults(ctx context.Context) ([]video.Result, error) {
+	rows, err := s.readRows(ctx, video.TabResults+"!A2:K")
+	if err != nil {
+		return nil, err
+	}
+	out := []video.Result{}
+	for _, row := range rows {
+		cells := make([]string, len(row))
+		for i := range row {
+			cells[i] = cell(row, i)
+		}
+		if r, err := video.ParseResultRow(cells); err == nil {
+			out = append(out, r)
+		}
+	}
+	return out, nil
+}
+
+func (s *Store) AppendVideoResult(ctx context.Context, r video.Result) error {
+	_, err := s.api.Spreadsheets.Values.Append(s.spreadsheetID, video.TabResults+"!A:K", &sheets.ValueRange{Values: [][]any{video.ResultRow(r)}}).
+		ValueInputOption("RAW").InsertDataOption("INSERT_ROWS").Context(ctx).Do()
+	return err
+}
+
 func toAny(ss []string) []any {
 	out := make([]any, len(ss))
 	for i, v := range ss {
@@ -296,9 +347,22 @@ func (s *Store) Setup(ctx context.Context) error {
 		have[sh.Properties.Title] = true
 	}
 	var add []*sheets.Request
-	tabs := []string{wordsTab, progressTab, settingsTab, logTab, mockTab}
+	tabs := []string{wordsTab, progressTab, settingsTab, logTab, mockTab, video.TabResults}
 	for _, t := range contentTabs() {
 		tabs = append(tabs, t.name)
+	}
+	// The video tabs are edited by hand: create them with a header only when missing,
+	// and never rewrite a header the learner may have changed.
+	var videoHeaders []*sheets.ValueRange
+	for _, t := range []struct {
+		name   string
+		header []string
+	}{{video.TabVideos, video.VideosHeader}, {video.TabTranscripts, video.TranscriptsHeader}} {
+		if !have[t.name] {
+			tabs = append(tabs, t.name)
+			videoHeaders = append(videoHeaders, &sheets.ValueRange{
+				Range: fmt.Sprintf("%s!A1:%s1", t.name, column(len(t.header))), Values: [][]any{toAny(t.header)}})
+		}
 	}
 	for _, tab := range tabs {
 		if !have[tab] {
@@ -322,7 +386,8 @@ func (s *Store) Setup(ctx context.Context) error {
 			{Range: settingsTab + "!A1:B1", Values: [][]any{settingsHeader}},
 			{Range: logTab + "!A1:E1", Values: [][]any{logHeader}},
 			{Range: mockTab + "!A1:I1", Values: [][]any{toAny(reading.MockHeader)}},
-		}, contentHeaders()...),
+			{Range: video.TabResults + "!A1:K1", Values: [][]any{toAny(video.ResultHeader)}},
+		}, append(contentHeaders(), videoHeaders...)...),
 	}).Context(ctx).Do()
 	if err != nil {
 		return fmt.Errorf("write headers: %w", err)

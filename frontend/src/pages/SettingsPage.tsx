@@ -172,6 +172,8 @@ function SheetReload({ onError }: { onError: (e: Error) => void }) {
   const [busy, setBusy] = useState(false);
   const [report, setReport] = useState<ReloadReport | null>(null);
 
+  const problems = report ? [...report.grammarProblems, ...report.readingProblems, ...report.videoProblems] : [];
+
   const reload = async () => {
     setBusy(true);
     setReport(null);
@@ -187,7 +189,7 @@ function SheetReload({ onError }: { onError: (e: Error) => void }) {
   return (
     <section>
       <h3>ข้อมูลใน Google Sheet</h3>
-      <p className="help">แก้คำศัพท์หรือบทเรียนใน Google Sheet แล้วกดปุ่มนี้เพื่อให้เว็บใช้ข้อมูลล่าสุด</p>
+      <p className="help">แก้คำศัพท์ บทเรียน หรือวิดีโอใน Google Sheet แล้วกดปุ่มนี้เพื่อให้เว็บใช้ข้อมูลล่าสุด</p>
       <button type="button" className="secondary wide" disabled={busy} onClick={reload}>
         {busy ? "กำลังโหลด" : "โหลดข้อมูลใหม่จาก Google Sheet"}
       </button>
@@ -195,15 +197,13 @@ function SheetReload({ onError }: { onError: (e: Error) => void }) {
         <div className="reload-report" role="status">
           <p>
             โหลดแล้ว: คำศัพท์ {report.words.toLocaleString()} คำ บทเรียนไวยากรณ์ {report.lessons} บท ชุดฝึกการอ่าน{" "}
-            {report.readingSets} ชุด
+            {report.readingSets} ชุด วิดีโอ {report.videos} เรื่อง
           </p>
-          {report.grammarProblems.length > 0 && (
+          {problems.length > 0 && (
             <>
-              <p className="notice">
-                มี {report.grammarProblems.length} แถวในแท็บบทเรียนที่ใช้ไม่ได้ จึงไม่แสดงในเว็บ:
-              </p>
+              <p className="notice">มี {problems.length} แถวใน Google Sheet ที่ใช้ไม่ได้ จึงไม่แสดงในเว็บ:</p>
               <ul className="problems">
-                {report.grammarProblems.map((p) => (
+                {problems.map((p) => (
                   <li key={p}>{p}</li>
                 ))}
               </ul>

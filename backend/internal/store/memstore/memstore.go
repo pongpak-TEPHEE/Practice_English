@@ -11,6 +11,7 @@ import (
 
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/grammar"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/reading"
+	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/video"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/vocab"
 )
 
@@ -23,6 +24,8 @@ type Store struct {
 	grammar  grammar.Tables
 	reading  reading.Tables
 	mocks    []reading.MockResult
+	videos   video.Tables
+	vresults []video.Result
 }
 
 func New(words []vocab.Word) *Store {
@@ -114,5 +117,31 @@ func (s *Store) AppendMockResult(_ context.Context, r reading.MockResult) error 
 	s.mu.Lock()
 	defer s.mu.Unlock()
 	s.mocks = append(s.mocks, r)
+	return nil
+}
+
+// SetVideos stores videos in their sheet form.
+func (s *Store) SetVideos(t video.Tables) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	s.videos = t
+}
+
+func (s *Store) LoadVideos(context.Context) (video.Tables, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	return maps.Clone(s.videos), nil
+}
+
+func (s *Store) LoadVideoResults(context.Context) ([]video.Result, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	return slices.Clone(s.vresults), nil
+}
+
+func (s *Store) AppendVideoResult(_ context.Context, r video.Result) error {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	s.vresults = append(s.vresults, r)
 	return nil
 }
