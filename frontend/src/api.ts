@@ -1,3 +1,4 @@
+import type { Lesson, LessonSummary } from "./grammar/types";
 import type { Achievements, Day, Mode, Result, Settings, Stats, Today, Word } from "./types";
 
 // Empty in development (Vite proxies /api); set VITE_API_URL to the Render URL for production.
@@ -67,7 +68,17 @@ export const api = {
   history: (level?: string, days = 30) =>
     request<Day[]>("GET", `/api/history?days=${days}${level ? `&level=${level}` : ""}`),
   achievements: () => request<Achievements>("GET", "/api/achievements"),
+  grammarLessons: () => request<LessonSummary[]>("GET", "/api/grammar"),
+  grammarLesson: (id: string) => request<Lesson>("GET", `/api/grammar/${encodeURIComponent(id)}`),
+  // Re-reads the Google Sheet after it was edited by hand.
+  reload: () => request<ReloadReport>("POST", "/api/admin/reload"),
   stats: () => request<Stats>("GET", "/api/stats"),
   settings: () => request<Settings>("GET", "/api/settings"),
   saveSettings: (s: Partial<Settings>) => request<Settings>("PUT", "/api/settings", s),
 };
+
+export interface ReloadReport {
+  words: number;
+  lessons: number;
+  grammarProblems: string[];
+}

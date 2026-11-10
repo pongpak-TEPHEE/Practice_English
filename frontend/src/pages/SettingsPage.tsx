@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { api, setToken } from "../api";
+import type { ReloadReport } from "../api";
 import type { Settings } from "../types";
 
 interface Props {
@@ -107,6 +108,8 @@ export function SettingsPage({ onSaved, onError, onSignOut }: Props) {
         {status}
       </p>
 
+      <SheetReload onError={onError} />
+
       <section>
         <h3>อุปกรณ์นี้</h3>
         <button
@@ -160,5 +163,53 @@ export function Stepper({ label, value, min, max, suffix = "", step = 1, onChang
         </button>
       </div>
     </div>
+  );
+}
+
+// After editing words or lessons in the Google Sheet, this loads the changes
+// without restarting the server, and lists any rows that could not be used.
+function SheetReload({ onError }: { onError: (e: Error) => void }) {
+  const [busy, setBusy] = useState(false);
+  const [report, setReport] = useState<ReloadReport | null>(null);
+
+  const reload = async () => {
+    setBusy(true);
+    setReport(null);
+    try {
+      setReport(await api.reload());
+    } catch (e) {
+      onError(e as Error);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <section>
+      <h3>ข้อมูลใน Google Sheet</h3>
+      <p className="help">แก้คำศัพท์หรือบทเรียนใน Google Sheet แล้วกดปุ่มนี้เพื่อให้เว็บใช้ข้อมูลล่าสุด</p>
+      <button type="button" className="secondary wide" disabled={busy} onClick={reload}>
+        {busy ? "กำลังโหลด" : "โหลดข้อมูลใหม่จาก Google Sheet"}
+      </button>
+      {report && (
+        <div className="reload-report" role="status">
+          <p>
+            โหลดแล้ว: คำศัพท์ {report.words.toLocaleString()} คำ บทเรียนไวยากรณ์ {report.lessons} บท
+          </p>
+          {report.grammarProblems.length > 0 && (
+            <>
+              <p className="notice">
+                มี {report.grammarProblems.length} แถวในแท็บบทเรียนที่ใช้ไม่ได้ จึงไม่แสดงในเว็บ:
+              </p>
+              <ul className="problems">
+                {report.grammarProblems.map((p) => (
+                  <li key={p}>{p}</li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
+      )}
+    </section>
   );
 }

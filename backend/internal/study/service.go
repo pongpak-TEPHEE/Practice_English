@@ -14,11 +14,13 @@ import (
 	"sync"
 	"time"
 
+	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/grammar"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/vocab"
 )
 
 var (
-	ErrWordNotFound = errors.New("word not found")
+	ErrWordNotFound   = errors.New("word not found")
+	ErrLessonNotFound = errors.New("lesson not found")
 	// ErrLogNotSaved means the answer counted but its history row could not be written.
 	ErrLogNotSaved = errors.New("answer saved but history not recorded")
 )
@@ -33,6 +35,7 @@ type Store interface {
 	SaveSettings(ctx context.Context, kv map[string]string) error
 	LoadLog(ctx context.Context) ([]vocab.LogEntry, error)
 	AppendLog(ctx context.Context, es ...vocab.LogEntry) error
+	LoadGrammar(ctx context.Context) (grammar.Tables, error)
 }
 
 // WordView is a word together with the learner's progress on it.
@@ -55,6 +58,9 @@ type Service struct {
 	progress map[int]vocab.Progress
 	settings Settings
 	log      []vocab.LogEntry
+
+	lessons         []grammar.Lesson
+	grammarProblems []string // rows in the grammar tabs that could not be used
 }
 
 func NewService(ctx context.Context, store Store, loc *time.Location) (*Service, error) {
@@ -84,6 +90,11 @@ func (s *Service) Reload(ctx context.Context) error {
 	if err != nil {
 		return fmt.Errorf("load log: %w", err)
 	}
+	tables, err := s.store.LoadGrammar(ctx)
+	if err != nil {
+		return fmt.Errorf("load grammar: %w", err)
+	}
+	lessons, problems := grammar.Assemble(tables)
 
 	byID := make(map[int]vocab.Word, len(words))
 	for _, w := range words {
@@ -96,6 +107,7 @@ func (s *Service) Reload(ctx context.Context) error {
 
 	s.mu.Lock()
 	s.words, s.wordByID, s.progress, s.settings, s.log = words, byID, pm, settingsFromMap(kv), log
+	s.lessons, s.grammarProblems = lessons, problems
 	s.mu.Unlock()
 	return nil
 }
@@ -113,6 +125,37 @@ func (s *Service) view(w vocab.Word) WordView {
 	}
 	v.Status = vocab.StatusOf(v.Progress, s.settings.Tiers)
 	return v
+}
+
+// ---- grammar ----
+
+func (s *Service) GrammarLessons() []grammar.Summary {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	out := make([]grammar.Summary, len(s.lessons))
+	for i, l := range s.lessons {
+		out[i] = l.Summarize()
+	}
+	return out
+}
+
+func (s *Service) GrammarLesson(id string) (grammar.Lesson, error) {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	for _, l := range s.lessons {
+		if l.ID == id {
+			return l, nil
+		}
+	}
+	return grammar.Lesson{}, ErrLessonNotFound
+}
+
+// GrammarProblems lists grammar rows that were left out at the last load.
+// It is never nil, so the API always sends a list.
+func (s *Service) GrammarProblems() []string {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	return append([]string{}, s.grammarProblems...)
 }
 
 // ---- settings ----

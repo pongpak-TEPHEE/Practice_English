@@ -1,3 +1,4 @@
+// Lessons are stored in the Google Sheet (grammar_* tabs) and served by the API.
 export interface Rule {
   word: string; // the word or phrase this row is about
   use: string; // when to use it, in Thai
@@ -13,7 +14,7 @@ export interface Example {
 // A Part 5-style question: one sentence, one blank, four options.
 export interface Drill {
   sentence: string; // "___" marks the blank
-  options: [string, string, string, string];
+  options: string[]; // always four; the server drops drills that don't have them
   answer: string;
   why: string; // shown after answering, in Thai: why the answer fits and why the others don't
 }
@@ -40,6 +41,16 @@ export interface Analysis {
   covers: string[];
   notCovered: string[];
   note: string;
+}
+
+// A lesson in the lesson list, without its content.
+export interface LessonSummary {
+  id: string;
+  title: string;
+  english: string;
+  summary: string;
+  sections: number;
+  drills: number;
 }
 
 export interface Lesson {

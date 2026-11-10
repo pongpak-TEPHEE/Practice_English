@@ -13,6 +13,7 @@ import (
 	"time"
 
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/config"
+	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/grammar"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/httpapi"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/store/memstore"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/store/sheetstore"
@@ -58,7 +59,11 @@ func run(log *slog.Logger) error {
 		ReadHeaderTimeout: 10 * time.Second,
 	}
 	st := svc.Stats()
-	log.Info("listening", "addr", srv.Addr, "store", cfg.Store, "words", st.Total, "dueToday", st.DueToday)
+	for _, p := range svc.GrammarProblems() {
+		log.Warn("grammar row skipped", "problem", p)
+	}
+	log.Info("listening", "addr", srv.Addr, "store", cfg.Store, "words", st.Total, "dueToday", st.DueToday,
+		"grammarLessons", len(svc.GrammarLessons()))
 
 	errCh := make(chan error, 1)
 	go func() { errCh <- srv.ListenAndServe() }()
@@ -95,5 +100,13 @@ func buildStore(ctx context.Context, cfg config.Config) (study.Store, error) {
 			return nil, fmt.Errorf("WORDS_CSV: %w", err)
 		}
 	}
-	return memstore.New(words), nil
+	mem := memstore.New(words)
+	if cfg.GrammarDir != "" {
+		lessons, err := grammar.ReadDir(cfg.GrammarDir)
+		if err != nil {
+			return nil, fmt.Errorf("GRAMMAR_DIR: %w", err)
+		}
+		mem.SetGrammar(grammar.Flatten(lessons))
+	}
+	return mem, nil
 }

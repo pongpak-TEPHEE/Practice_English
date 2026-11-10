@@ -14,6 +14,7 @@ type Config struct {
 	Port           string
 	Store          string // "memory" or "sheets"
 	WordsCSV       string // memory store only: optional comma-separated word list files to load
+	GrammarDir     string // memory store only: optional folder of grammar lesson JSON files
 	SheetID        string
 	Credentials    []byte
 	APIToken       string
@@ -23,11 +24,12 @@ type Config struct {
 
 func Load() (Config, error) {
 	c := Config{
-		Port:     env("PORT", "8080"),
-		Store:    env("STORE", "memory"),
-		WordsCSV: os.Getenv("WORDS_CSV"),
-		SheetID:  os.Getenv("GOOGLE_SHEET_ID"),
-		APIToken: os.Getenv("API_TOKEN"),
+		Port:       env("PORT", "8080"),
+		Store:      env("STORE", "memory"),
+		WordsCSV:   os.Getenv("WORDS_CSV"),
+		GrammarDir: os.Getenv("GRAMMAR_DIR"),
+		SheetID:    os.Getenv("GOOGLE_SHEET_ID"),
+		APIToken:   os.Getenv("API_TOKEN"),
 	}
 	for _, o := range strings.Split(env("ALLOWED_ORIGINS", "http://localhost:5173"), ",") {
 		if o = strings.TrimSpace(o); o != "" {

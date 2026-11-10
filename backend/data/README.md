@@ -37,3 +37,37 @@ What this file contains and how it was changed from the TSL:
 
 Because this file adapts the TSL, it is shared under the same
 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) license.
+
+## grammar/ — grammar lessons
+
+One JSON file per lesson (loaded in file-name order). These files only seed the
+Google Sheet; once seeded, **the sheet is the source the app reads**, so edit
+lessons there and press "โหลดข้อมูลใหม่จาก Google Sheet" on the settings page.
+
+    go run ./cmd/seed -grammar data/grammar          # first time
+    go run ./cmd/seed -grammar data/grammar -force   # replace what is in the sheet
+
+The seed refuses files with any problem; the app is more forgiving of the sheet
+(see below).
+
+### How lessons are laid out in the sheet
+
+Rows show in the app in the same order as in the sheet. `lesson_id` and
+`section_id` link the tabs together.
+
+| Tab | Columns |
+|---|---|
+| `grammar_lessons` | lesson_id, title, english, summary, parts, questions, points, covers, not_covered, note, strategy |
+| `grammar_sections` | lesson_id, section_id, title, priority (`high` / `medium` / `basic`), intro, tip |
+| `grammar_rules` | lesson_id, section_id, word, use, examples |
+| `grammar_examples` | lesson_id, section_id, en, th, mark (the part of `en` to highlight) |
+| `grammar_drills` | lesson_id, section_id, sentence (with one `___`), option_a–option_d, answer, why |
+
+`covers`, `not_covered` and `strategy` hold one item per line inside the cell
+(Ctrl/Cmd+Enter makes a new line in Google Sheets).
+
+When the app loads the sheet, a row it cannot use is skipped and listed on the
+settings page with its tab and row number: a drill whose answer is not one of its
+four options, a sentence without exactly one `___`, a duplicate or unknown id, and
+so on. An unknown priority falls back to `medium`, and an example whose `mark`
+is not in the sentence is shown without a highlight.

@@ -11,6 +11,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/grammar"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/store/memstore"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/study"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/vocab"
@@ -20,7 +21,16 @@ const token = "secret"
 
 func newServer(t *testing.T) *httptest.Server {
 	t.Helper()
-	svc, err := study.NewService(context.Background(), memstore.New(vocab.SampleWords()), time.UTC)
+	store := memstore.New(vocab.SampleWords())
+	store.SetGrammar(grammar.Tables{
+		grammar.TabLessons:  {{"time", "เวลา", "Time", "at / on / in"}},
+		grammar.TabSections: {{"time", "clock", "เวลาเป๊ะ", "high", "ใช้ at"}},
+		grammar.TabDrills: {
+			{"time", "clock", "Leave ___ 9.", "at", "on", "in", "by", "at", "เวลาเป๊ะใช้ at"},
+			{"time", "clock", "Leave ___ 9.", "at", "on", "in", "by", "for", "คำตอบไม่อยู่ในตัวเลือก"},
+		},
+	})
+	svc, err := study.NewService(context.Background(), store, time.UTC)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -209,6 +219,50 @@ func TestAnswerBatch(t *testing.T) {
 	call(t, srv, "GET", "/api/history", "", &hist)
 	if len(hist) != 1 || len(hist[0].Learned) != 2 || hist[0].Learned[0].Fails != 1 || hist[0].Learned[0].Passes != 1 {
 		t.Errorf("history = %+v", hist)
+	}
+}
+
+func TestReloadWithoutProblemsSendsEmptyList(t *testing.T) {
+	svc, err := study.NewService(context.Background(), memstore.New(vocab.SampleWords()), time.UTC)
+	if err != nil {
+		t.Fatal(err)
+	}
+	srv := httptest.NewServer(NewHandler(svc, Options{Logger: slog.New(slog.NewTextHandler(io.Discard, nil))}))
+	defer srv.Close()
+	resp, err := http.Post(srv.URL+"/api/admin/reload", "application/json", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer resp.Body.Close()
+	b, _ := io.ReadAll(resp.Body)
+	if !strings.Contains(string(b), `"grammarProblems":[]`) {
+		t.Errorf("reload body = %s, want an empty grammarProblems list", b)
+	}
+}
+
+func TestGrammar(t *testing.T) {
+	srv := newServer(t)
+	var list []grammar.Summary
+	if code := call(t, srv, "GET", "/api/grammar", "", &list); code != 200 || len(list) != 1 || list[0].Drills != 1 {
+		t.Fatalf("list: %d %+v", code, list)
+	}
+	var lesson grammar.Lesson
+	if code := call(t, srv, "GET", "/api/grammar/time", "", &lesson); code != 200 || lesson.Sections[0].Priority != "high" {
+		t.Fatalf("lesson: %d %+v", code, lesson)
+	}
+	if code := call(t, srv, "GET", "/api/grammar/nope", "", nil); code != 404 {
+		t.Errorf("unknown lesson: status %d, want 404", code)
+	}
+	var report struct {
+		Words           int      `json:"words"`
+		Lessons         int      `json:"lessons"`
+		GrammarProblems []string `json:"grammarProblems"`
+	}
+	if code := call(t, srv, "POST", "/api/admin/reload", "", &report); code != 200 {
+		t.Fatalf("reload: %d", code)
+	}
+	if report.Words != 10 || report.Lessons != 1 || len(report.GrammarProblems) != 1 {
+		t.Errorf("reload report = %+v", report)
 	}
 }
 

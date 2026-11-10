@@ -177,8 +177,8 @@ export function App() {
           </p>
         )}
         {page === "home" && <HomePage onError={handleError} />}
-        {page === "grammar" && <GrammarPage />}
-        {page === "lesson" && <LessonPage id={lessonId} accent={accent} />}
+        {page === "grammar" && <GrammarPage onError={handleError} />}
+        {page === "lesson" && <LessonPage id={lessonId} accent={accent} onError={handleError} />}
         {page === "vocab" && <VocabPage key={level} level={level} onLevel={changeLevel} onError={handleError} />}
         {page === "learn" && <LearnPage key={level} onStart={start} onError={handleError} />}
         {page === "review" && <ReviewPage level={level} onStart={start} onError={handleError} />}

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { speak } from "../audio";
 import { Drill } from "../components/Drill";
-import { findLesson } from "../grammar";
+import { api, ApiError } from "../api";
 import type { Drill as DrillData, Example, Lesson, Priority } from "../grammar/types";
 import { shuffle } from "../shuffle";
 import type { Accent } from "../types";
@@ -15,8 +15,30 @@ const PRIORITY_LABEL: Record<Priority, string> = {
   basic: "พื้นฐาน",
 };
 
-export function LessonPage({ id, accent }: { id: string; accent: Accent }) {
-  const lesson = findLesson(id);
+interface Props {
+  id: string;
+  accent: Accent;
+  onError: (e: Error) => void;
+}
+
+export function LessonPage({ id, accent, onError }: Props) {
+  const [lesson, setLesson] = useState<Lesson | null | undefined>(undefined); // null = not found
+
+  useEffect(() => {
+    api
+      .grammarLesson(id)
+      .then(setLesson)
+      .catch((e: Error) => {
+        if (e instanceof ApiError && e.status === 404) setLesson(null);
+        else onError(e);
+      });
+  }, [id]);
+
+  if (lesson === undefined) return <p className="loading">กำลังโหลด</p>;
+  return <LessonView lesson={lesson} accent={accent} />;
+}
+
+function LessonView({ lesson, accent }: { lesson: Lesson | null; accent: Accent }) {
   const [quiz, setQuiz] = useState(false);
 
   if (!lesson) {

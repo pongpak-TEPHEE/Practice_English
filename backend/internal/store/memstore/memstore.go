@@ -9,6 +9,7 @@ import (
 	"slices"
 	"sync"
 
+	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/grammar"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/vocab"
 )
 
@@ -18,6 +19,7 @@ type Store struct {
 	progress map[int]vocab.Progress
 	settings map[string]string
 	log      []vocab.LogEntry
+	grammar  grammar.Tables
 }
 
 func New(words []vocab.Word) *Store {
@@ -71,4 +73,17 @@ func (s *Store) AppendLog(_ context.Context, es ...vocab.LogEntry) error {
 	defer s.mu.Unlock()
 	s.log = append(s.log, es...)
 	return nil
+}
+
+// SetGrammar stores grammar lessons in their sheet form.
+func (s *Store) SetGrammar(t grammar.Tables) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	s.grammar = maps.Clone(t)
+}
+
+func (s *Store) LoadGrammar(context.Context) (grammar.Tables, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	return maps.Clone(s.grammar), nil
 }

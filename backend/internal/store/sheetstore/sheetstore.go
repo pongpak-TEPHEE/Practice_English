@@ -8,6 +8,7 @@
 //	          learned_date | round_date | rounds_today
 //	settings: key | value
 //	log:      date | time | word_id | mode | result   (one row per answer)
+//	grammar_*: grammar lessons, see package grammar for the five tabs' columns
 package sheetstore
 
 import (
@@ -25,6 +26,7 @@ import (
 	"google.golang.org/api/option"
 	"google.golang.org/api/sheets/v4"
 
+	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/grammar"
 	"github.com/pongpak-TEPHEE/Practice_English/backend/internal/vocab"
 )
 
@@ -258,7 +260,11 @@ func (s *Store) Setup(ctx context.Context) error {
 		have[sh.Properties.Title] = true
 	}
 	var add []*sheets.Request
-	for _, tab := range []string{wordsTab, progressTab, settingsTab, logTab} {
+	tabs := []string{wordsTab, progressTab, settingsTab, logTab}
+	for _, g := range grammar.Tabs {
+		tabs = append(tabs, g.Name)
+	}
+	for _, tab := range tabs {
 		if !have[tab] {
 			add = append(add, &sheets.Request{AddSheet: &sheets.AddSheetRequest{
 				Properties: &sheets.SheetProperties{Title: tab},
@@ -274,15 +280,92 @@ func (s *Store) Setup(ctx context.Context) error {
 	}
 	_, err = s.api.Spreadsheets.Values.BatchUpdate(s.spreadsheetID, &sheets.BatchUpdateValuesRequest{
 		ValueInputOption: "RAW",
-		Data: []*sheets.ValueRange{
+		Data: append([]*sheets.ValueRange{
 			{Range: wordsTab + "!A1:H1", Values: [][]any{wordsHeader}},
 			{Range: progressTab + "!A1:" + progressCols + "1", Values: [][]any{progressHeader}},
 			{Range: settingsTab + "!A1:B1", Values: [][]any{settingsHeader}},
 			{Range: logTab + "!A1:E1", Values: [][]any{logHeader}},
-		},
+		}, grammarHeaders()...),
 	}).Context(ctx).Do()
 	if err != nil {
 		return fmt.Errorf("write headers: %w", err)
+	}
+	return nil
+}
+
+func grammarHeaders() []*sheets.ValueRange {
+	var out []*sheets.ValueRange
+	for _, g := range grammar.Tabs {
+		row := make([]any, len(g.Header))
+		for i, h := range g.Header {
+			row[i] = h
+		}
+		out = append(out, &sheets.ValueRange{Range: fmt.Sprintf("%s!A1:%s1", g.Name, column(len(g.Header))), Values: [][]any{row}})
+	}
+	return out
+}
+
+// grammarRange is a tab's data rows (below the header) across all its columns.
+func grammarRange(name string, width int) string {
+	return fmt.Sprintf("%s!A2:%s", name, column(width))
+}
+
+// column returns the letter of the n-th column (1 = A); grammar tabs stay within A–Z.
+func column(n int) string { return string(rune('A' + n - 1)) }
+
+// LoadGrammar reads all grammar tabs in one request.
+func (s *Store) LoadGrammar(ctx context.Context) (grammar.Tables, error) {
+	ranges := make([]string, len(grammar.Tabs))
+	for i, g := range grammar.Tabs {
+		ranges[i] = grammarRange(g.Name, len(g.Header))
+	}
+	resp, err := s.api.Spreadsheets.Values.BatchGet(s.spreadsheetID).Ranges(ranges...).Context(ctx).Do()
+	if err != nil {
+		return nil, fmt.Errorf("read grammar tabs: %w", err)
+	}
+	t := grammar.Tables{}
+	for i, vr := range resp.ValueRanges {
+		rows := make([][]string, len(vr.Values))
+		for r, row := range vr.Values {
+			rows[r] = make([]string, len(row))
+			for c := range row {
+				rows[r][c] = cell(row, c)
+			}
+		}
+		t[grammar.Tabs[i].Name] = rows
+	}
+	return t, nil
+}
+
+// ReplaceGrammar clears the grammar tabs and writes t.
+func (s *Store) ReplaceGrammar(ctx context.Context, t grammar.Tables) error {
+	ranges := make([]string, len(grammar.Tabs))
+	for i, g := range grammar.Tabs {
+		ranges[i] = grammarRange(g.Name, len(g.Header))
+	}
+	_, err := s.api.Spreadsheets.Values.BatchClear(s.spreadsheetID, &sheets.BatchClearValuesRequest{Ranges: ranges}).
+		Context(ctx).Do()
+	if err != nil {
+		return fmt.Errorf("clear grammar tabs: %w", err)
+	}
+	for i, g := range grammar.Tabs {
+		rows := t[g.Name]
+		if len(rows) == 0 {
+			continue
+		}
+		values := make([][]any, len(rows))
+		for r, row := range rows {
+			values[r] = make([]any, len(row))
+			for c, v := range row {
+				values[r][c] = v
+			}
+		}
+		// Append (not Update) so a tab grows past the sheet's default row count.
+		_, err := s.api.Spreadsheets.Values.Append(s.spreadsheetID, ranges[i], &sheets.ValueRange{Values: values}).
+			ValueInputOption("RAW").InsertDataOption("INSERT_ROWS").Context(ctx).Do()
+		if err != nil {
+			return fmt.Errorf("write %s: %w", g.Name, err)
+		}
 	}
 	return nil
 }
