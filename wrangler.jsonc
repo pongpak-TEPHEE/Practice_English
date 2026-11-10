@@ -1,0 +1,15 @@
+// Cloudflare Workers deploy for the frontend (the dashboard runs `npx wrangler deploy`
+// from the repo root). The build step turns frontend/src into frontend/dist first.
+{
+  "$schema": "https://unpkg.com/wrangler@4.160.0/config-schema.json",
+  "name": "practice-english",
+  "compatibility_date": "2026-11-10",
+  "build": {
+    "command": "cd frontend && npm ci && npm run build"
+  },
+  "assets": {
+    "directory": "./frontend/dist"
+  },
+  "workers_dev": true,
+  "preview_urls": false
+}
