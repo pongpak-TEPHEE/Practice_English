@@ -1818,3 +1818,166 @@ kbd {
 .lesson-section > .primary {
   align-self: flex-start;
 }
+
+/* ---------- lesson analysis, strategy and timed quiz ---------- */
+
+.lesson-overview {
+  display: grid;
+  gap: 16px;
+}
+
+.analysis,
+.strategy {
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.analysis {
+  background: color-mix(in srgb, var(--progress) 18%, white);
+}
+
+.page .analysis h3,
+.page .strategy h3 {
+  color: var(--ink);
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.analysis-facts {
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.analysis-facts div {
+  display: grid;
+  grid-template-columns: 7.5em 1fr;
+  gap: 8px;
+}
+
+.analysis-facts dt {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.analysis-facts dd {
+  margin: 0;
+  font-weight: 500;
+}
+
+.analysis-lists {
+  display: grid;
+  gap: 12px;
+}
+
+.analysis-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.analysis ul,
+.strategy ol {
+  margin: 0;
+  padding-left: 1.3em;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.analysis-note {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.priority {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 1px 10px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.priority-high {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.priority-medium {
+  background: var(--progress);
+  color: var(--ink);
+}
+
+.priority-basic {
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+}
+
+.lesson-toc a {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.lesson-toc .priority {
+  margin-top: 2px;
+}
+
+.drill-letter {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.drill-options button.is-pass .drill-letter,
+.drill-options button.is-fail .drill-letter {
+  color: var(--ink);
+}
+
+.quiz-head {
+  display: flex;
+  justify-content: space-between;
+  color: var(--ink-soft);
+}
+
+.quiz-clock {
+  font-family: var(--serif);
+  font-variant-numeric: tabular-nums;
+}
+
+.quiz-clock.is-over,
+.quiz-score.is-over {
+  color: #b0306a;
+}
+
+.quiz-figures {
+  display: flex;
+  gap: 40px;
+}
+
+.quiz-topics td.is-weak {
+  font-weight: 600;
+  color: #b0306a;
+}
+
+.quiz-topics a {
+  color: var(--ink);
+}
+
+@media (min-width: 1000px) {
+  .lesson-overview {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .analysis-lists {
+    grid-template-columns: 1fr 1fr;
+  }
+}

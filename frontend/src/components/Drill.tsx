@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
-import { shuffle } from "../shuffle";
 import type { Drill as DrillData } from "../grammar/types";
+import { shuffle } from "../shuffle";
 
 interface Props {
   drill: DrillData;
@@ -8,7 +8,9 @@ interface Props {
   onAnswered?: (correct: boolean) => void;
 }
 
-// One fill-in-the-blank question: pick an option, then see whether it was right and why.
+const LETTERS = ["A", "B", "C", "D"];
+
+// One Part 5-style question: pick an option, then see whether it was right and why.
 export function Drill({ drill, number, onAnswered }: Props) {
   const [picked, setPicked] = useState<string | null>(null);
   // Shuffled once per question so the answer's position gives nothing away.
@@ -33,18 +35,11 @@ export function Drill({ drill, number, onAnswered }: Props) {
         {after}
       </p>
       <div className="drill-options" role="group" aria-label="ตัวเลือก">
-        {options.map((o) => {
+        {options.map((o, i) => {
           const state = !picked ? "" : o === drill.answer ? "is-pass" : o === picked ? "is-fail" : "is-dim";
           return (
-            <button
-              key={o}
-              type="button"
-              lang="en"
-              className={state}
-              disabled={Boolean(picked)}
-              onClick={() => pick(o)}
-            >
-              {o}
+            <button key={o} type="button" className={state} disabled={Boolean(picked)} onClick={() => pick(o)}>
+              <span className="drill-letter">({LETTERS[i]})</span> <span lang="en">{o}</span>
             </button>
           );
         })}

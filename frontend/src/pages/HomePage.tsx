@@ -40,9 +40,9 @@ export function HomePage({ onError }: { onError: (e: Error) => void }) {
             <a href="#/grammar" className="activity activity-grammar">
               <span className="activity-title">ไวยากรณ์</span>
               <span className="activity-note">
-                บทเรียนพร้อมแบบฝึกที่เฉลยทันที
+                บทเรียนและแบบฝึกแบบ Part 5–6 พร้อมเฉลย
                 <br />
-                เริ่มจากคำบุพบท at / on / in, by / until
+                บทแรก: คำบุพบทและคำเชื่อม
               </span>
             </a>
           </nav>
