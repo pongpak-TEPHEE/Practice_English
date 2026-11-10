@@ -1,0 +1,347 @@
+{
+  "id": "conjunctions",
+  "title": "คำเชื่อมและ relative pronoun",
+  "english": "Conjunctions & Relative Pronouns",
+  "summary": "who / which / whose, both…and, unless / once / so that, that / what / whether และ however / therefore ใน Part 6",
+  "analysis": {
+    "parts": "Reading Part 5 (เติมประโยค 30 ข้อ) และ Part 6 (เติมข้อความ 16 ข้อ)",
+    "questions": "ประมาณ 2–4 ข้อใน Part 5 และอีก 2–3 ข้อใน Part 6 (Part 6 ชอบให้เลือกคำเชื่อมระหว่างประโยค เช่น However, As a result)",
+    "points": "ประมาณ 20–35 คะแนน จาก 495 คะแนนของ Reading (คิดคร่าว ๆ ข้อละ 5 คะแนน)",
+    "covers": [
+      "relative pronoun: who / which / whose / whom / where และ that ที่ใช้หลังจุลภาคไม่ได้",
+      "คำเชื่อมคู่: both…and, either…or, neither…nor, not only…but also, whether…or",
+      "คำเชื่อมที่ต้องเลือกจากความหมาย: unless, once, so that, whereas, as long as, in case",
+      "noun clause: that / what / whether",
+      "คำเชื่อมระหว่างประโยคใน Part 6: However, Therefore, Otherwise, Instead, In addition, Meanwhile"
+    ],
+    "notCovered": [
+      "บุพบทกับคำเชื่อม (despite / although, because of / because) อยู่ในบทคำบุพบทแล้ว",
+      "สรรพนาม (he / his / him / himself)",
+      "ขั้นกว่าและขั้นสุด",
+      "Part 6 แบบเลือกประโยคทั้งประโยคใส่ในข้อความ"
+    ],
+    "note": "ETS ไม่เปิดเผยสัดส่วนหัวข้อในข้อสอบ ตัวเลขนี้ประมาณจากการวิเคราะห์ข้อสอบของหนังสือเตรียมสอบ และตารางแปลงคะแนนต่างกันในแต่ละชุด ใช้เพื่อจัดลำดับว่าควรฝึกอะไรก่อน ไม่ใช่การรับประกันคะแนน"
+  },
+  "strategy": [
+    "ดูตัวเลือกก่อน ถ้าเป็น who / which / whose ให้ดูคำนามหน้าช่องว่าง (คนหรือสิ่งของ) และดูหลังช่องว่างว่าเป็นคำนามหรือกริยา",
+    "ถ้าในประโยคมี and / or / nor / but also อยู่แล้ว ให้หาคู่ของมัน (both / either / neither / not only)",
+    "ถ้าตัวเลือกเป็นคำเชื่อมที่ถูกไวยากรณ์ทุกตัว ให้แปลความสัมพันธ์ของสองประโยค: เงื่อนไข (unless, as long as) เวลา (once) จุดประสงค์ (so that) หรือขัดแย้ง (although, whereas)",
+    "ใน Part 6 ถ้าช่องว่างอยู่ต้นประโยคแล้วตามด้วยจุลภาค ให้อ่านประโยคก่อนหน้าแล้วถามว่าประโยคนี้ขัดแย้ง (However) เป็นผล (As a result) เพิ่มเติม (In addition) หรือเป็นตัวอย่าง (For example)",
+    "เป้าเวลาข้อละไม่เกิน 15 วินาทีใน Part 5"
+  ],
+  "sections": [
+    {
+      "id": "relatives",
+      "title": "Relative pronoun: who / which / whose / whom / where",
+      "priority": "high",
+      "intro": "relative pronoun ขึ้นต้นประโยคย่อยที่ขยายคำนามข้างหน้า เลือกจากสองอย่าง: คำนามข้างหน้าเป็นคนหรือสิ่งของ และหลังช่องว่างเป็นกริยา (ช่องว่างเป็นประธาน) หรือคำนาม (ต้องใช้ whose)",
+      "rules": [
+        { "word": "who", "use": "คน + กริยา (ช่องว่างเป็นประธานของประโยคย่อย)", "examples": "employees who want to attend" },
+        { "word": "which", "use": "สิ่งของ + กริยา หรือสิ่งของ + ประธาน + กริยา", "examples": "the printer which was repaired" },
+        { "word": "whose", "use": "ของ... + คำนาม (ใช้ได้ทั้งคนและสิ่งของ)", "examples": "a supplier whose products meet our standards" },
+        { "word": "whom", "use": "คนที่เป็นกรรม โดยเฉพาะหลังบุพบท", "examples": "the candidate to whom we offered the job" },
+        { "word": "where", "use": "สถานที่ + ประโยคครบ", "examples": "the hotel where the conference will be held" },
+        { "word": "that", "use": "ใช้แทน who / which ได้ แต่ห้ามใช้หลังจุลภาคและหลังบุพบท", "examples": "the report that you sent" }
+      ],
+      "examples": [
+        { "en": "Employees who want to attend the seminar should contact Ms. Lee.", "th": "พนักงานที่ต้องการเข้าร่วมสัมมนาควรติดต่อคุณลี", "mark": "who" },
+        { "en": "We are looking for a supplier whose products meet our safety standards.", "th": "เรากำลังหาผู้จำหน่ายที่สินค้าผ่านมาตรฐานความปลอดภัยของเรา", "mark": "whose" },
+        { "en": "Mr. Grant, who joined the company in 2019, was promoted to director.", "th": "คุณแกรนต์ ซึ่งเข้าทำงานที่บริษัทในปี 2019 ได้เลื่อนตำแหน่งเป็นผู้อำนวยการ", "mark": "who" }
+      ],
+      "tip": "ถ้าหลังช่องว่างเป็นคำนามที่ไม่มีคำนำหน้า (products, staff, office) แทบจะต้องเป็น whose เสมอ และถ้าหน้าช่องว่างเป็นจุลภาค ตัด that ทิ้งได้ทันที",
+      "drills": [
+        {
+          "sentence": "Employees ___ want to attend the safety seminar should contact Ms. Lee.",
+          "options": ["who", "which", "whose", "whom"],
+          "answer": "who",
+          "why": "ตอบ who เพราะคำนามข้างหน้าคือ Employees (คน) และหลังช่องว่างเป็นกริยา want ช่องว่างจึงเป็นประธาน ส่วน which ใช้กับสิ่งของ whose ต้องตามด้วยคำนาม และ whom ใช้เป็นกรรม ไม่ใช่ประธาน"
+        },
+        {
+          "sentence": "The printer ___ was repaired last week has broken down again.",
+          "options": ["which", "who", "whose", "whom"],
+          "answer": "which",
+          "why": "ตอบ which เพราะคำนามข้างหน้าคือเครื่องพิมพ์ (สิ่งของ) และหลังช่องว่างเป็นกริยา was repaired ส่วน who และ whom ใช้กับคน และ whose ต้องตามด้วยคำนาม"
+        },
+        {
+          "sentence": "We are looking for a supplier ___ products meet our safety standards.",
+          "options": ["whose", "who", "which", "whom"],
+          "answer": "whose",
+          "why": "ตอบ whose เพราะหลังช่องว่างเป็นคำนาม products ที่ไม่มีคำนำหน้า และแปลว่าสินค้าของผู้จำหน่าย ส่วน who และ which จะทำให้ประโยคย่อยมีประธานสองตัว และ whom ใช้เป็นกรรม"
+        },
+        {
+          "sentence": "Mr. Grant, ___ joined the company in 2019, was promoted to director.",
+          "options": ["who", "that", "which", "whose"],
+          "answer": "who",
+          "why": "ตอบ who เพราะคุณแกรนต์เป็นคนและหลังช่องว่างเป็นกริยา joined ส่วน that ใช้หลังจุลภาคไม่ได้ which ใช้กับสิ่งของ และ whose ต้องตามด้วยคำนาม"
+        },
+        {
+          "sentence": "The candidate to ___ we offered the position has accepted.",
+          "options": ["whom", "who", "which", "whose"],
+          "answer": "whom",
+          "why": "ตอบ whom เพราะหลังบุพบท to และคำนามข้างหน้าเป็นคน ต้องใช้ whom ส่วน who ใช้หลังบุพบทไม่ได้ which ใช้กับสิ่งของ และ whose ต้องตามด้วยคำนาม"
+        },
+        {
+          "sentence": "The hotel ___ the conference will be held is close to the airport.",
+          "options": ["where", "which", "who", "whose"],
+          "answer": "where",
+          "why": "ตอบ where เพราะคำนามข้างหน้าเป็นสถานที่ และประโยคหลังช่องว่าง (the conference will be held) ครบแล้ว ส่วน which ต้องมีบุพบท (in which) who ใช้กับคน และ whose ต้องตามด้วยคำนามที่เป็นของสิ่งนั้น"
+        },
+        {
+          "sentence": "The new tablet, ___ was released in May, has sold better than expected.",
+          "options": ["which", "that", "who", "what"],
+          "answer": "which",
+          "why": "ตอบ which เพราะคำนามข้างหน้าเป็นสิ่งของ หลังช่องว่างเป็นกริยา และมีจุลภาคนำหน้า ส่วน that ใช้หลังจุลภาคไม่ได้ who ใช้กับคน และ what ไม่ใช้ขยายคำนามข้างหน้า"
+        }
+      ]
+    },
+    {
+      "id": "pairs",
+      "title": "คำเชื่อมคู่และ and / but / or / so",
+      "priority": "high",
+      "intro": "คำเชื่อมคู่ต้องมาเป็นคู่เสมอ ถ้าในประโยคมีครึ่งหนึ่งอยู่แล้ว ข้อสอบจะให้เติมอีกครึ่ง หาคำที่อยู่หลังช่องว่างให้เจอ (and, or, nor, but also) แล้วจับคู่ ส่วน and / but / or / so ต้องเลือกจากความสัมพันธ์ของสองส่วน",
+      "rules": [
+        { "word": "both A and B", "use": "ทั้ง A และ B", "examples": "both a degree and experience" },
+        { "word": "either A or B", "use": "A หรือ B อย่างใดอย่างหนึ่ง", "examples": "either by credit card or in cash" },
+        { "word": "neither A nor B", "use": "ไม่ทั้ง A และ B", "examples": "neither the manager nor her assistant" },
+        { "word": "not only A but (also) B", "use": "ไม่เพียงแต่ A แต่ยัง B", "examples": "not only lighter but also cheaper" },
+        { "word": "whether A or B / whether or not", "use": "ไม่ว่าจะ...หรือ / ...หรือไม่", "examples": "whether you will attend or not" },
+        { "word": "and / but / or / so", "use": "เพิ่ม / ขัดแย้ง / ทางเลือก / ผลลัพธ์", "examples": "The flight was delayed, so we missed the session." }
+      ],
+      "examples": [
+        { "en": "The position requires both a degree in accounting and three years of experience.", "th": "ตำแหน่งนี้ต้องมีทั้งปริญญาด้านบัญชีและประสบการณ์สามปี", "mark": "both" },
+        { "en": "Customers can pay either by credit card or in cash.", "th": "ลูกค้าจ่ายได้ทั้งบัตรเครดิตหรือเงินสด", "mark": "either" },
+        { "en": "The new phone is not only lighter but also cheaper.", "th": "โทรศัพท์รุ่นใหม่ไม่เพียงเบากว่า แต่ยังถูกกว่าด้วย", "mark": "not only" }
+      ],
+      "tip": "นี่คือข้อที่ตอบได้เร็วที่สุดในกลุ่มนี้ เห็น and ให้หา both เห็น or ให้หา either หรือ whether เห็น nor ให้หา neither เห็น but also ให้หา not only ไม่ต้องแปล",
+      "drills": [
+        {
+          "sentence": "The position requires ___ a degree in accounting and three years of experience.",
+          "options": ["both", "either", "neither", "whether"],
+          "answer": "both",
+          "why": "ตอบ both เพราะในประโยคมี and จึงต้องเป็น both A and B ส่วน either คู่กับ or neither คู่กับ nor และ whether คู่กับ or"
+        },
+        {
+          "sentence": "Customers can pay ___ by credit card or in cash.",
+          "options": ["either", "both", "neither", "not only"],
+          "answer": "either",
+          "why": "ตอบ either เพราะในประโยคมี or และแปลว่าอย่างใดอย่างหนึ่ง ส่วน both คู่กับ and neither คู่กับ nor และ not only คู่กับ but also"
+        },
+        {
+          "sentence": "___ the manager nor her assistant was available to answer questions.",
+          "options": ["Neither", "Either", "Both", "Not only"],
+          "answer": "Neither",
+          "why": "ตอบ Neither เพราะในประโยคมี nor จึงต้องเป็น neither A nor B ส่วน Either คู่กับ or Both คู่กับ and และ Not only คู่กับ but also"
+        },
+        {
+          "sentence": "The new phone is not only lighter ___ cheaper than the old model.",
+          "options": ["but also", "and also", "or", "nor"],
+          "answer": "but also",
+          "why": "ตอบ but also เพราะในประโยคมี not only จึงต้องเป็น not only A but also B ส่วน and also, or และ nor ไม่ใช่คู่ของ not only"
+        },
+        {
+          "sentence": "Please let us know ___ you will attend the awards dinner or not.",
+          "options": ["whether", "either", "both", "neither"],
+          "answer": "whether",
+          "why": "ตอบ whether เพราะหลังช่องว่างเป็นประโยค (you will attend) และท้ายประโยคมี or not จึงเป็น whether ... or not (…หรือไม่) ส่วน either, both และ neither ไม่ใช้นำประโยคแบบนี้"
+        },
+        {
+          "sentence": "The flight from Seoul was delayed, ___ we missed the opening session.",
+          "options": ["so", "but", "or", "because"],
+          "answer": "so",
+          "why": "ตอบ so เพราะการพลาดช่วงเปิดงานเป็นผลจากเที่ยวบินล่าช้า ส่วน but บอกความขัดแย้ง or บอกทางเลือก และ because จะกลับเหตุผลกลายเป็นว่าพลาดงานจึงทำให้เครื่องบินล่าช้า"
+        },
+        {
+          "sentence": "The software is easy to install, ___ it can run on older computers as well.",
+          "options": ["and", "but", "or", "so"],
+          "answer": "and",
+          "why": "ตอบ and เพราะประโยคหลังเป็นข้อดีที่เพิ่มเติมจากประโยคแรก (as well ยืนยัน) ส่วน but บอกความขัดแย้ง or บอกทางเลือก และ so บอกผลลัพธ์ ซึ่งไม่ใช่ความสัมพันธ์ของสองประโยคนี้"
+        }
+      ]
+    },
+    {
+      "id": "meaning",
+      "title": "คำเชื่อมที่ต้องเลือกจากความหมาย",
+      "priority": "medium",
+      "intro": "เมื่อตัวเลือกเป็นคำเชื่อมที่ตามด้วยประโยคได้ทุกตัว โครงสร้างช่วยไม่ได้ ต้องดูความสัมพันธ์ของสองประโยค คำที่ออกบ่อยใน TOEIC คือคำบอกเงื่อนไข เวลา จุดประสงค์ และความขัดแย้ง",
+      "rules": [
+        { "word": "unless", "use": "เว้นแต่ (= if ... not)", "examples": "You cannot enter unless you show your badge." },
+        { "word": "as long as / provided that", "use": "ตราบใดที่, โดยมีเงื่อนไขว่า", "examples": "as long as tasks are completed on time" },
+        { "word": "once", "use": "ทันทีที่, เมื่อ...แล้ว", "examples": "Once the contract is signed, work can begin." },
+        { "word": "so that", "use": "เพื่อที่จะ + ประโยค", "examples": "Arrive early so that we can start on time." },
+        { "word": "although / even though", "use": "แม้ว่า", "examples": "Although the store is small, it has many products." },
+        { "word": "whereas / while", "use": "ในขณะที่ (เปรียบเทียบสองฝั่งที่ต่างกัน)", "examples": "She prefers mornings, whereas he prefers evenings." },
+        { "word": "in case", "use": "เผื่อว่า", "examples": "Take an umbrella in case it rains." }
+      ],
+      "examples": [
+        { "en": "You cannot enter the building unless you show your ID badge.", "th": "คุณเข้าอาคารไม่ได้ เว้นแต่จะแสดงบัตรพนักงาน", "mark": "unless" },
+        { "en": "Once the contract is signed, work on the project can begin.", "th": "ทันทีที่ลงนามในสัญญาแล้ว งานโครงการก็เริ่มได้", "mark": "Once" },
+        { "en": "Please arrive early so that we can start the meeting on time.", "th": "กรุณามาก่อนเวลาเพื่อที่เราจะเริ่มประชุมได้ตรงเวลา", "mark": "so that" }
+      ],
+      "tip": "unless มีความหมายปฏิเสธอยู่ในตัว (= if not) ถ้าประโยคมีความหมายว่า 'ต้องทำ X ถึงจะได้ Y' แต่เขียนในรูปปฏิเสธ (cannot ... ___ you show) ให้เลือก unless",
+      "drills": [
+        {
+          "sentence": "Visitors will not be allowed into the laboratory ___ they wear protective glasses.",
+          "options": ["unless", "if", "because", "so that"],
+          "answer": "unless",
+          "why": "ตอบ unless เพราะความหมายคือห้ามเข้า เว้นแต่จะสวมแว่นป้องกัน ส่วน if จะแปลว่าห้ามเข้าถ้าสวมแว่น ซึ่งกลับความหมาย because จะแปลว่าห้ามเข้าเพราะสวมแว่น และ so that บอกจุดประสงค์"
+        },
+        {
+          "sentence": "___ the contract is signed, work on the new warehouse can begin.",
+          "options": ["Once", "Unless", "Although", "Whereas"],
+          "answer": "Once",
+          "why": "ตอบ Once เพราะความหมายคือทันทีที่ลงนามแล้ว งานก็เริ่มได้ ส่วน Unless จะแปลว่างานเริ่มได้ถ้าไม่ลงนาม Although บอกความขัดแย้ง และ Whereas ใช้เปรียบเทียบสองฝั่ง"
+        },
+        {
+          "sentence": "Please arrive ten minutes early ___ we can start the meeting on time.",
+          "options": ["so that", "because", "although", "unless"],
+          "answer": "so that",
+          "why": "ตอบ so that เพราะการเริ่มประชุมตรงเวลาเป็นจุดประสงค์ของการมาก่อน ส่วน because จะกลายเป็นว่ามาก่อนเพราะเริ่มตรงเวลา although บอกความขัดแย้ง และ unless บอกเงื่อนไขปฏิเสธ"
+        },
+        {
+          "sentence": "Ms. Diaz prefers to work in the morning, ___ her colleague prefers to work in the evening.",
+          "options": ["whereas", "because", "so that", "unless"],
+          "answer": "whereas",
+          "why": "ตอบ whereas เพราะประโยคเปรียบเทียบสองคนที่ชอบต่างกัน ส่วน because บอกเหตุผล so that บอกจุดประสงค์ และ unless บอกเงื่อนไข ซึ่งไม่เข้ากับความหมาย"
+        },
+        {
+          "sentence": "Employees may work from home on Fridays ___ they complete their tasks on time.",
+          "options": ["as long as", "even though", "so that", "whereas"],
+          "answer": "as long as",
+          "why": "ตอบ as long as เพราะการทำงานเสร็จตรงเวลาเป็นเงื่อนไขของการทำงานที่บ้าน ส่วน even though บอกความขัดแย้ง so that บอกจุดประสงค์ และ whereas ใช้เปรียบเทียบสองฝั่ง"
+        },
+        {
+          "sentence": "___ the store is quite small, it offers a wide selection of products.",
+          "options": ["Although", "Because", "Unless", "So that"],
+          "answer": "Although",
+          "why": "ตอบ Although เพราะร้านเล็กกับมีสินค้าให้เลือกมากเป็นความขัดแย้งกัน ส่วน Because บอกเหตุผล Unless บอกเงื่อนไข และ So that บอกจุดประสงค์"
+        },
+        {
+          "sentence": "Bring an umbrella to the company picnic ___ it rains in the afternoon.",
+          "options": ["in case", "unless", "so that", "whereas"],
+          "answer": "in case",
+          "why": "ตอบ in case เพราะความหมายคือพกร่มไปเผื่อฝนตก ส่วน unless จะแปลว่าพกร่มเว้นแต่ฝนตก so that จะแปลว่าพกร่มเพื่อให้ฝนตก และ whereas ใช้เปรียบเทียบ"
+        }
+      ]
+    },
+    {
+      "id": "noun-clauses",
+      "title": "Noun clause: that / what / whether",
+      "priority": "medium",
+      "intro": "noun clause คือประโยคย่อยที่ทำหน้าที่เป็นคำนาม (เป็นประธานหรือกรรม) ข้อสอบให้เลือกระหว่าง that, what และ whether โดยดูว่าประโยคหลังช่องว่างครบหรือขาดอะไรไป",
+      "rules": [
+        { "word": "that + ประโยคครบ", "use": "ว่า... (หลัง announce, say, confirm, important)", "examples": "announced that the office will close early" },
+        { "word": "what + ประโยคที่ขาดกรรมหรือประธาน", "use": "สิ่งที่...", "examples": "What customers want is fast delivery." },
+        { "word": "whether + ประโยคครบ หรือ to V", "use": "ว่า...หรือไม่", "examples": "decide whether to extend the contract" }
+      ],
+      "examples": [
+        { "en": "The manager announced that the office will close early on Friday.", "th": "ผู้จัดการประกาศว่าสำนักงานจะปิดเร็วในวันศุกร์", "mark": "that" },
+        { "en": "What customers want most is fast delivery.", "th": "สิ่งที่ลูกค้าต้องการมากที่สุดคือการจัดส่งที่รวดเร็ว", "mark": "What" },
+        { "en": "We have not decided whether to extend the contract.", "th": "เรายังไม่ได้ตัดสินใจว่าจะต่อสัญญาหรือไม่", "mark": "whether" }
+      ],
+      "tip": "ถ้าประโยคหลังช่องว่างขาดกรรม (customers want ___) ให้ใช้ what ถ้าครบแล้วและแปลว่า 'ว่า' ใช้ that ถ้าแปลว่า 'ว่า...หรือไม่' ใช้ whether และหน้า to + V ใช้ whether ได้ แต่ if ใช้ไม่ได้",
+      "drills": [
+        {
+          "sentence": "The manager announced ___ the office will close early on Friday.",
+          "options": ["that", "what", "which", "who"],
+          "answer": "that",
+          "why": "ตอบ that เพราะประโยคหลังช่องว่าง (the office will close early) ครบแล้วและแปลว่า 'ว่า' ส่วน what ใช้เมื่อประโยคขาดประธานหรือกรรม และ which กับ who ไม่ใช้เป็นกรรมของ announced แบบนี้"
+        },
+        {
+          "sentence": "___ customers want most is fast and reliable delivery.",
+          "options": ["What", "That", "Which", "Whether"],
+          "answer": "What",
+          "why": "ตอบ What เพราะประโยคย่อย customers want ขาดกรรม และทั้งก้อนเป็นประธานของ is แปลว่า 'สิ่งที่ลูกค้าต้องการ' ส่วน That และ Whether ต้องตามด้วยประโยคครบ และ Which ต้องมีคำนามให้เลือก"
+        },
+        {
+          "sentence": "The board has not yet decided ___ to extend the contract with the supplier.",
+          "options": ["whether", "that", "what", "which"],
+          "answer": "whether",
+          "why": "ตอบ whether เพราะแปลว่า 'ว่าจะ...หรือไม่' และตามด้วย to + V ได้ ส่วน that และ what ตามด้วย to + V ไม่ได้ และ which ต้องมีตัวเลือกที่เป็นคำนาม"
+        },
+        {
+          "sentence": "Please tell the event planner ___ you need for the presentation.",
+          "options": ["what", "that", "whether", "which"],
+          "answer": "what",
+          "why": "ตอบ what เพราะประโยคย่อย you need ขาดกรรม แปลว่า 'สิ่งที่คุณต้องการ' ส่วน that และ whether ต้องตามด้วยประโยคครบ และ which ต้องตามด้วยคำนาม"
+        },
+        {
+          "sentence": "It is important ___ all forms are completed before the deadline.",
+          "options": ["that", "what", "whether", "which"],
+          "answer": "that",
+          "why": "ตอบ that เพราะโครงสร้าง It is important that + ประโยคครบ ส่วน what ใช้กับประโยคที่ขาดกรรม whether แปลว่า 'หรือไม่' ซึ่งไม่เข้ากับ important และ which ไม่ใช้ในโครงสร้างนี้"
+        },
+        {
+          "sentence": "The survey asked ___ customers were satisfied with the new service.",
+          "options": ["whether", "what", "that", "which"],
+          "answer": "whether",
+          "why": "ตอบ whether เพราะแบบสำรวจถามว่าลูกค้าพอใจหรือไม่ เป็นคำถามแบบใช่หรือไม่ ส่วน what ใช้กับประโยคที่ขาดกรรม that ไม่ใช้หลัง ask ในความหมายนี้ และ which ต้องตามด้วยคำนาม"
+        }
+      ]
+    },
+    {
+      "id": "transitions",
+      "title": "คำเชื่อมระหว่างประโยคใน Part 6",
+      "priority": "medium",
+      "intro": "Part 6 ชอบเว้นช่องว่างไว้ต้นประโยคแล้วตามด้วยจุลภาค ตัวเลือกเป็น adverb เชื่อมประโยคทั้งหมด จึงต้องอ่านประโยคก่อนหน้าแล้วดูว่าประโยคใหม่สัมพันธ์กับประโยคเก่าอย่างไร",
+      "rules": [
+        { "word": "However / Nevertheless", "use": "ขัดแย้งกับประโยคก่อน", "examples": "It is expensive. However, it saves money." },
+        { "word": "Therefore / As a result / Consequently", "use": "เป็นผลจากประโยคก่อน", "examples": "Demand rose. As a result, we hired more staff." },
+        { "word": "In addition / Moreover / Furthermore", "use": "เพิ่มข้อมูลไปทางเดียวกัน", "examples": "It has Wi-Fi. In addition, the gym is free." },
+        { "word": "Otherwise", "use": "มิฉะนั้น (ถ้าไม่ทำตามประโยคก่อน)", "examples": "Submit it by Friday. Otherwise, it may be delayed." },
+        { "word": "Instead", "use": "แทนที่จะเป็นสิ่งที่พูดถึงก่อนหน้า", "examples": "Trains stopped. Instead, buses took passengers." },
+        { "word": "For example / For instance", "use": "ยกตัวอย่างประโยคก่อน", "examples": "Many firms use it. For example, ..." },
+        { "word": "Meanwhile / In the meantime", "use": "ระหว่างนั้น", "examples": "Repairs take two weeks. Meanwhile, ..." }
+      ],
+      "examples": [
+        { "en": "The new system is expensive. However, it will save us money in the long run.", "th": "ระบบใหม่ราคาแพง อย่างไรก็ตาม ระยะยาวจะช่วยประหยัดเงิน", "mark": "However" },
+        { "en": "Please submit your form by Friday. Otherwise, your request may be delayed.", "th": "กรุณาส่งแบบฟอร์มภายในวันศุกร์ มิฉะนั้นคำขอของคุณอาจล่าช้า", "mark": "Otherwise" },
+        { "en": "The renovation will take two weeks. Meanwhile, staff will work on the third floor.", "th": "การปรับปรุงจะใช้เวลาสองสัปดาห์ ระหว่างนั้นพนักงานจะทำงานที่ชั้นสาม", "mark": "Meanwhile" }
+      ],
+      "tip": "Otherwise มักตามหลังประโยคที่เป็นคำขอหรือคำสั่ง (Please..., Be sure to...) และ Instead มักตามหลังประโยคที่บอกว่าบางอย่างถูกยกเลิกหรือไม่เกิดขึ้น สองคำนี้ออก Part 6 บ่อย",
+      "drills": [
+        {
+          "sentence": "The new accounting system is expensive. ___, it will save the company money in the long run.",
+          "options": ["However", "Therefore", "Moreover", "For example"],
+          "answer": "However",
+          "why": "ตอบ However เพราะแพงกับช่วยประหยัดเงินเป็นความขัดแย้งกัน ส่วน Therefore บอกผลลัพธ์ Moreover เพิ่มข้อมูลไปทางเดียวกัน และ For example ใช้ยกตัวอย่าง"
+        },
+        {
+          "sentence": "Demand for the product has risen sharply this year. ___, the factory will hire 50 new workers.",
+          "options": ["As a result", "However", "Otherwise", "Instead"],
+          "answer": "As a result",
+          "why": "ตอบ As a result เพราะการจ้างคนเพิ่มเป็นผลจากความต้องการที่เพิ่มขึ้น ส่วน However บอกความขัดแย้ง Otherwise แปลว่ามิฉะนั้น และ Instead แปลว่าแทนที่"
+        },
+        {
+          "sentence": "Please return the signed form by Friday. ___, your registration may not be processed.",
+          "options": ["Otherwise", "Therefore", "Moreover", "Similarly"],
+          "answer": "Otherwise",
+          "why": "ตอบ Otherwise เพราะความหมายคือถ้าไม่ส่งภายในวันศุกร์ การลงทะเบียนอาจไม่ถูกดำเนินการ ส่วน Therefore บอกผลลัพธ์ Moreover เพิ่มข้อมูล และ Similarly บอกความคล้ายกัน"
+        },
+        {
+          "sentence": "All guest rooms have free Wi-Fi. ___, guests can use the fitness center at no charge.",
+          "options": ["In addition", "However", "Otherwise", "Instead"],
+          "answer": "In addition",
+          "why": "ตอบ In addition เพราะฟิตเนสฟรีเป็นข้อดีที่เพิ่มเติมไปทางเดียวกับ Wi-Fi ฟรี ส่วน However บอกความขัดแย้ง Otherwise แปลว่ามิฉะนั้น และ Instead แปลว่าแทนที่"
+        },
+        {
+          "sentence": "Train service to the city center was suspended because of the storm. ___, passengers were taken by bus.",
+          "options": ["Instead", "Moreover", "Otherwise", "For example"],
+          "answer": "Instead",
+          "why": "ตอบ Instead เพราะรถบัสถูกใช้แทนรถไฟที่หยุดให้บริการ ส่วน Moreover เพิ่มข้อมูลไปทางเดียวกัน Otherwise แปลว่ามิฉะนั้น และ For example ใช้ยกตัวอย่าง"
+        },
+        {
+          "sentence": "Many small businesses rely on our ordering software. ___, three local restaurants manage all of their orders with it.",
+          "options": ["For example", "However", "Otherwise", "Instead"],
+          "answer": "For example",
+          "why": "ตอบ For example เพราะร้านอาหารสามร้านเป็นตัวอย่างของธุรกิจขนาดเล็กที่ใช้ซอฟต์แวร์ ส่วน However บอกความขัดแย้ง Otherwise แปลว่ามิฉะนั้น และ Instead แปลว่าแทนที่"
+        },
+        {
+          "sentence": "The renovation of the second floor will take two weeks. ___, staff will work in the conference rooms on the third floor.",
+          "options": ["Meanwhile", "Otherwise", "However", "For example"],
+          "answer": "Meanwhile",
+          "why": "ตอบ Meanwhile เพราะการทำงานที่ชั้นสามเกิดขึ้นระหว่างสองสัปดาห์ที่ปรับปรุง ส่วน Otherwise แปลว่ามิฉะนั้น However บอกความขัดแย้ง และ For example ใช้ยกตัวอย่าง"
+        }
+      ]
+    }
+  ]
+}
