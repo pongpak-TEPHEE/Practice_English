@@ -36,7 +36,7 @@ export function GoalsPage({ onError }: Props) {
 
   return (
     <div className="page">
-      <a href="#/home" className="back">
+      <a href="#/vocab" className="back">
         กลับ
       </a>
       <h2 className="page-title">ความสำเร็จ</h2>

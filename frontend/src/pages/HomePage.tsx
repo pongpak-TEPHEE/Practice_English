@@ -1,102 +1,54 @@
 import { useEffect, useState } from "react";
 import { api } from "../api";
-import { LEVELS } from "../types";
-import type { Achievements, Level, Stats } from "../types";
+import { ProgressDonut } from "../components/ProgressDonut";
+import type { Achievements, Stats } from "../types";
 
-interface Props {
-  level: Level;
-  onLevel: (l: Level) => Promise<void>;
-  onError: (e: Error) => void;
-}
-
-export function HomePage({ level, onLevel, onError }: Props) {
+// The starting point of the app: pick an activity, see overall progress.
+// New activities get their own card in the list below.
+export function HomePage({ onError }: { onError: (e: Error) => void }) {
   const [stats, setStats] = useState<Stats | null>(null);
   const [ach, setAch] = useState<Achievements | null>(null);
-  const [busy, setBusy] = useState(false);
 
   useEffect(() => {
     api.stats().then(setStats).catch(onError);
     api.achievements().then(setAch).catch(onError);
   }, []);
 
-  const lv = stats?.byLevel.find((b) => b.level === level);
-  const learned = lv ? lv.total - lv.new : 0;
-
-  const pick = async (l: Level) => {
-    if (l === level) return;
-    setBusy(true);
-    try {
-      await onLevel(l);
-    } finally {
-      setBusy(false);
-    }
-  };
-
-  const menus = [
-    {
-      href: "#/learn",
-      title: "ท่องศัพท์ใหม่",
-      note: ach ? `วันนี้ ${ach.today.new}/${ach.newGoal} คำ` : "",
-    },
-    {
-      href: "#/review",
-      title: "ทวนศัพท์เก่า",
-      note: ach ? `วันนี้ ${ach.today.reviewed}/${ach.reviewGoal} คำ` : "",
-    },
-    { href: "#/history", title: "ประวัติ", note: "คำที่ผ่าน ไม่ผ่าน และสิ่งที่เรียนแต่ละวัน" },
-    {
-      href: "#/goals",
-      title: "ความสำเร็จ",
-      note: ach ? (ach.streak > 0 ? `ทำครบเป้า ${ach.streak} วันติด` : "ตั้งเป้าหมายรายวัน") : "",
-    },
-  ];
-
   return (
     <div className="page">
       <header className="home-head">
-        <h1>ท่องศัพท์</h1>
-        <p className="date">Oxford 3000 สำหรับเตรียมสอบ TOEIC</p>
+        <h1>คลังคำ TOEIC</h1>
+        <p className="date">วันนี้จะฝึกอะไรดี</p>
       </header>
 
-      <section className="home-level">
-        <div>
-          <h3>ระดับของคำศัพท์</h3>
-          <div className="segmented" role="radiogroup" aria-label="ระดับของคำศัพท์">
-            {LEVELS.map((l) => (
-              <button
-                key={l}
-                type="button"
-                role="radio"
-                aria-checked={level === l}
-                className={level === l ? "is-on" : ""}
-                disabled={busy}
-                onClick={() => pick(l)}
-              >
-                {l}
-              </button>
-            ))}
-          </div>
-        </div>
-        {lv && (
-          <div className="level-progress">
-            <p>
-              ท่องผ่านแล้ว <strong>{learned}</strong> จาก {lv.total} คำ
-            </p>
-            <div className="meter" aria-hidden>
-              <span style={{ width: `${(learned / Math.max(lv.total, 1)) * 100}%` }} />
-            </div>
-          </div>
-        )}
-      </section>
+      <div className="hub">
+        <section aria-labelledby="activities">
+          <h3 id="activities">เลือกกิจกรรม</h3>
+          <nav className="activities">
+            <a href="#/vocab" className="activity">
+              <span className="activity-title">ท่องศัพท์</span>
+              <span className="activity-note">
+                บัตรคำศัพท์ Oxford 3000 ระดับ A1–B2
+                {ach && (
+                  <>
+                    <br />
+                    วันนี้ท่องใหม่ {ach.today.new}/{ach.newGoal} คำ ทวน {ach.today.reviewed}/{ach.reviewGoal} คำ
+                  </>
+                )}
+              </span>
+            </a>
+          </nav>
+        </section>
 
-      <nav className="menu" aria-label={`เมนูระดับ ${level}`}>
-        {menus.map((m) => (
-          <a key={m.href} href={m.href} className="menu-item">
-            <span className="menu-title">{m.title}</span>
-            <span className="menu-note">{m.note}</span>
-          </a>
-        ))}
-      </nav>
+        <section className="overall" aria-labelledby="overall">
+          <h3 id="overall">ความคืบหน้าทั้งหมด</h3>
+          {stats ? (
+            <ProgressDonut learned={stats.total - stats.new} total={stats.total} />
+          ) : (
+            <p className="loading">กำลังโหลด</p>
+          )}
+        </section>
+      </div>
     </div>
   );
 }

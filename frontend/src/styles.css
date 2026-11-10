@@ -1388,3 +1388,141 @@ kbd {
     width: 100%;
   }
 }
+
+/* ---------- home hub ---------- */
+
+.hub {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.activities {
+  display: grid;
+  gap: 12px;
+}
+
+.activity {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 150px;
+  padding: 22px 20px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-card);
+  background: color-mix(in srgb, var(--pass) 35%, white);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.activity:hover {
+  border-color: var(--ink-soft);
+}
+
+.activity-title {
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.activity-note {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.donut {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.donut-chart {
+  position: relative;
+  width: min(240px, 70vw);
+  aspect-ratio: 1;
+}
+
+.donut-chart svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.donut-left {
+  stroke: color-mix(in srgb, var(--line) 60%, white);
+  transition: stroke 0.15s;
+}
+
+.donut-left.is-hover {
+  stroke: var(--line);
+}
+
+/* Ink, not the pastel sky: the filled share has to stand out from the paper. */
+.donut-learned {
+  stroke: var(--ink);
+  transition: opacity 0.15s;
+}
+
+.donut-learned.is-hover {
+  opacity: 0.8;
+}
+
+.donut-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+  padding: 0 40px;
+}
+
+.donut-value {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 2.6rem;
+  line-height: 1.1;
+}
+
+.donut-label {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.donut figcaption {
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+.donut figcaption strong {
+  color: var(--ink);
+  font-family: var(--serif);
+}
+
+@media (min-width: 1000px) {
+  .hub {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 56px;
+    align-items: start;
+  }
+
+  .activities {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+
+  .activity {
+    min-height: 220px;
+    padding: 26px 24px;
+  }
+
+  .overall {
+    border: 1.5px solid var(--line);
+    border-radius: var(--radius-card);
+    padding: 22px;
+  }
+}

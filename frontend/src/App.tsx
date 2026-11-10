@@ -6,14 +6,16 @@ import { GoalsPage } from "./pages/GoalsPage";
 import { HistoryPage } from "./pages/HistoryPage";
 import { HomePage } from "./pages/HomePage";
 import { LearnPage } from "./pages/LearnPage";
+import { VocabPage } from "./pages/VocabPage";
 import { ReviewPage } from "./pages/ReviewPage";
 import { SettingsPage } from "./pages/SettingsPage";
 import { WordsPage } from "./pages/WordsPage";
 import type { Accent, Level } from "./types";
 
-// Main tabs; the home tab also owns the four study pages reached from it.
+// Main tabs; the vocab tab also owns the four study pages reached from it.
 const TABS = [
-  { id: "home", label: "ท่องศัพท์" },
+  { id: "home", label: "หน้าแรก" },
+  { id: "vocab", label: "ท่องศัพท์" },
   { id: "words", label: "คำศัพท์" },
   { id: "settings", label: "ตั้งค่า" },
 ] as const;
@@ -23,14 +25,15 @@ const STUDY = [
   { id: "history", label: "ประวัติ" },
   { id: "goals", label: "ความสำเร็จ" },
 ] as const;
-const PAGE_IDS = ["home", "learn", "review", "history", "goals", "words", "settings"] as const;
+const PAGE_IDS = ["home", "vocab", "learn", "review", "history", "goals", "words", "settings"] as const;
 type PageId = (typeof PAGE_IDS)[number];
 const TAB_OF: Record<PageId, string> = {
   home: "home",
-  learn: "home",
-  review: "home",
-  history: "home",
-  goals: "home",
+  vocab: "vocab",
+  learn: "vocab",
+  review: "vocab",
+  history: "vocab",
+  goals: "vocab",
   words: "words",
   settings: "settings",
 };
@@ -120,7 +123,8 @@ export function App() {
       <aside className="sidebar">
         <p className="brand">คลังคำ TOEIC</p>
         <nav aria-label="เมนูหลัก">
-          <a {...link("home")}>
+          <a {...link("home")}>หน้าแรก</a>
+          <a {...link("vocab")}>
             ท่องศัพท์ <span className="nav-level">{level}</span>
           </a>
           <div className="nav-sub">
@@ -141,7 +145,8 @@ export function App() {
             {error}
           </p>
         )}
-        {page === "home" && <HomePage key={level} level={level} onLevel={changeLevel} onError={handleError} />}
+        {page === "home" && <HomePage onError={handleError} />}
+        {page === "vocab" && <VocabPage key={level} level={level} onLevel={changeLevel} onError={handleError} />}
         {page === "learn" && <LearnPage key={level} onStart={start} onError={handleError} />}
         {page === "review" && <ReviewPage level={level} onStart={start} onError={handleError} />}
         {page === "history" && <HistoryPage level={level} onError={handleError} />}

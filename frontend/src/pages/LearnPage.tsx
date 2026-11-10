@@ -70,7 +70,7 @@ export function LearnPage({ onStart, onError }: Props) {
 
   return (
     <div className="page">
-      <a href="#/home" className="back">
+      <a href="#/vocab" className="back">
         กลับ
       </a>
       <h2 className="page-title">ท่องศัพท์ใหม่</h2>

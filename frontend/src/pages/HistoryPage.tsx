@@ -34,7 +34,7 @@ export function HistoryPage({ level, onError }: Props) {
 
   return (
     <div className="page">
-      <a href="#/home" className="back">
+      <a href="#/vocab" className="back">
         กลับ
       </a>
       <h2 className="page-title">ประวัติ · {level}</h2>
