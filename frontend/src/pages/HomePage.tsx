@@ -17,7 +17,7 @@ export function HomePage({ onError }: { onError: (e: Error) => void }) {
   return (
     <div className="page">
       <header className="home-head">
-        <h1>คลังคำ TOEIC</h1>
+        <h1>ฝึกเพื่อสอบ TOEIC</h1>
         <p className="date">วันนี้จะฝึกอะไรดี</p>
       </header>
 

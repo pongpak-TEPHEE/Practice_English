@@ -121,7 +121,7 @@ export function App() {
   return (
     <div className="shell">
       <aside className="sidebar">
-        <p className="brand">คลังคำ TOEIC</p>
+        <p className="brand">ฝึกเพื่อสอบ TOEIC</p>
         <nav aria-label="เมนูหลัก">
           <a {...link("home")}>หน้าแรก</a>
           <a {...link("vocab")}>
@@ -202,7 +202,7 @@ function SignIn({ onDone }: { onDone: () => void }) {
 
   return (
     <form className="signin" onSubmit={submit}>
-      <h1>คลังคำ TOEIC</h1>
+      <h1>ฝึกเพื่อสอบ TOEIC</h1>
       <p>ใส่รหัสเข้าใช้งาน (API token) ครั้งเดียว อุปกรณ์นี้จะจำไว้ให้</p>
       <input
         type="password"
