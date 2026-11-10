@@ -1,0 +1,252 @@
+{
+  "id": "pronouns",
+  "title": "สรรพนาม",
+  "english": "Pronouns",
+  "summary": "he / him / his / himself เลือกจากตำแหน่ง, its กับ it's, another / others / the other และ those who",
+  "analysis": {
+    "parts": "Reading Part 5 (เติมประโยค 30 ข้อ) และ Part 6 (เติมข้อความ 16 ข้อ)",
+    "questions": "ประมาณ 1–3 ข้อใน Part 5 และ 0–1 ข้อใน Part 6 ต่อการสอบหนึ่งครั้ง",
+    "points": "ประมาณ 10–20 คะแนน จาก 495 คะแนนของ Reading (คิดคร่าว ๆ ข้อละ 5 คะแนน) ข้อสรรพนามตอบได้ในไม่กี่วินาทีเมื่อแม่นตำแหน่ง",
+    "covers": [
+      "เลือกรูปสรรพนามจากตำแหน่ง: ประธาน (he) กรรม (him) หน้าคำนาม (his) และไม่มีคำนามตามหลัง (his / hers / theirs)",
+      "สรรพนามสะท้อนกลับ (himself): ประธานกับกรรมเป็นคนเดียวกัน, by oneself และการเน้น",
+      "ให้สอดคล้องกับคำนามที่อ้างถึง: its / their และ its กับ it's",
+      "another / other / others / the other, each other, those who และ ones"
+    ],
+    "notCovered": [
+      "ขั้นกว่าและขั้นสุด",
+      "relative pronoun (who / which / whose) อยู่ในบทคำเชื่อมแล้ว",
+      "Part 6 แบบเลือกประโยคทั้งประโยคใส่ในข้อความ"
+    ],
+    "note": "ETS ไม่เปิดเผยสัดส่วนหัวข้อในข้อสอบ ตัวเลขนี้ประมาณจากการวิเคราะห์ข้อสอบของหนังสือเตรียมสอบ และตารางแปลงคะแนนต่างกันในแต่ละชุด ใช้เพื่อจัดลำดับว่าควรฝึกอะไรก่อน ไม่ใช่การรับประกันคะแนน"
+  },
+  "strategy": [
+    "ดูตัวเลือกก่อน ถ้าเป็นสรรพนามตัวเดียวกันคนละรูป (she / her / hers / herself) คือข้อตำแหน่ง ไม่ต้องแปลทั้งประโยค",
+    "ดูหลังช่องว่าง: มีคำนามตามมา ใช้ his / her / their / its ถ้าไม่มีคำนาม ให้ดูต่อว่าเป็นประธาน (he) หรือกรรม (him)",
+    "ถ้าประธานกับกรรมเป็นคนเดียวกัน หรือมี by อยู่หน้าช่องว่าง ใช้ -self / -selves",
+    "ถ้าช่องว่างอยู่หลังกริยาหรือบุพบท ใช้รูปกรรม (him, them, us) ไม่ใช่รูปประธาน",
+    "เป้าเวลาข้อละไม่เกิน 10 วินาที"
+  ],
+  "sections": [
+    {
+      "id": "cases",
+      "title": "เลือกรูปสรรพนามจากตำแหน่ง",
+      "priority": "high",
+      "intro": "ข้อสรรพนามส่วนใหญ่ให้ตัวเลือกเป็นคำเดียวกันสี่รูป ตัดสินได้จากตำแหน่งอย่างเดียว: เป็นประธาน เป็นกรรม อยู่หน้าคำนาม หรือยืนเดี่ยวแทนสิ่งของของใครบางคน",
+      "rules": [
+        { "word": "I / you / he / she / it / we / they", "use": "ประธาน (หน้ากริยา)", "examples": "They were pleased with the service." },
+        { "word": "me / you / him / her / it / us / them", "use": "กรรม (หลังกริยาหรือบุพบท)", "examples": "please contact us, give it to him" },
+        { "word": "my / your / his / her / its / our / their", "use": "หน้าคำนามเสมอ", "examples": "her assistant, its proposal" },
+        { "word": "mine / yours / his / hers / ours / theirs", "use": "ยืนเดี่ยว ไม่มีคำนามตามหลัง (= ของฉัน ของเธอ)", "examples": "The umbrella is hers." }
+      ],
+      "examples": [
+        { "en": "Ms. Yamada asked her assistant to book a meeting room.", "th": "คุณยามาดะขอให้ผู้ช่วยของเธอจองห้องประชุม", "mark": "her" },
+        { "en": "If you have any questions, please contact us.", "th": "หากมีคำถาม กรุณาติดต่อเรา", "mark": "us" },
+        { "en": "The blue umbrella in the lobby is hers.", "th": "ร่มสีน้ำเงินในล็อบบี้เป็นของเธอ", "mark": "hers" }
+      ],
+      "tip": "her เป็นได้ทั้งกรรม (contact her) และหน้าคำนาม (her assistant) แต่ hers ต้องยืนเดี่ยวเสมอ และ it's คือ it is ไม่ใช่ของ (its)",
+      "drills": [
+        {
+          "sentence": "Ms. Yamada asked ___ assistant to book a meeting room for Thursday.",
+          "options": ["her", "she", "hers", "herself"],
+          "answer": "her",
+          "why": "ตอบ her เพราะหลังช่องว่างมีคำนาม assistant จึงต้องเป็นรูปที่อยู่หน้าคำนาม ส่วน she เป็นประธาน hers ต้องยืนเดี่ยว และ herself ใช้เมื่อประธานกับกรรมเป็นคนเดียวกัน"
+        },
+        {
+          "sentence": "If you have any questions about your reservation, please contact ___ at the front desk.",
+          "options": ["us", "we", "our", "ours"],
+          "answer": "us",
+          "why": "ตอบ us เพราะช่องว่างเป็นกรรมของ contact ส่วน we เป็นประธาน our ต้องมีคำนามตามหลัง และ ours แปลว่าของเรา ซึ่งไม่เข้ากับความหมาย"
+        },
+        {
+          "sentence": "The marketing department presented ___ proposal to the board on Monday.",
+          "options": ["its", "it", "itself", "it's"],
+          "answer": "its",
+          "why": "ตอบ its เพราะหลังช่องว่างมีคำนาม proposal และแผนก (เอกพจน์ สิ่งของ) เป็นเจ้าของ ส่วน it ไม่ใช้หน้าคำนาม itself ใช้เมื่อประธานกับกรรมเป็นสิ่งเดียวกัน และ it's ย่อมาจาก it is"
+        },
+        {
+          "sentence": "Mr. Cho and ___ will represent our company at the trade show in Berlin.",
+          "options": ["I", "me", "my", "myself"],
+          "answer": "I",
+          "why": "ตอบ I เพราะ Mr. Cho and ___ เป็นประธานของ will represent จึงต้องใช้รูปประธาน ส่วน me เป็นรูปกรรม my ต้องมีคำนามตามหลัง และ myself ไม่ใช้เป็นประธาน"
+        },
+        {
+          "sentence": "The black umbrella left in the lobby is ___, not Mr. Diaz's.",
+          "options": ["hers", "her", "she", "herself"],
+          "answer": "hers",
+          "why": "ตอบ hers เพราะหลังช่องว่างไม่มีคำนาม และแปลว่าเป็นของเธอ (เทียบกับ Mr. Diaz's) ส่วน her ต้องมีคำนามตามหลังในความหมายนี้ she เป็นประธาน และ herself ไม่ใช้บอกความเป็นเจ้าของ"
+        },
+        {
+          "sentence": "Please give the signed contracts to Mr. Ruiz or ___ secretary.",
+          "options": ["his", "him", "he", "himself"],
+          "answer": "his",
+          "why": "ตอบ his เพราะหลังช่องว่างมีคำนาม secretary จึงต้องเป็นรูปที่อยู่หน้าคำนาม ส่วน him เป็นรูปกรรม he เป็นประธาน และ himself ไม่ใช้หน้าคำนาม"
+        },
+        {
+          "sentence": "Several customers told us that ___ were pleased with the new delivery service.",
+          "options": ["they", "them", "their", "themselves"],
+          "answer": "they",
+          "why": "ตอบ they เพราะช่องว่างเป็นประธานของ were pleased ในประโยคย่อย ส่วน them เป็นรูปกรรม their ต้องมีคำนามตามหลัง และ themselves ไม่ใช้เป็นประธาน"
+        }
+      ]
+    },
+    {
+      "id": "reflexive",
+      "title": "สรรพนามสะท้อนกลับ: -self / -selves",
+      "priority": "high",
+      "intro": "ใช้ -self / -selves ในสามกรณี: ประธานกับกรรมเป็นคนเดียวกัน, หลัง by แปลว่าด้วยตัวเอง (คนเดียว) และเน้นว่าคนนั้นทำเอง ข้อสอบชอบหลอกด้วยรูปกรรม (her) ที่ดูเหมือนถูก",
+      "rules": [
+        { "word": "ประธาน + กริยา + -self", "use": "ประธานกับกรรมเป็นคนเดียวกัน", "examples": "She introduced herself." },
+        { "word": "by + -self", "use": "ด้วยตัวเอง ไม่มีใครช่วย", "examples": "He finished the report by himself." },
+        { "word": "คำนาม + -self / ท้ายประโยค", "use": "เน้นว่าเป็นคนนั้นเอง", "examples": "The director himself will welcome guests." },
+        { "word": "familiarize / help + -self", "use": "สำนวนที่ต้องใช้ -self", "examples": "familiarize yourself with, help yourself to" }
+      ],
+      "examples": [
+        { "en": "Ms. Lin introduced herself to the new clients.", "th": "คุณหลินแนะนำตัวเองกับลูกค้าใหม่", "mark": "herself" },
+        { "en": "Ms. Ortiz completed the entire report by herself.", "th": "คุณออร์ติซทำรายงานทั้งหมดเสร็จด้วยตัวเอง", "mark": "by herself" },
+        { "en": "Please help yourself to coffee in the break room.", "th": "เชิญดื่มกาแฟในห้องพักได้ตามสบาย", "mark": "help yourself" }
+      ],
+      "tip": "ถ้าประธานกับกรรมเป็นคนเดียวกัน ต้องใช้ -self เสมอ (She introduced her จะแปลว่าแนะนำผู้หญิงอีกคน) และหลัง by ถ้าแปลว่าคนเดียว ใช้ -self",
+      "drills": [
+        {
+          "sentence": "Ms. Lin introduced ___ to the new clients at the start of the meeting.",
+          "options": ["herself", "her", "hers", "she"],
+          "answer": "herself",
+          "why": "ตอบ herself เพราะคุณหลินแนะนำตัวเอง ประธานกับกรรมเป็นคนเดียวกัน ส่วน her จะแปลว่าแนะนำผู้หญิงอีกคน hers ต้องยืนแทนของ และ she เป็นประธาน"
+        },
+        {
+          "sentence": "Mr. Kato prefers to review all contracts ___ before they are signed.",
+          "options": ["himself", "him", "his", "he"],
+          "answer": "himself",
+          "why": "ตอบ himself เพราะประโยค Mr. Kato prefers to review all contracts ครบแล้ว ช่องว่างใช้เน้นว่าเขาตรวจเอง ส่วน him จะเป็นกรรมตัวที่สอง his ต้องมีคำนามตามหลัง และ he เป็นประธาน"
+        },
+        {
+          "sentence": "New employees should familiarize ___ with the safety procedures.",
+          "options": ["themselves", "them", "their", "they"],
+          "answer": "themselves",
+          "why": "ตอบ themselves เพราะ familiarize oneself with เป็นสำนวน และประธานกับกรรมเป็นกลุ่มเดียวกัน ส่วน them จะแปลว่าทำให้คนอื่นคุ้นเคย their ต้องมีคำนามตามหลัง และ they เป็นประธาน"
+        },
+        {
+          "sentence": "Ms. Ortiz completed the entire quarterly report by ___.",
+          "options": ["herself", "her", "hers", "she"],
+          "answer": "herself",
+          "why": "ตอบ herself เพราะ by herself แปลว่าด้วยตัวเองคนเดียว ส่วน by her จะแปลว่าโดยผู้หญิงอีกคน hers แปลว่าของเธอ และ she ใช้หลังบุพบทไม่ได้"
+        },
+        {
+          "sentence": "The company president ___ will welcome the guests at the reception.",
+          "options": ["himself", "him", "his", "he"],
+          "answer": "himself",
+          "why": "ตอบ himself เพราะประธานคือ The company president อยู่แล้ว ช่องว่างใช้เน้นว่าประธานบริษัทมาต้อนรับเอง ส่วน him เป็นรูปกรรม his ต้องมีคำนามตามหลัง และ he จะเป็นประธานซ้ำ"
+        },
+        {
+          "sentence": "Please help ___ to coffee and snacks in the break room.",
+          "options": ["yourself", "you", "your", "yours"],
+          "answer": "yourself",
+          "why": "ตอบ yourself เพราะ help yourself to แปลว่าเชิญหยิบได้ตามสบาย เป็นสำนวนที่ต้องใช้ -self ส่วน you จะแปลว่าช่วยคุณ your ต้องมีคำนามตามหลัง และ yours แปลว่าของคุณ"
+        }
+      ]
+    },
+    {
+      "id": "agreement",
+      "title": "ให้สอดคล้องกับคำนามที่อ้างถึง: its / their",
+      "priority": "medium",
+      "intro": "สรรพนามต้องสอดคล้องกับคำนามที่มันแทน: สิ่งของเอกพจน์ใช้ its กลุ่มคนหรือสิ่งของพหูพจน์ใช้ their ข้อสอบชอบหลอกด้วย it's (= it is) และ there (= ที่นั่น)",
+      "rules": [
+        { "word": "its", "use": "ของมัน (สิ่งของหรือองค์กรเอกพจน์)", "examples": "The hotel renovated its lobby." },
+        { "word": "it's", "use": "ย่อจาก it is / it has ไม่ใช่ความเป็นเจ้าของ", "examples": "It's open until 9 p.m." },
+        { "word": "their", "use": "ของพวกเขา ของพวกมัน (พหูพจน์)", "examples": "The printers are fast, but their ink is costly." },
+        { "word": "there / they're", "use": "ที่นั่น / ย่อจาก they are (ตัวลวง)", "examples": "Park there. They're ready." }
+      ],
+      "examples": [
+        { "en": "The hotel has renovated its lobby and restaurant.", "th": "โรงแรมปรับปรุงล็อบบี้และร้านอาหารของตนแล้ว", "mark": "its" },
+        { "en": "All passengers must keep their boarding passes.", "th": "ผู้โดยสารทุกคนต้องเก็บบัตรขึ้นเครื่องของตนไว้", "mark": "their" }
+      ],
+      "tip": "ถามว่าคำนามที่ถูกแทนเป็นเอกพจน์หรือพหูพจน์ แล้วจำว่า its ไม่มี apostrophe เสมอเมื่อแปลว่า 'ของมัน'",
+      "drills": [
+        {
+          "sentence": "The hotel has recently renovated ___ lobby and restaurant.",
+          "options": ["its", "it's", "it", "itself"],
+          "answer": "its",
+          "why": "ตอบ its เพราะหลังช่องว่างมีคำนาม lobby และโรงแรมเป็นเจ้าของ ส่วน it's ย่อจาก it is it ไม่ใช้หน้าคำนาม และ itself ใช้เมื่อประธานกับกรรมเป็นสิ่งเดียวกัน"
+        },
+        {
+          "sentence": "All passengers must keep ___ boarding passes until the end of the flight.",
+          "options": ["their", "his", "its", "our"],
+          "answer": "their",
+          "why": "ตอบ their เพราะ All passengers เป็นพหูพจน์ ส่วน his ใช้กับผู้ชายคนเดียว its ใช้กับสิ่งของเอกพจน์ และ our แปลว่าของเรา ซึ่งไม่ใช่ผู้โดยสาร"
+        },
+        {
+          "sentence": "The new printers are fast, but ___ ink cartridges are expensive.",
+          "options": ["their", "its", "there", "they're"],
+          "answer": "their",
+          "why": "ตอบ their เพราะคำนามที่อ้างถึงคือ printers (พหูพจน์) และหลังช่องว่างมีคำนาม ส่วน its ใช้กับเอกพจน์ there แปลว่าที่นั่น และ they're ย่อจาก they are"
+        },
+        {
+          "sentence": "Mr. Okafor and Ms. Bell will present ___ research findings at the conference.",
+          "options": ["their", "his", "her", "its"],
+          "answer": "their",
+          "why": "ตอบ their เพราะคำนามที่อ้างถึงคือสองคน (Mr. Okafor and Ms. Bell) ซึ่งเป็นพหูพจน์ ส่วน his และ her ใช้กับคนเดียว และ its ใช้กับสิ่งของ"
+        }
+      ]
+    },
+    {
+      "id": "indefinite",
+      "title": "another / others / the other, those who และ ones",
+      "priority": "medium",
+      "intro": "กลุ่มนี้ต่างกันที่จำนวนและคำที่ตามหลัง another ตามด้วยเอกพจน์ others ยืนเดี่ยว the other หมายถึงอีกอันที่เหลืออยู่อันเดียว those who แปลว่าคนที่... และ one / ones ใช้แทนคำนามที่พูดถึงแล้ว",
+      "rules": [
+        { "word": "another + เอกพจน์", "use": "อีกอันหนึ่ง (อันไหนก็ได้)", "examples": "order another one" },
+        { "word": "other + พหูพจน์", "use": "อื่น ๆ (ต้องมีคำนามตามหลัง)", "examples": "other employees" },
+        { "word": "others", "use": "คนอื่น สิ่งอื่น (ไม่มีคำนามตามหลัง)", "examples": "Some prefer A, while others prefer B." },
+        { "word": "the other", "use": "อีกอันที่เหลือ (มีสองอัน)", "examples": "One works, but the other is broken." },
+        { "word": "each other", "use": "ซึ่งกันและกัน", "examples": "help each other" },
+        { "word": "those who", "use": "คนที่... (พหูพจน์)", "examples": "Those who wish to attend should sign up." },
+        { "word": "one / ones", "use": "แทนคำนามเอกพจน์ / พหูพจน์ที่พูดถึงแล้ว", "examples": "replaced with new ones" }
+      ],
+      "examples": [
+        { "en": "Some employees prefer to work from home, while others prefer the office.", "th": "พนักงานบางคนชอบทำงานที่บ้าน ส่วนคนอื่นชอบที่สำนักงาน", "mark": "others" },
+        { "en": "Those who wish to attend the workshop should sign up by Friday.", "th": "ผู้ที่ต้องการเข้าร่วมเวิร์กช็อปควรลงชื่อภายในวันศุกร์", "mark": "Those who" },
+        { "en": "The old desks will be replaced with new ones.", "th": "โต๊ะเก่าจะถูกเปลี่ยนเป็นโต๊ะใหม่", "mark": "ones" }
+      ],
+      "tip": "ถ้าหลังช่องว่างไม่มีคำนาม ตัด other ทิ้ง (ต้องมีคำนาม) ถ้าในประโยคบอกว่ามีสองสิ่ง และพูดถึงอันแรกแล้ว อันที่เหลือคือ the other",
+      "drills": [
+        {
+          "sentence": "If this model is out of stock, we can order ___ one for you from our warehouse.",
+          "options": ["another", "other", "others", "the others"],
+          "answer": "another",
+          "why": "ตอบ another เพราะหลังช่องว่างเป็น one (เอกพจน์) และแปลว่าอีกเครื่องหนึ่ง ส่วน other ใช้กับพหูพจน์ others และ the others ไม่มีคำนามตามหลัง"
+        },
+        {
+          "sentence": "Some employees prefer to work from home, while ___ prefer to work in the office.",
+          "options": ["others", "other", "another", "the other"],
+          "answer": "others",
+          "why": "ตอบ others เพราะหลังช่องว่างไม่มีคำนาม และกริยา prefer บอกว่าเป็นพหูพจน์ ส่วน other ต้องมีคำนามตามหลัง another และ the other เป็นเอกพจน์ ซึ่งต้องใช้ prefers"
+        },
+        {
+          "sentence": "___ who wish to attend the leadership workshop should sign up by Friday.",
+          "options": ["Those", "These", "They", "Them"],
+          "answer": "Those",
+          "why": "ตอบ Those เพราะ those who แปลว่าคนที่... เป็นสำนวนที่ใช้บ่อยในประกาศ ส่วน These ไม่ใช้กับ who ในความหมายนี้ They ไม่ตามด้วย who และ Them เป็นรูปกรรม"
+        },
+        {
+          "sentence": "The two departments will share resources and support each ___ during the project.",
+          "options": ["other", "another", "others", "one"],
+          "answer": "other",
+          "why": "ตอบ other เพราะ each other แปลว่าซึ่งกันและกัน ส่วน each another, each others และ each one ไม่ใช่สำนวนนี้"
+        },
+        {
+          "sentence": "Of the two elevators in the building, one is working, but ___ is under repair.",
+          "options": ["the other", "another", "others", "other"],
+          "answer": "the other",
+          "why": "ตอบ the other เพราะมีลิฟต์สองตัว พูดถึงตัวแรกแล้ว ตัวที่เหลือจึงเป็น the other ส่วน another หมายถึงอีกตัวที่ไม่เจาะจง others เป็นพหูพจน์ และ other ต้องมีคำนามตามหลัง"
+        },
+        {
+          "sentence": "The old office chairs will be replaced with new ___ next month.",
+          "options": ["ones", "one", "it", "them"],
+          "answer": "ones",
+          "why": "ตอบ ones เพราะแทนคำนามพหูพจน์ chairs ที่พูดถึงแล้ว และมีคุณศัพท์ new อยู่หน้า ส่วน one ใช้กับเอกพจน์ และ it กับ them ใช้หลังคุณศัพท์ไม่ได้"
+        }
+      ]
+    }
+  ]
+}
